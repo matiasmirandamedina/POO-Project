@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 using MySql.Data.MySqlClient;
 
-namespace practica
+namespace mini_home_banking.Modelos
 {
-    internal class Conexion
+    public class Conexion
     {
         private MySqlConnection conexion;
         private string server = "localhost";

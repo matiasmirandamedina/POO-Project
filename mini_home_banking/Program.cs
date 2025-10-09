@@ -1,3 +1,5 @@
+using mini_home_banking.Vistas;
+
 namespace mini_home_banking
 {
     internal static class Program
