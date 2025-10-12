@@ -30,5 +30,10 @@ namespace mini_home_banking.Controladores
         {
             return $"ID: {Id}, Usuario: {Username}, Nombre completo: {FullName}, Rol: {RoleId}, Email: {Email}";
         }
+
+        public int Getid()
+        {
+            return Id;
+        }
     }
 }

@@ -28,19 +28,46 @@
         /// </summary>
         private void InitializeComponent()
         {
+            listBoxCuentas = new ListBox();
+            label1 = new Label();
             SuspendLayout();
+            // 
+            // listBoxCuentas
+            // 
+            listBoxCuentas.FormattingEnabled = true;
+            listBoxCuentas.ItemHeight = 15;
+            listBoxCuentas.Location = new Point(51, 117);
+            listBoxCuentas.Name = "listBoxCuentas";
+            listBoxCuentas.Size = new Size(182, 79);
+            listBoxCuentas.TabIndex = 0;
+            listBoxCuentas.SelectedIndexChanged += listBoxCuentas_SelectedIndexChanged;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(51, 85);
+            label1.Name = "label1";
+            label1.Size = new Size(50, 15);
+            label1.TabIndex = 2;
+            label1.Text = "Cuentas";
             // 
             // Home
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(699, 343);
+            Controls.Add(label1);
+            Controls.Add(listBoxCuentas);
             Name = "Home";
             Text = "Home";
             Load += Home_Load;
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private ListBox listBoxCuentas;
+        private Label label1;
     }
 }
