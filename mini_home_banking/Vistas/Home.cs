@@ -27,31 +27,58 @@ namespace mini_home_banking.Vistas
             mConexion = new Conexion();
         }
 
+        public List<Cuenta> Obtener_Cuentas()
+        {
 
+            MySqlDataReader reader = null;
+            List<Cuenta> cuentas = new List<Cuenta>();
+
+            string query = "SELECT at.description, a.alias, a.current_balance, a.cbu FROM accounts a JOIN account_types at ON" +
+                " a.account_type_id = at.id WHERE user_id = @user_id";
+
+            if (mConexion.getConexion() != null)
+            {
+                MySqlCommand cmd = new MySqlCommand(query, mConexion.getConexion());
+                cmd.Parameters.AddWithValue("@user_id", user.Getid());
+
+                reader = cmd.ExecuteReader();
+
+
+                while (reader.Read())
+                {
+                    Cuenta cuenta = new Cuenta(reader["alias"].ToString(), reader["description"].ToString(), Convert.ToDecimal(reader["current_balance"]),reader["cbu"].ToString());
+                    cuentas.Add(cuenta);
+
+                }
+                reader.Close();
+
+            }
+            return cuentas;
+        }
         private void Home_Load(object sender, EventArgs e)
         {
             try
             {
-                MySqlDataReader reader = null;
+                listBoxCuentas.DataSource = Obtener_Cuentas();
 
-                string query = "SELECT at.description, a.alias, a.current_balance FROM accounts a JOIN account_types at ON" +
-                    " a.account_type_id = at.id WHERE user_id = @user_id";
+                MySqlDataReader reader = null;
+                string query = "SELECT card_type, expiration, available_limit FROM cards WHERE user_id = @user_id";
 
                 if (mConexion.getConexion() != null)
                 {
-                    MySqlCommand cmd = new MySqlCommand(query, mConexion.getConexion());
-                    cmd.Parameters.AddWithValue("@user_id", user.Getid());
+                    List<Tarjeta> tarjetas = new List<Tarjeta>();
 
-                    reader = cmd.ExecuteReader();
-                    List<Cuenta> cuentas = new List<Cuenta>();
+                    MySqlCommand cmd2 = new MySqlCommand(query, mConexion.getConexion());
+                    cmd2.Parameters.AddWithValue("@user_id", user.Getid());
+                    reader = cmd2.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Tarjeta tarjeta = new Tarjeta(reader["card_type"].ToString(), Convert.ToDecimal(reader["available_limit"]), Convert.ToDateTime(reader["expiration"]));
+                        tarjetas.Add(tarjeta);
 
-                        while (reader.Read()) {
-                            Cuenta cuenta = new Cuenta(reader["alias"].ToString(), reader["description"].ToString(), Convert.ToDecimal(reader["current_balance"]));
-                            cuentas.Add(cuenta);
-                            
-                        }
-                        listBoxCuentas.DataSource = cuentas;
-                    
+                    }
+                    listBoxTarjetas.DataSource = tarjetas;
+
                     reader.Close();
                 }
                 else
@@ -64,13 +91,22 @@ namespace mini_home_banking.Vistas
                 MessageBox.Show("Error: " + ex.Message);
             }
 
-            
-
         }
 
         private void listBoxCuentas_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void listBoxTarjetas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Transferencia transferencia = new Transferencia(Obtener_Cuentas());
+            transferencia.Show();
         }
     }
 }

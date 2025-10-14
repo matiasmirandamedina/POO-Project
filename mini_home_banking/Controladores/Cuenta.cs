@@ -12,11 +12,14 @@ namespace mini_home_banking.Controladores
         private string Tipo { get; set; }
         private decimal Saldo { get; set; }
 
-        public Cuenta(string Alias, string Tipo, decimal Saldo)
+        private string Cbu { get; set; }
+
+        public Cuenta(string Alias, string Tipo, decimal Saldo, string cbu)
         {
             this.Alias = Alias;
             this.Tipo = Tipo;
             this.Saldo = Saldo;
+            Cbu = cbu;
         }
 
         public override string ToString()
