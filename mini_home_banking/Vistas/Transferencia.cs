@@ -23,7 +23,7 @@ namespace mini_home_banking.Vistas
 
         private void Transferencia_Load(object sender, EventArgs e)
         {
-
+            listBoxCuentas.DataSource = cuentas;
         }
     }
 }
