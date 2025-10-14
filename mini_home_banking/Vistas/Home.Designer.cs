@@ -41,7 +41,7 @@
             listBoxCuentas.ItemHeight = 15;
             listBoxCuentas.Location = new Point(12, 167);
             listBoxCuentas.Name = "listBoxCuentas";
-            listBoxCuentas.Size = new Size(182, 79);
+            listBoxCuentas.Size = new Size(195, 79);
             listBoxCuentas.TabIndex = 0;
             listBoxCuentas.SelectedIndexChanged += listBoxCuentas_SelectedIndexChanged;
             // 
@@ -79,7 +79,7 @@
             listBoxTarjetas.ItemHeight = 15;
             listBoxTarjetas.Location = new Point(213, 167);
             listBoxTarjetas.Name = "listBoxTarjetas";
-            listBoxTarjetas.Size = new Size(338, 79);
+            listBoxTarjetas.Size = new Size(333, 79);
             listBoxTarjetas.TabIndex = 5;
             listBoxTarjetas.SelectedIndexChanged += listBoxTarjetas_SelectedIndexChanged;
             // 

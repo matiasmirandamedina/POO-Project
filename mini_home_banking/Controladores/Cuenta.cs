@@ -25,7 +25,7 @@ namespace mini_home_banking.Controladores
         public override string ToString()
         {
             // Esto define lo que se muestra en la ListBox
-            return $"{Alias} - {Tipo} - ${Saldo}";
+            return $"{Alias} - {Tipo} - ${Saldo} - {Cbu}";
         }
     }
 }
