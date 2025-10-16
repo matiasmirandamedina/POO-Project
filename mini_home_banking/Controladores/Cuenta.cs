@@ -8,14 +8,16 @@ namespace mini_home_banking.Controladores
 {
     public class Cuenta
     {
+        private int Id { get; set; }
         private string Alias { get; set; }
         private string Tipo { get; set; }
         private decimal Saldo { get; set; }
 
         private string Cbu { get; set; }
 
-        public Cuenta(string Alias, string Tipo, decimal Saldo, string cbu)
+        public Cuenta(int Id,string Alias, string Tipo, decimal Saldo, string cbu)
         {
+            this.Id = Id;
             this.Alias = Alias;
             this.Tipo = Tipo;
             this.Saldo = Saldo;
