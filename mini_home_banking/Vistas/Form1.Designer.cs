@@ -35,6 +35,8 @@
             pass = new TextBox();
             gmail = new TextBox();
             Login = new Button();
+            dataGridViewUsuarios = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewUsuarios).BeginInit();
             SuspendLayout();
             // 
             // button1
@@ -98,11 +100,27 @@
             Login.UseVisualStyleBackColor = true;
             Login.Click += Login_Click;
             // 
+            // dataGridViewUsuarios
+            // 
+            dataGridViewUsuarios.AllowUserToAddRows = false;
+            dataGridViewUsuarios.AllowUserToDeleteRows = false;
+            dataGridViewUsuarios.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewUsuarios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewUsuarios.Location = new Point(27, 213);
+            dataGridViewUsuarios.MultiSelect = false;
+            dataGridViewUsuarios.Name = "dataGridViewUsuarios";
+            dataGridViewUsuarios.ReadOnly = true;
+            dataGridViewUsuarios.RowHeadersVisible = false;
+            dataGridViewUsuarios.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridViewUsuarios.Size = new Size(375, 164);
+            dataGridViewUsuarios.TabIndex = 7;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(423, 241);
+            ClientSize = new Size(445, 438);
+            Controls.Add(dataGridViewUsuarios);
             Controls.Add(Login);
             Controls.Add(gmail);
             Controls.Add(pass);
@@ -113,6 +131,7 @@
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;
+            ((System.ComponentModel.ISupportInitialize)dataGridViewUsuarios).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -126,5 +145,6 @@
         private TextBox pass;
         private TextBox gmail;
         private Button Login;
+        private DataGridView dataGridViewUsuarios;
     }
 }

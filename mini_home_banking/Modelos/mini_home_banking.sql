@@ -75,9 +75,7 @@ create index idx_tx_account_date on transactions(account_id, created_at);
 -- Tarjetas
 create table cards (
 	id bigint auto_increment primary key,
-    user_id bigint not null,
-    foreign key (user_id) references users(id) on delete cascade,
-	account_id bigint null,
+	account_id bigint,
 	foreign key (account_id) references accounts(id),
 	card_number_hash char(16) unique,
 	card_type enum('DEBITO', 'CREDITO') not null,
@@ -88,8 +86,6 @@ create table cards (
     created_at datetime not null default current_timestamp,
     updated_at datetime null on update current_timestamp
 );
-
-create index idx_cards_user on cards(user_id);
 
 -- Movimientos de tarjeta
 CREATE TABLE card_movements (
