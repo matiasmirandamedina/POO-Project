@@ -75,8 +75,8 @@ create index idx_tx_account_date on transactions(account_id, created_at);
 -- Tarjetas
 create table cards (
 	id bigint auto_increment primary key,
-	account_id bigint,
-	foreign key (account_id) references accounts(id),
+	user_id bigint,
+	foreign key (user_id) references users(id),
 	card_number_hash char(16) unique,
 	card_type enum('DEBITO', 'CREDITO') not null,
 	expiration date,
