@@ -31,17 +31,17 @@ namespace mini_home_banking.Vistas
         {
             string result = "";
             MySqlDataReader reader = null;
-            
+
             string query = "SELECT * FROM users;";
 
             if (mConexion.getConexion() != null)
             {
                 MySqlCommand cmd = new MySqlCommand(query, mConexion.getConexion());
-                
+
 
 
                 reader = cmd.ExecuteReader();
-               
+
 
                 while (reader.Read())
                 {
@@ -63,11 +63,11 @@ namespace mini_home_banking.Vistas
 
         private void Login_Click(object sender, EventArgs e)
         {
-           
+
             string email = gmail.Text;
             string password = pass.Text;
             MySqlDataReader cons = null;
-            
+
             string login = "SELECT * FROM users WHERE email = @email AND password_hash = @password_hash;";
 
             if (mConexion.getConexion() != null)
@@ -112,6 +112,16 @@ namespace mini_home_banking.Vistas
             {
                 MessageBox.Show("¡Error al conectar!");
             }
+        }
+
+        private void gmail_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pass_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

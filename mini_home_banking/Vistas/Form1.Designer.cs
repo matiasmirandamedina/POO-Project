@@ -82,6 +82,7 @@
             pass.Name = "pass";
             pass.Size = new Size(100, 23);
             pass.TabIndex = 4;
+            pass.TextChanged += pass_TextChanged;
             // 
             // gmail
             // 
@@ -89,6 +90,7 @@
             gmail.Name = "gmail";
             gmail.Size = new Size(100, 23);
             gmail.TabIndex = 5;
+            gmail.TextChanged += gmail_TextChanged;
             // 
             // Login
             // 
