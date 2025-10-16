@@ -29,12 +29,13 @@
         private void InitializeComponent()
         {
             label1 = new Label();
-            Cuenta = new TextBox();
-            listBoxCuentas = new ListBox();
+            cuentaOrigen = new TextBox();
             label2 = new Label();
-            textBox1 = new TextBox();
+            monto = new TextBox();
             label3 = new Label();
-            textBox2 = new TextBox();
+            cuentaDestino = new TextBox();
+            transferir = new Button();
+            listBox1 = new ListBox();
             SuspendLayout();
             // 
             // label1
@@ -46,21 +47,12 @@
             label1.TabIndex = 0;
             label1.Text = "Seleccionar cuenta por medio de alias o cbu";
             // 
-            // Cuenta
+            // cuentaOrigen
             // 
-            Cuenta.Location = new Point(23, 58);
-            Cuenta.Name = "Cuenta";
-            Cuenta.Size = new Size(239, 23);
-            Cuenta.TabIndex = 1;
-            // 
-            // listBoxCuentas
-            // 
-            listBoxCuentas.FormattingEnabled = true;
-            listBoxCuentas.ItemHeight = 15;
-            listBoxCuentas.Location = new Point(23, 96);
-            listBoxCuentas.Name = "listBoxCuentas";
-            listBoxCuentas.Size = new Size(239, 64);
-            listBoxCuentas.TabIndex = 2;
+            cuentaOrigen.Location = new Point(23, 58);
+            cuentaOrigen.Name = "cuentaOrigen";
+            cuentaOrigen.Size = new Size(239, 23);
+            cuentaOrigen.TabIndex = 1;
             // 
             // label2
             // 
@@ -71,12 +63,12 @@
             label2.TabIndex = 3;
             label2.Text = "Monto a transferir:";
             // 
-            // textBox1
+            // monto
             // 
-            textBox1.Location = new Point(23, 202);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(100, 23);
-            textBox1.TabIndex = 4;
+            monto.Location = new Point(23, 202);
+            monto.Name = "monto";
+            monto.Size = new Size(100, 23);
+            monto.TabIndex = 4;
             // 
             // label3
             // 
@@ -87,24 +79,44 @@
             label3.TabIndex = 5;
             label3.Text = "Cuenta a transferir con alias o cbu";
             // 
-            // textBox2
+            // cuentaDestino
             // 
-            textBox2.Location = new Point(484, 58);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(186, 23);
-            textBox2.TabIndex = 6;
+            cuentaDestino.Location = new Point(484, 58);
+            cuentaDestino.Name = "cuentaDestino";
+            cuentaDestino.Size = new Size(186, 23);
+            cuentaDestino.TabIndex = 6;
+            // 
+            // transferir
+            // 
+            transferir.Location = new Point(254, 188);
+            transferir.Name = "transferir";
+            transferir.Size = new Size(296, 80);
+            transferir.TabIndex = 7;
+            transferir.Text = "transferir";
+            transferir.UseVisualStyleBackColor = true;
+            transferir.Click += transferir_Click;
+            // 
+            // listBox1
+            // 
+            listBox1.FormattingEnabled = true;
+            listBox1.ItemHeight = 15;
+            listBox1.Location = new Point(22, 89);
+            listBox1.Name = "listBox1";
+            listBox1.Size = new Size(240, 79);
+            listBox1.TabIndex = 8;
             // 
             // Transferencia
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(692, 294);
-            Controls.Add(textBox2);
+            Controls.Add(listBox1);
+            Controls.Add(transferir);
+            Controls.Add(cuentaDestino);
             Controls.Add(label3);
-            Controls.Add(textBox1);
+            Controls.Add(monto);
             Controls.Add(label2);
-            Controls.Add(listBoxCuentas);
-            Controls.Add(Cuenta);
+            Controls.Add(cuentaOrigen);
             Controls.Add(label1);
             Name = "Transferencia";
             Text = "Transferencia";
@@ -116,11 +128,12 @@
         #endregion
 
         private Label label1;
-        private TextBox Cuenta;
-        private ListBox listBoxCuentas;
+        private TextBox cuentaOrigen;
         private Label label2;
-        private TextBox textBox1;
+        private TextBox monto;
         private Label label3;
-        private TextBox textBox2;
+        private TextBox cuentaDestino;
+        private Button transferir;
+        private ListBox listBox1;
     }
 }
