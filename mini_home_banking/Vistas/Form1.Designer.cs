@@ -39,7 +39,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(130, 17);
+            label1.Location = new Point(126, 19);
             label1.Name = "label1";
             label1.Size = new Size(37, 15);
             label1.TabIndex = 1;
@@ -73,8 +73,8 @@
             // 
             // email
             // 
-            email.Location = new Point(86, 78);
-            email.Name = "gmail";
+            email.Location = new Point(32, 70);
+            email.Name = "email";
             email.Size = new Size(100, 23);
             email.TabIndex = 5;
             email.TextChanged += email_TextChanged;
@@ -89,27 +89,11 @@
             Login.UseVisualStyleBackColor = true;
             Login.Click += Login_Click;
             // 
-            // dataGridViewUsuarios
-            // 
-            dataGridViewUsuarios.AllowUserToAddRows = false;
-            dataGridViewUsuarios.AllowUserToDeleteRows = false;
-            dataGridViewUsuarios.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewUsuarios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewUsuarios.Location = new Point(27, 213);
-            dataGridViewUsuarios.MultiSelect = false;
-            dataGridViewUsuarios.Name = "dataGridViewUsuarios";
-            dataGridViewUsuarios.ReadOnly = true;
-            dataGridViewUsuarios.RowHeadersVisible = false;
-            dataGridViewUsuarios.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewUsuarios.Size = new Size(375, 164);
-            dataGridViewUsuarios.TabIndex = 7;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(445, 438);
-            Controls.Add(dataGridViewUsuarios);
+            ClientSize = new Size(296, 179);
             Controls.Add(Login);
             Controls.Add(email);
             Controls.Add(pass);
