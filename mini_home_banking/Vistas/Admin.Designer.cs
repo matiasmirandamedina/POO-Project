@@ -50,10 +50,6 @@
             textBox8 = new TextBox();
             label11 = new Label();
             textBox9 = new TextBox();
-            label12 = new Label();
-            textBox10 = new TextBox();
-            label13 = new Label();
-            textBox11 = new TextBox();
             label14 = new Label();
             textBox12 = new TextBox();
             label15 = new Label();
@@ -62,7 +58,7 @@
             // 
             // button3
             // 
-            button3.Location = new Point(463, 375);
+            button3.Location = new Point(450, 308);
             button3.Name = "button3";
             button3.Size = new Size(75, 23);
             button3.TabIndex = 0;
@@ -113,6 +109,7 @@
             textBox4.Name = "textBox4";
             textBox4.Size = new Size(100, 23);
             textBox4.TabIndex = 5;
+            textBox4.TextChanged += textBox4_TextChanged;
             // 
             // label1
             // 
@@ -219,6 +216,7 @@
             textBox7.Name = "textBox7";
             textBox7.Size = new Size(100, 23);
             textBox7.TabIndex = 17;
+            textBox7.TextChanged += textBox7_TextChanged;
             // 
             // label10
             // 
@@ -235,6 +233,7 @@
             textBox8.Name = "textBox8";
             textBox8.Size = new Size(100, 23);
             textBox8.TabIndex = 19;
+            textBox8.TextChanged += textBox8_TextChanged;
             // 
             // label11
             // 
@@ -253,42 +252,10 @@
             textBox9.TabIndex = 21;
             textBox9.TextChanged += textBox9_TextChanged;
             // 
-            // label12
-            // 
-            label12.AutoSize = true;
-            label12.Location = new Point(395, 211);
-            label12.Name = "label12";
-            label12.Size = new Size(61, 15);
-            label12.TabIndex = 22;
-            label12.Text = "created_at";
-            // 
-            // textBox10
-            // 
-            textBox10.Location = new Point(463, 211);
-            textBox10.Name = "textBox10";
-            textBox10.Size = new Size(100, 23);
-            textBox10.TabIndex = 23;
-            // 
-            // label13
-            // 
-            label13.AutoSize = true;
-            label13.Location = new Point(395, 246);
-            label13.Name = "label13";
-            label13.Size = new Size(66, 15);
-            label13.TabIndex = 24;
-            label13.Text = "updated_at";
-            // 
-            // textBox11
-            // 
-            textBox11.Location = new Point(467, 246);
-            textBox11.Name = "textBox11";
-            textBox11.Size = new Size(100, 23);
-            textBox11.TabIndex = 25;
-            // 
             // label14
             // 
             label14.AutoSize = true;
-            label14.Location = new Point(397, 290);
+            label14.Location = new Point(395, 221);
             label14.Name = "label14";
             label14.Size = new Size(91, 15);
             label14.TabIndex = 26;
@@ -296,7 +263,7 @@
             // 
             // textBox12
             // 
-            textBox12.Location = new Point(494, 290);
+            textBox12.Location = new Point(494, 221);
             textBox12.Name = "textBox12";
             textBox12.Size = new Size(100, 23);
             textBox12.TabIndex = 27;
@@ -304,7 +271,7 @@
             // label15
             // 
             label15.AutoSize = true;
-            label15.Location = new Point(397, 327);
+            label15.Location = new Point(395, 262);
             label15.Name = "label15";
             label15.Size = new Size(30, 15);
             label15.TabIndex = 28;
@@ -312,7 +279,7 @@
             // 
             // textBox13
             // 
-            textBox13.Location = new Point(440, 327);
+            textBox13.Location = new Point(438, 262);
             textBox13.Name = "textBox13";
             textBox13.Size = new Size(100, 23);
             textBox13.TabIndex = 29;
@@ -326,10 +293,6 @@
             Controls.Add(label15);
             Controls.Add(textBox12);
             Controls.Add(label14);
-            Controls.Add(textBox11);
-            Controls.Add(label13);
-            Controls.Add(textBox10);
-            Controls.Add(label12);
             Controls.Add(textBox9);
             Controls.Add(label11);
             Controls.Add(textBox8);
@@ -353,7 +316,7 @@
             Controls.Add(label2);
             Controls.Add(button3);
             Name = "Admin";
-            Text = "S";
+            Text = "1";
             Load += Admin_Load;
             ResumeLayout(false);
             PerformLayout();
@@ -383,10 +346,6 @@
         private TextBox textBox8;
         private Label label11;
         private TextBox textBox9;
-        private Label label12;
-        private TextBox textBox10;
-        private Label label13;
-        private TextBox textBox11;
         private Label label14;
         private TextBox textBox12;
         private Label label15;

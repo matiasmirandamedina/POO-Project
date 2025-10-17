@@ -31,10 +31,52 @@ namespace mini_home_banking.Vistas
         {
 
         }
-
         private void button3_Click(object sender, EventArgs e)
         {
+            string user_id = textBox4.Text;
+            string account_type_id = textBox7.Text;
+            string currency_id = textBox8.Text;
+            string CBU = textBox9.Text;
+            string current_balance = textBox12.Text;
+            string alias = textBox13.Text;
 
+            if (mConexion.getConexion() != null)
+            {
+                try
+                {
+                    string query = "INSERT INTO accounts (user_id, account_type_id, currency_id, cbu, current_balance, alias) " +
+                                   "VALUES (@user_id, @account_type_id, @currency_id, @cbu, @current_balance, @alias)";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, mConexion.getConexion()))
+                    {
+                        cmd.Parameters.AddWithValue("@user_id", user_id);
+                        cmd.Parameters.AddWithValue("@account_type_id", account_type_id);
+                        cmd.Parameters.AddWithValue("@currency_id", currency_id);
+                        cmd.Parameters.AddWithValue("@cbu", CBU);
+                        cmd.Parameters.AddWithValue("@current_balance", current_balance);
+                        cmd.Parameters.AddWithValue("@alias", alias);
+
+                        int rowsInserted = cmd.ExecuteNonQuery();
+
+                        if (rowsInserted > 0)
+                        {
+                            MessageBox.Show("Cuenta insertada con éxito.");
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se pudo insertar la cuenta.");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al insertar cuenta: " + ex.Message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("¡Error al conectar con la base de datos!");
+            }
         }
         private void button4_Click(object sender, EventArgs e)
         {
@@ -134,6 +176,31 @@ namespace mini_home_banking.Vistas
         }
 
         private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox7_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox8_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox10_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label13_Click(object sender, EventArgs e)
         {
 
         }
