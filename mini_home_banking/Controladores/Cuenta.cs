@@ -12,7 +12,6 @@ namespace mini_home_banking.Controladores
         private string Alias { get; set; }
         private string Tipo { get; set; }
         private decimal Saldo { get; set; }
-
         private string Cbu { get; set; }
 
         public Cuenta(int Id,string Alias, string Tipo, decimal Saldo, string cbu)
@@ -28,6 +27,21 @@ namespace mini_home_banking.Controladores
         {
             // Esto define lo que se muestra en la ListBox
             return $"{Alias} - {Tipo} - ${Saldo} - {Cbu}";
+        }
+
+        public string Get_Alias()
+        {
+            return Alias;
+        }
+
+        public string Get_Cbu()
+        {
+            return Cbu;
+        }
+
+        public decimal Get_Saldo()
+        {
+            return Saldo;
         }
     }
 }
