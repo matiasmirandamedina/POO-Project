@@ -37,29 +37,30 @@ namespace mini_home_banking.Vistas
             {
                 string cuentaOrigen = this.cuentaOrigen.Text;
                 string cuentaDestino = this.cuentaDestino.Text;
-                string monto = this.monto.Text;
+                string montoText = this.monto.Text;
 
-                if (string.IsNullOrWhiteSpace(monto) || string.IsNullOrWhiteSpace(cuentaDestino) || string.IsNullOrWhiteSpace(cuentaOrigen))
+                if (string.IsNullOrWhiteSpace(montoText) || string.IsNullOrWhiteSpace(cuentaDestino) || string.IsNullOrWhiteSpace(cuentaOrigen))
                 {
                     throw new Own_Exception("Por favor complete todos los campos");
                 }
 
-                decimal montoDecimal;
-                if (!decimal.TryParse(monto, out montoDecimal))
+                decimal monto;
+                if (!decimal.TryParse(montoText, out monto))
                 {
-                    throw new Own_Exception("Monto inválido");
+                    throw new Own_Exception("Por favor ingrese un monto válido (solo números).");
                 }
+                monto = Convert.ToDecimal(montoText);
 
                 foreach (Cuenta account in cuentas)
                 {
                     if (account.Get_Cbu() == cuentaOrigen || account.Get_Alias() == cuentaOrigen)
                     {
                         Cuenta accountVer = account;
-                        if (accountVer.Get_Saldo() < Convert.ToDecimal(monto)) throw new Own_Exception($"El monto seleccionado supera el actual. Ingrese un monto igual o menor a {accountVer.Get_Saldo()}");
+                        if (accountVer.Get_Saldo() < monto) throw new Own_Exception($"El monto seleccionado supera el actual. Ingrese un monto igual o menor a {accountVer.Get_Saldo()}");
                     }
                 }
 
-                if(Convert.ToDecimal(monto) < 0 || Convert.ToDecimal(monto) == 0) throw new Own_Exception($"El monto seleccionado no puede ser igual o menor a cero");
+                if(monto < 0 || monto == 0) throw new Own_Exception($"El monto seleccionado no puede ser igual o menor a cero");
 
                 string transferir = "INSERT INTO transactions (account_id, destination_account_id, type, amount, currency_id, description, created_by, created_at, reference) VALUES (@cuentaOrigen, @cuentaDestino, 'DEBITO', @montoDecimal, 2, 'Pago de servicios', 2, NOW(), 'REF004');";
                 string descontar = "UPDATE accounts SET current_balance = current_balance - @montoDecimal WHERE id = @cuentaOrigen;";
@@ -109,20 +110,20 @@ namespace mini_home_banking.Vistas
                     {
                         log.Parameters.AddWithValue("@cuentaOrigen", idOrigen);
                         log.Parameters.AddWithValue("@cuentaDestino", idDestino);
-                        log.Parameters.AddWithValue("@montoDecimal", montoDecimal);
+                        log.Parameters.AddWithValue("@montoDecimal", monto);
                         log.ExecuteNonQuery();
                     }
 
                     using (MySqlCommand cmdDescontar = new MySqlCommand(descontar, mConexion.getConexion()))
                     {
-                        cmdDescontar.Parameters.AddWithValue("@montoDecimal", montoDecimal);
+                        cmdDescontar.Parameters.AddWithValue("@montoDecimal", monto);
                         cmdDescontar.Parameters.AddWithValue("@cuentaOrigen", idOrigen);
                         cmdDescontar.ExecuteNonQuery();
                     }
 
                     using (MySqlCommand cmdSumar = new MySqlCommand(sumar, mConexion.getConexion()))
                     {
-                        cmdSumar.Parameters.AddWithValue("@montoDecimal", montoDecimal);
+                        cmdSumar.Parameters.AddWithValue("@montoDecimal", monto);
                         cmdSumar.Parameters.AddWithValue("@cuentaDestino", idDestino);
                         cmdSumar.ExecuteNonQuery();
                     }
