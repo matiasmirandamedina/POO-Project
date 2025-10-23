@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Transferencia));
             label1 = new Label();
             cuentaOrigen = new TextBox();
             label2 = new Label();
@@ -36,6 +37,8 @@
             cuentaDestino = new TextBox();
             transferir = new Button();
             listBox1 = new ListBox();
+            pictureBox1 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -105,11 +108,23 @@
             listBox1.Size = new Size(240, 79);
             listBox1.TabIndex = 8;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(133, 188);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(37, 37);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 9;
+            pictureBox1.TabStop = false;
+            // 
             // Transferencia
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ActiveCaption;
             ClientSize = new Size(692, 294);
+            Controls.Add(pictureBox1);
             Controls.Add(listBox1);
             Controls.Add(transferir);
             Controls.Add(cuentaDestino);
@@ -121,6 +136,7 @@
             Name = "Transferencia";
             Text = "Transferencia";
             Load += Transferencia_Load;
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -135,5 +151,6 @@
         private TextBox cuentaDestino;
         private Button transferir;
         private ListBox listBox1;
+        private PictureBox pictureBox1;
     }
 }
