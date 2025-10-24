@@ -116,9 +116,9 @@
             label1.AutoSize = true;
             label1.Location = new Point(32, 63);
             label1.Name = "label1";
-            label1.Size = new Size(21, 15);
+            label1.Size = new Size(36, 15);
             label1.TabIndex = 6;
-            label1.Text = "rol";
+            label1.Text = "rol_id";
             label1.Click += label1_Click;
             // 
             // label4
