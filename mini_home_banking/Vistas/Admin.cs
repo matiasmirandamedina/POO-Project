@@ -89,31 +89,31 @@ namespace mini_home_banking.Vistas
 
         private void button4_Click(object sender, EventArgs e)
         {
-            string role = rol.Text.Trim();
-            string username = textBox1.Text.Trim();
-            string fullname = textBox2.Text.Trim();
-            string email = textBox5.Text.Trim();
-            string password = textBox6.Text.Trim();
+            string role = rol.Text;
+            string username = textBox1.Text;
+            string fullname = textBox2.Text;
+            string email = textBox5.Text;
+            string password = textBox6.Text;
 
             try
             {
                 if (!int.TryParse(role, out _))
-                    throw new Exception("El rol debe ingresarse con el ID numérico (no el nombre).");
+                    throw new Own_Exception("El rol debe ingresarse con el ID numérico (no el nombre).");
 
                 if (string.IsNullOrWhiteSpace(username))
-                    throw new Exception("El nombre de usuario no puede estar vacío.");
+                    throw new Own_Exception("El nombre de usuario no puede estar vacío.");
 
                 if (string.IsNullOrWhiteSpace(fullname))
-                    throw new Exception("El nombre completo no puede estar vacío.");
+                    throw new Own_Exception("El nombre completo no puede estar vacío.");
 
                 if (string.IsNullOrWhiteSpace(email) || !email.Contains("@"))
-                    throw new Exception("Debe ingresar un email válido.");
+                    throw new Own_Exception("Debe ingresar un email válido.");
 
                 if (string.IsNullOrWhiteSpace(password))
-                    throw new Exception("Debe ingresar una contraseña.");
+                    throw new Own_Exception("Debe ingresar una contraseña.");
 
                 if (mConexion.getConexion() == null)
-                    throw new Exception("¡Error al conectar con la base de datos!");
+                    throw new Own_Exception("¡Error al conectar con la base de datos!");
 
                 string query = "INSERT INTO users (role_id, username, full_name, email, password_hash, created_at) " +
                                "VALUES (@role_id, @username, @full_name, @email, @password_hash, @created_at)";
@@ -134,6 +134,10 @@ namespace mini_home_banking.Vistas
                     else
                         MessageBox.Show("No se pudo insertar el usuario.");
                 }
+            }
+            catch (Own_Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
             }
             catch (Exception ex)
             {
