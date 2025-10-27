@@ -134,6 +134,7 @@
             Controls.Add(label1);
             Controls.Add(listBoxCuentas);
             Name = "Home";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Home";
             Load += Home_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

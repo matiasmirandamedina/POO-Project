@@ -34,22 +34,22 @@ namespace mini_home_banking.Vistas
             {
                 string email = this.email.Text;
                 string password = pass.Text;
-                bool arroba = false;
+                bool at = false;
 
                 if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
                 {
                     throw new Own_Exception("Ingrese los valores correspondientes");
                 }
 
-                for(int i = 0; i < email.Length; i++)
+                for (int i = 0; i < email.Length; i++)
                 {
-                    if(email[i] == '@')
+                    if (email[i] == '@')
                     {
-                        arroba = true;
+                        at = true;
                     }
                 }
 
-                if(arroba == false) throw new Own_Exception("Falta el @ en gmail");
+                if (at == false) throw new Own_Exception("Falta el @ en gmail");
 
 
                 MySqlDataReader cons = null;
@@ -68,7 +68,7 @@ namespace mini_home_banking.Vistas
                     {
                         MessageBox.Show("Login exitoso");
 
-                        Usuario user = new Usuario(Convert.ToInt32(cons["id"]),
+                        User user = new User(Convert.ToInt32(cons["id"]),
                         Convert.ToInt32(cons["role_id"]),
                         cons["username"].ToString(),
                         cons["full_name"].ToString(),
@@ -106,8 +106,8 @@ namespace mini_home_banking.Vistas
             {
                 MessageBox.Show(" Ocurrió un error: " + ex.Message);
             }
-            
-            
+
+
         }
 
         private void email_TextChanged(object sender, EventArgs e)
@@ -116,6 +116,11 @@ namespace mini_home_banking.Vistas
         }
 
         private void pass_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
         {
 
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace mini_home_banking.Controladores
 {
-    public class Cuenta
+    public class Account
     {
         private int Id { get; set; }
         private string Alias { get; set; }
@@ -14,7 +14,7 @@ namespace mini_home_banking.Controladores
         private decimal Saldo { get; set; }
         private string Cbu { get; set; }
 
-        public Cuenta(int Id,string Alias, string Tipo, decimal Saldo, string cbu)
+        public Account(int Id,string Alias, string Tipo, decimal Saldo, string cbu)
         {
             this.Id = Id;
             this.Alias = Alias;

@@ -18,7 +18,7 @@ namespace mini_home_banking.Vistas
     public partial class Admin : Form
     {
         private Conexion mConexion;
-        public Admin(Usuario user)
+        public Admin(User user)
         {
             InitializeComponent();
             mConexion = new Conexion();

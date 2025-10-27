@@ -134,6 +134,7 @@
             Controls.Add(cuentaOrigen);
             Controls.Add(label1);
             Name = "Transferencia";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Transferencia";
             Load += Transferencia_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
