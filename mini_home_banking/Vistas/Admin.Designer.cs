@@ -51,9 +51,16 @@
             label11 = new Label();
             textBox9 = new TextBox();
             label14 = new Label();
-            textBox12 = new TextBox();
             label15 = new Label();
             textBox13 = new TextBox();
+            label12 = new Label();
+            label13 = new Label();
+            label16 = new Label();
+            textBox12 = new TextBox();
+            Number_card = new TextBox();
+            button1 = new Button();
+            label17 = new Label();
+            Debitos = new TextBox();
             SuspendLayout();
             // 
             // button3
@@ -72,11 +79,11 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Harrington", 15.75F, FontStyle.Bold);
+            label2.Font = new Font("Harrington", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.ForeColor = SystemColors.ControlLightLight;
             label2.Location = new Point(12, 21);
             label2.Name = "label2";
-            label2.Size = new Size(101, 25);
+            label2.Size = new Size(92, 22);
             label2.TabIndex = 1;
             label2.Text = "usuarios";
             label2.Click += label2_Click;
@@ -84,11 +91,11 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Harrington", 15.75F, FontStyle.Bold);
+            label3.Font = new Font("Harrington", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = SystemColors.ControlLightLight;
-            label3.Location = new Point(225, 25);
+            label3.Location = new Point(222, 25);
             label3.Name = "label3";
-            label3.Size = new Size(90, 25);
+            label3.Size = new Size(81, 22);
             label3.TabIndex = 2;
             label3.Text = "cuentas";
             // 
@@ -291,13 +298,6 @@
             label14.TabIndex = 26;
             label14.Text = "current_balance";
             // 
-            // textBox12
-            // 
-            textBox12.Location = new Point(350, 217);
-            textBox12.Name = "textBox12";
-            textBox12.Size = new Size(100, 23);
-            textBox12.TabIndex = 27;
-            // 
             // label15
             // 
             label15.AutoSize = true;
@@ -316,12 +316,97 @@
             textBox13.Size = new Size(100, 23);
             textBox13.TabIndex = 29;
             // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Harrington", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label12.ForeColor = SystemColors.ControlLightLight;
+            label12.Location = new Point(455, 25);
+            label12.Name = "label12";
+            label12.Size = new Size(240, 19);
+            label12.TabIndex = 30;
+            label12.Text = "Generar debitos a una tarjeta";
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Font = new Font("Harrington", 12F);
+            label13.ForeColor = SystemColors.ControlLightLight;
+            label13.Location = new Point(455, 62);
+            label13.Name = "label13";
+            label13.Size = new Size(133, 19);
+            label13.TabIndex = 31;
+            label13.Text = "Numero de tarjeta";
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Font = new Font("Harrington", 12F);
+            label16.ForeColor = SystemColors.ControlLightLight;
+            label16.Location = new Point(370, 216);
+            label16.Name = "label16";
+            label16.Size = new Size(0, 19);
+            label16.TabIndex = 32;
+            // 
+            // textBox12
+            // 
+            textBox12.Location = new Point(350, 217);
+            textBox12.Name = "textBox12";
+            textBox12.Size = new Size(100, 23);
+            textBox12.TabIndex = 27;
+            // 
+            // Number_card
+            // 
+            Number_card.Location = new Point(594, 58);
+            Number_card.Name = "Number_card";
+            Number_card.Size = new Size(100, 23);
+            Number_card.TabIndex = 33;
+            // 
+            // button1
+            // 
+            button1.BackColor = Color.DarkSlateGray;
+            button1.Font = new Font("Harrington", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button1.ForeColor = SystemColors.ControlLightLight;
+            button1.Location = new Point(457, 127);
+            button1.Name = "button1";
+            button1.Size = new Size(238, 63);
+            button1.TabIndex = 34;
+            button1.Text = "Generar debitos";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            // 
+            // label17
+            // 
+            label17.AutoSize = true;
+            label17.Font = new Font("Harrington", 12F);
+            label17.ForeColor = SystemColors.ControlLightLight;
+            label17.Location = new Point(457, 97);
+            label17.Name = "label17";
+            label17.Size = new Size(63, 19);
+            label17.TabIndex = 35;
+            label17.Text = "Debitos";
+            label17.Click += label17_Click;
+            // 
+            // Debitos
+            // 
+            Debitos.Location = new Point(526, 95);
+            Debitos.Name = "Debitos";
+            Debitos.Size = new Size(100, 23);
+            Debitos.TabIndex = 36;
+            // 
             // Admin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkCyan;
             ClientSize = new Size(800, 450);
+            Controls.Add(Debitos);
+            Controls.Add(label17);
+            Controls.Add(button1);
+            Controls.Add(Number_card);
+            Controls.Add(label16);
+            Controls.Add(label13);
+            Controls.Add(label12);
             Controls.Add(textBox13);
             Controls.Add(label15);
             Controls.Add(textBox12);
@@ -380,8 +465,15 @@
         private Label label11;
         private TextBox textBox9;
         private Label label14;
-        private TextBox textBox12;
         private Label label15;
         private TextBox textBox13;
+        private Label label12;
+        private Label label13;
+        private Label label16;
+        private TextBox textBox12;
+        private TextBox Number_card;
+        private Button button1;
+        private Label label17;
+        private TextBox Debitos;
     }
 }
