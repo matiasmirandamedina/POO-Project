@@ -44,9 +44,11 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(23, 38);
+            label1.Font = new Font("Harrington", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.ForeColor = SystemColors.ControlLightLight;
+            label1.Location = new Point(22, 34);
             label1.Name = "label1";
-            label1.Size = new Size(239, 15);
+            label1.Size = new Size(315, 19);
             label1.TabIndex = 0;
             label1.Text = "Seleccionar cuenta por medio de alias o cbu";
             // 
@@ -60,9 +62,11 @@
             // label2
             // 
             label2.AutoSize = true;
+            label2.Font = new Font("Harrington", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.ForeColor = SystemColors.ControlLightLight;
             label2.Location = new Point(22, 180);
             label2.Name = "label2";
-            label2.Size = new Size(105, 15);
+            label2.Size = new Size(129, 17);
             label2.TabIndex = 3;
             label2.Text = "Monto a transferir:";
             // 
@@ -76,27 +80,32 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(484, 38);
+            label3.Font = new Font("Harrington", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.ForeColor = SystemColors.ControlLightLight;
+            label3.Location = new Point(432, 36);
             label3.Name = "label3";
-            label3.Size = new Size(186, 15);
+            label3.Size = new Size(248, 19);
             label3.TabIndex = 5;
             label3.Text = "Cuenta a transferir con alias o cbu";
             // 
             // cuentaDestino
             // 
-            cuentaDestino.Location = new Point(484, 58);
+            cuentaDestino.Location = new Point(432, 58);
             cuentaDestino.Name = "cuentaDestino";
             cuentaDestino.Size = new Size(186, 23);
             cuentaDestino.TabIndex = 6;
             // 
             // transferir
             // 
+            transferir.BackColor = Color.DarkSlateGray;
+            transferir.Font = new Font("Harrington", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            transferir.ForeColor = SystemColors.ControlLightLight;
             transferir.Location = new Point(254, 188);
             transferir.Name = "transferir";
             transferir.Size = new Size(296, 80);
             transferir.TabIndex = 7;
             transferir.Text = "transferir";
-            transferir.UseVisualStyleBackColor = true;
+            transferir.UseVisualStyleBackColor = false;
             transferir.Click += transferir_Click;
             // 
             // listBox1
@@ -105,13 +114,13 @@
             listBox1.ItemHeight = 15;
             listBox1.Location = new Point(22, 89);
             listBox1.Name = "listBox1";
-            listBox1.Size = new Size(240, 79);
+            listBox1.Size = new Size(315, 79);
             listBox1.TabIndex = 8;
             // 
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(133, 188);
+            pictureBox1.Location = new Point(129, 202);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(37, 37);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -122,7 +131,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ActiveCaption;
+            BackColor = Color.DarkCyan;
             ClientSize = new Size(692, 294);
             Controls.Add(pictureBox1);
             Controls.Add(listBox1);

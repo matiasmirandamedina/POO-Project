@@ -58,20 +58,25 @@
             // 
             // button3
             // 
-            button3.Location = new Point(450, 308);
+            button3.BackColor = Color.DarkSlateGray;
+            button3.Font = new Font("Harrington", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button3.ForeColor = SystemColors.ControlLightLight;
+            button3.Location = new Point(225, 298);
             button3.Name = "button3";
-            button3.Size = new Size(75, 23);
+            button3.Size = new Size(225, 71);
             button3.TabIndex = 0;
-            button3.Text = "insertar";
-            button3.UseVisualStyleBackColor = true;
+            button3.Text = "Insertar Cuenta";
+            button3.UseVisualStyleBackColor = false;
             button3.Click += button3_Click;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(22, 21);
+            label2.Font = new Font("Harrington", 15.75F, FontStyle.Bold);
+            label2.ForeColor = SystemColors.ControlLightLight;
+            label2.Location = new Point(12, 21);
             label2.Name = "label2";
-            label2.Size = new Size(51, 15);
+            label2.Size = new Size(101, 25);
             label2.TabIndex = 1;
             label2.Text = "usuarios";
             label2.Click += label2_Click;
@@ -79,25 +84,30 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(395, 21);
+            label3.Font = new Font("Harrington", 15.75F, FontStyle.Bold);
+            label3.ForeColor = SystemColors.ControlLightLight;
+            label3.Location = new Point(225, 25);
             label3.Name = "label3";
-            label3.Size = new Size(48, 15);
+            label3.Size = new Size(90, 25);
             label3.TabIndex = 2;
             label3.Text = "cuentas";
             // 
             // button4
             // 
-            button4.Location = new Point(105, 273);
+            button4.BackColor = Color.DarkSlateGray;
+            button4.Font = new Font("Harrington", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button4.ForeColor = SystemColors.ControlLightLight;
+            button4.Location = new Point(12, 237);
             button4.Name = "button4";
-            button4.Size = new Size(75, 23);
+            button4.Size = new Size(185, 59);
             button4.TabIndex = 3;
-            button4.Text = "insertar";
-            button4.UseVisualStyleBackColor = true;
+            button4.Text = "Insertar Usuario";
+            button4.UseVisualStyleBackColor = false;
             button4.Click += button4_Click;
             // 
             // rol
             // 
-            rol.Location = new Point(80, 58);
+            rol.Location = new Point(67, 62);
             rol.Name = "rol";
             rol.Size = new Size(100, 23);
             rol.TabIndex = 4;
@@ -105,7 +115,7 @@
             // 
             // textBox4
             // 
-            textBox4.Location = new Point(463, 58);
+            textBox4.Location = new Point(289, 66);
             textBox4.Name = "textBox4";
             textBox4.Size = new Size(100, 23);
             textBox4.TabIndex = 5;
@@ -114,9 +124,11 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(32, 63);
+            label1.Font = new Font("Harrington", 12F);
+            label1.ForeColor = SystemColors.ControlLightLight;
+            label1.Location = new Point(12, 62);
             label1.Name = "label1";
-            label1.Size = new Size(36, 15);
+            label1.Size = new Size(49, 19);
             label1.TabIndex = 6;
             label1.Text = "rol_id";
             label1.Click += label1_Click;
@@ -124,16 +136,18 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(32, 92);
+            label4.Font = new Font("Harrington", 12F);
+            label4.ForeColor = SystemColors.ControlLightLight;
+            label4.Location = new Point(12, 91);
             label4.Name = "label4";
-            label4.Size = new Size(59, 15);
+            label4.Size = new Size(77, 19);
             label4.TabIndex = 7;
             label4.Text = "username";
             label4.Click += label4_Click;
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(97, 89);
+            textBox1.Location = new Point(95, 91);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(100, 23);
             textBox1.TabIndex = 8;
@@ -142,16 +156,18 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(32, 130);
+            label5.Font = new Font("Harrington", 12F);
+            label5.ForeColor = SystemColors.ControlLightLight;
+            label5.Location = new Point(12, 127);
             label5.Name = "label5";
-            label5.Size = new Size(54, 15);
+            label5.Size = new Size(68, 19);
             label5.TabIndex = 9;
             label5.Text = "fullname";
             label5.Click += label5_Click;
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(97, 127);
+            textBox2.Location = new Point(86, 127);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(100, 23);
             textBox2.TabIndex = 10;
@@ -160,15 +176,17 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(32, 165);
+            label6.Font = new Font("Harrington", 12F);
+            label6.ForeColor = SystemColors.ControlLightLight;
+            label6.Location = new Point(12, 162);
             label6.Name = "label6";
-            label6.Size = new Size(36, 15);
+            label6.Size = new Size(45, 19);
             label6.TabIndex = 11;
             label6.Text = "email";
             // 
             // textBox5
             // 
-            textBox5.Location = new Point(80, 162);
+            textBox5.Location = new Point(63, 162);
             textBox5.Name = "textBox5";
             textBox5.Size = new Size(100, 23);
             textBox5.TabIndex = 12;
@@ -177,15 +195,17 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(32, 203);
+            label7.Font = new Font("Harrington", 12F);
+            label7.ForeColor = SystemColors.ControlLightLight;
+            label7.Location = new Point(12, 203);
             label7.Name = "label7";
-            label7.Size = new Size(57, 15);
+            label7.Size = new Size(76, 19);
             label7.TabIndex = 13;
             label7.Text = "password";
             // 
             // textBox6
             // 
-            textBox6.Location = new Point(97, 203);
+            textBox6.Location = new Point(97, 199);
             textBox6.Name = "textBox6";
             textBox6.Size = new Size(100, 23);
             textBox6.TabIndex = 14;
@@ -194,9 +214,11 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(395, 66);
+            label8.Font = new Font("Harrington", 12F);
+            label8.ForeColor = SystemColors.ControlLightLight;
+            label8.Location = new Point(222, 66);
             label8.Name = "label8";
-            label8.Size = new Size(44, 15);
+            label8.Size = new Size(61, 19);
             label8.TabIndex = 15;
             label8.Text = "user_id";
             label8.Click += label8_Click;
@@ -204,15 +226,17 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(395, 97);
+            label9.Font = new Font("Harrington", 12F);
+            label9.ForeColor = SystemColors.ControlLightLight;
+            label9.Location = new Point(222, 97);
             label9.Name = "label9";
-            label9.Size = new Size(93, 15);
+            label9.Size = new Size(125, 19);
             label9.TabIndex = 16;
             label9.Text = "account_type_id";
             // 
             // textBox7
             // 
-            textBox7.Location = new Point(494, 94);
+            textBox7.Location = new Point(351, 95);
             textBox7.Name = "textBox7";
             textBox7.Size = new Size(100, 23);
             textBox7.TabIndex = 17;
@@ -221,15 +245,17 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(395, 135);
+            label10.Font = new Font("Harrington", 12F);
+            label10.ForeColor = SystemColors.ControlLightLight;
+            label10.Location = new Point(222, 135);
             label10.Name = "label10";
-            label10.Size = new Size(68, 15);
+            label10.Size = new Size(93, 19);
             label10.TabIndex = 18;
             label10.Text = "currency_id";
             // 
             // textBox8
             // 
-            textBox8.Location = new Point(479, 135);
+            textBox8.Location = new Point(321, 131);
             textBox8.Name = "textBox8";
             textBox8.Size = new Size(100, 23);
             textBox8.TabIndex = 19;
@@ -238,15 +264,17 @@
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(395, 179);
+            label11.Font = new Font("Harrington", 12F);
+            label11.ForeColor = SystemColors.ControlLightLight;
+            label11.Location = new Point(222, 179);
             label11.Name = "label11";
-            label11.Size = new Size(30, 15);
+            label11.Size = new Size(40, 19);
             label11.TabIndex = 20;
             label11.Text = "CBU";
             // 
             // textBox9
             // 
-            textBox9.Location = new Point(440, 176);
+            textBox9.Location = new Point(282, 175);
             textBox9.Name = "textBox9";
             textBox9.Size = new Size(100, 23);
             textBox9.TabIndex = 21;
@@ -255,15 +283,17 @@
             // label14
             // 
             label14.AutoSize = true;
-            label14.Location = new Point(395, 221);
+            label14.Font = new Font("Harrington", 12F);
+            label14.ForeColor = SystemColors.ControlLightLight;
+            label14.Location = new Point(222, 221);
             label14.Name = "label14";
-            label14.Size = new Size(91, 15);
+            label14.Size = new Size(122, 19);
             label14.TabIndex = 26;
             label14.Text = "current_balance";
             // 
             // textBox12
             // 
-            textBox12.Location = new Point(494, 221);
+            textBox12.Location = new Point(350, 217);
             textBox12.Name = "textBox12";
             textBox12.Size = new Size(100, 23);
             textBox12.TabIndex = 27;
@@ -271,15 +301,17 @@
             // label15
             // 
             label15.AutoSize = true;
-            label15.Location = new Point(395, 262);
+            label15.Font = new Font("Harrington", 12F);
+            label15.ForeColor = SystemColors.ControlLightLight;
+            label15.Location = new Point(222, 262);
             label15.Name = "label15";
-            label15.Size = new Size(30, 15);
+            label15.Size = new Size(41, 19);
             label15.TabIndex = 28;
             label15.Text = "alias";
             // 
             // textBox13
             // 
-            textBox13.Location = new Point(438, 262);
+            textBox13.Location = new Point(269, 258);
             textBox13.Name = "textBox13";
             textBox13.Size = new Size(100, 23);
             textBox13.TabIndex = 29;
@@ -288,6 +320,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.DarkCyan;
             ClientSize = new Size(800, 450);
             Controls.Add(textBox13);
             Controls.Add(label15);
@@ -316,7 +349,7 @@
             Controls.Add(label2);
             Controls.Add(button3);
             Name = "Admin";
-            Text = "1";
+            Text = "Ventana de administrador";
             Load += Admin_Load;
             ResumeLayout(false);
             PerformLayout();

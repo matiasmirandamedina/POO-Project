@@ -46,7 +46,7 @@ namespace mini_home_banking.Vistas
 
                 while (reader.Read())
                 {
-                    Account account = new Account(Convert.ToInt32(reader["id"]),reader["alias"].ToString(), reader["description"].ToString(), Convert.ToDecimal(reader["current_balance"]),reader["cbu"].ToString());
+                    Account account = new Account(Convert.ToInt32(reader["id"]), reader["alias"].ToString(), reader["description"].ToString(), Convert.ToDecimal(reader["current_balance"]), reader["cbu"].ToString());
                     accounts.Add(account);
 
                 }
@@ -107,6 +107,11 @@ namespace mini_home_banking.Vistas
         {
             Transferencia transferencia = new Transferencia(Obtener_Cuentas());
             transferencia.Show();
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
