@@ -61,6 +61,12 @@
             button1 = new Button();
             label17 = new Label();
             Debitos = new TextBox();
+            label18 = new Label();
+            label19 = new Label();
+            Id_card = new TextBox();
+            label20 = new Label();
+            Month = new TextBox();
+            Resumen = new Button();
             SuspendLayout();
             // 
             // button3
@@ -328,6 +334,7 @@
             label12.Size = new Size(296, 24);
             label12.TabIndex = 30;
             label12.Text = "Generar débitos a una tarjeta";
+            label12.Click += label12_Click;
             // 
             // label13
             // 
@@ -398,12 +405,78 @@
             Debitos.Size = new Size(296, 23);
             Debitos.TabIndex = 36;
             // 
+            // label18
+            // 
+            label18.AutoSize = true;
+            label18.Font = new Font("Harrington", 15F, FontStyle.Bold | FontStyle.Italic);
+            label18.ForeColor = SystemColors.ControlLightLight;
+            label18.Location = new Point(492, 248);
+            label18.Name = "label18";
+            label18.Size = new Size(279, 24);
+            label18.TabIndex = 37;
+            label18.Text = "Ver resumen de  una tarjeta";
+            // 
+            // label19
+            // 
+            label19.AutoSize = true;
+            label19.Font = new Font("Harrington", 12F);
+            label19.ForeColor = SystemColors.ControlLightLight;
+            label19.Location = new Point(492, 278);
+            label19.Name = "label19";
+            label19.Size = new Size(113, 19);
+            label19.TabIndex = 38;
+            label19.Text = "ID de la tarjeta:";
+            // 
+            // Id_card
+            // 
+            Id_card.Location = new Point(492, 300);
+            Id_card.Name = "Id_card";
+            Id_card.Size = new Size(296, 23);
+            Id_card.TabIndex = 39;
+            // 
+            // label20
+            // 
+            label20.AutoSize = true;
+            label20.Font = new Font("Harrington", 12F);
+            label20.ForeColor = SystemColors.ControlLightLight;
+            label20.Location = new Point(492, 329);
+            label20.Name = "label20";
+            label20.Size = new Size(41, 19);
+            label20.TabIndex = 40;
+            label20.Text = "Mes:";
+            // 
+            // Month
+            // 
+            Month.Location = new Point(492, 352);
+            Month.Name = "Month";
+            Month.Size = new Size(296, 23);
+            Month.TabIndex = 41;
+            // 
+            // Resumen
+            // 
+            Resumen.BackColor = Color.DarkSlateGray;
+            Resumen.Font = new Font("Harrington", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Resumen.ForeColor = SystemColors.ControlLightLight;
+            Resumen.Location = new Point(492, 381);
+            Resumen.Name = "Resumen";
+            Resumen.Size = new Size(296, 65);
+            Resumen.TabIndex = 42;
+            Resumen.Text = "Ver resumen";
+            Resumen.UseVisualStyleBackColor = false;
+            Resumen.Click += Resumen_Click;
+            // 
             // Admin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkCyan;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 491);
+            Controls.Add(Resumen);
+            Controls.Add(Month);
+            Controls.Add(label20);
+            Controls.Add(Id_card);
+            Controls.Add(label19);
+            Controls.Add(label18);
             Controls.Add(Debitos);
             Controls.Add(label17);
             Controls.Add(button1);
@@ -451,7 +524,7 @@
         private TextBox textBox1;
         private Label label1;
         private TextBox textBox2;
-        private Button button2;
+        private Button Resumen;
         private Button button3;
         private Label label2;
         private Label label3;
@@ -482,5 +555,10 @@
         private Button button1;
         private Label label17;
         private TextBox Debitos;
+        private Label label18;
+        private Label label19;
+        private TextBox Id_card;
+        private Label label20;
+        private TextBox Month;
     }
 }

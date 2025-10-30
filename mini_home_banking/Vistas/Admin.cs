@@ -41,25 +41,25 @@ namespace mini_home_banking.Vistas
             try
             {
                 if (!int.TryParse(user_id, out _))
-                    throw new Exception("El ID de usuario debe ser un número válido.");
+                    throw new Own_Exception("El ID de usuario debe ser un número válido.");
 
                 if (!int.TryParse(account_type_id, out _))
-                    throw new Exception("El ID del tipo de cuenta debe ser un número válido.");
+                    throw new Own_Exception("El ID del tipo de cuenta debe ser un número válido.");
 
                 if (!int.TryParse(currency_id, out _))
-                    throw new Exception("El ID de moneda debe ser un número válido.");
+                    throw new Own_Exception("El ID de moneda debe ser un número válido.");
 
-                if (!CBU.All(char.IsDigit) || CBU.Length != 22)
-                    throw new Exception("El CBU debe tener exactamente 22 dígitos numéricos.");
+                if (!CBU.All(char.IsDigit))
+                    throw new Own_Exception("El CBU debe tener solo numeros");
 
                 if (!decimal.TryParse(current_balance, out decimal saldo))
-                    throw new Exception("El saldo debe ser un número válido.");
+                    throw new Own_Exception("El saldo debe ser un número válido.");
 
                 if (saldo < 0)
-                    throw new Exception("El saldo no puede ser menor a 0.");
+                    throw new Own_Exception("El saldo no puede ser menor a 0.");
 
                 if (mConexion.getConexion() == null)
-                    throw new Exception("¡Error al conectar con la base de datos!");
+                    throw new Own_Exception("¡Error al conectar con la base de datos!");
 
                 string query = "INSERT INTO accounts (user_id, account_type_id, currency_id, cbu, current_balance, alias) " +
                                "VALUES (@user_id, @account_type_id, @currency_id, @cbu, @current_balance, @alias)";
@@ -80,6 +80,10 @@ namespace mini_home_banking.Vistas
                     else
                         MessageBox.Show("No se pudo insertar la cuenta.");
                 }
+            }
+            catch (Own_Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
             }
             catch (Exception ex)
             {
@@ -274,7 +278,7 @@ namespace mini_home_banking.Vistas
                 string card_movements = @"
                 INSERT INTO `card_movements`
                 (`card_id`, `amount`, `type`, `description`, `created_by`, `created_at`)
-                VALUES (@card_id, @amount, 'Prestamo', 'Prestamo instantaneo', @user_id, NOW())";
+                VALUES (@card_id, @amount, 'CARGA','Prestamo', 'Prestamo instantaneo', @user_id, NOW())";
 
                 using (MySqlCommand cmd = new MySqlCommand(card_movements, mConexion.getConexion()))
                 {
@@ -320,6 +324,109 @@ namespace mini_home_banking.Vistas
         private void label6_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void label12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Resumen_Click(object sender, EventArgs e)
+        {
+            string id_cardText = Id_card.Text;
+            string MonthText = Month.Text;
+
+            try
+            {
+
+                if (string.IsNullOrWhiteSpace(id_cardText) || string.IsNullOrWhiteSpace(MonthText))
+                    throw new Own_Exception("Porfavor complete todos los campos");
+
+                if (!id_cardText.All(char.IsDigit))
+                    throw new Own_Exception("El id de la tarjeta debe ser un numero");
+
+                if (!MonthText.All(char.IsDigit))
+                    throw new Own_Exception("El mes debe estar puesto en forma numerica");
+
+                int card_id = Convert.ToInt32(id_cardText);
+                int month = Convert.ToInt32(MonthText);
+
+                bool verification = false;
+                if(card_id == 0 || card_id < 0) verification = true;
+                if (month == 0 || month < 0 ) verification = true;
+
+                if (verification)
+                {
+                    throw new Own_Exception("Ninguno de los campos puede ser menor o igual a cero");
+                }
+
+                if(month > 12) throw new Own_Exception("El mes no puede ser mayor a 12");
+
+                if (mConexion.getConexion() == null)
+                    throw new Own_Exception("¡Error al conectar con la base de datos!");
+
+
+
+                string queryId = "SELECT * FROM cards WHERE id = @id ";
+
+
+                using (MySqlCommand cmd = new MySqlCommand(queryId, mConexion.getConexion()))
+                {
+                    cmd.Parameters.AddWithValue("@id", card_id);
+                    using (MySqlDataReader result_card = cmd.ExecuteReader())
+                    {
+                        if (result_card.Read())
+                        {
+                            MessageBox.Show("Tarjeta encontrada");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Tarjeta no encontrada");
+                            return;
+                        }
+                    }
+                }
+
+                string query = "SELECT * from card_movements where MONTH(created_at) = @month AND card_id = @card_id LIMIT 1";
+
+                using (MySqlCommand cmd = new MySqlCommand(query, mConexion.getConexion()))
+                {
+                    cmd.Parameters.AddWithValue("@month", month);
+                    cmd.Parameters.AddWithValue("@card_id", card_id);
+
+                    using(var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            CardMovement cm1 = new CardMovement(
+                            Convert.ToInt32(reader["id"]),
+                            Convert.ToInt32(reader["card_id"]),
+                            Convert.ToDecimal(reader["amount"]),
+                            reader["type"].ToString(),
+                            reader["description"].ToString(),
+                            Convert.ToInt32(reader["created_by"]),
+                            Convert.ToDateTime(reader["created_at"])
+                            );
+                            MessageBox.Show(cm1.ToString());
+                        }
+                        else
+                        {
+                            throw new Own_Exception("Movimiento de tarjeta no encontrada");
+                        }
+                    }
+
+
+                }
+
+            }
+            catch (Own_Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al insertar usuario: " + ex.Message);
+            }
         }
     }
 }

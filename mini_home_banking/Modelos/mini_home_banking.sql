@@ -94,16 +94,16 @@ create table accounts (
     alias varchar(128) null
 );
 INSERT INTO accounts (user_id, account_type_id, currency_id, cbu, current_balance, alias) VALUES
-	(2, 1, 2, '0000000000000000000001', 1000.0, 'Ahorro Cliente1'),
-	(3, 1, 2, '0000000000000000000002', 2000.0, 'Ahorro Cliente2'),
-	(2, 2, 2, '0000000000000000000003', 500.0, 'Corriente Cliente1'),
-	(3, 2, 2, '0000000000000000000004', 1500.0, 'Corriente Cliente2'),
-	(2, 3, 1, '0000000000000000000005', 300.0, 'Ahorro USD Cliente1'),
-	(3, 3, 1, '0000000000000000000006', 600.0, 'Ahorro USD Cliente2'),
-	(2, 4, 3, '0000000000000000000007', 0.0, 'Corriente EUR Cliente1'),
-	(3, 4, 3, '0000000000000000000008', 0.0, 'Corriente EUR Cliente2'),
-	(2, 5, 2, '0000000000000000000009', 10000.0, 'Inversión Cliente1'),
-	(3, 5, 2, '0000000000000000000010', 5000.0, 'Inversión Cliente2');
+	(2, 1, 2, '1', 1000.0, 'Ahorro Cliente1'),
+	(3, 1, 2, '2', 2000.0, 'Ahorro Cliente2'),
+	(2, 2, 2, '3', 500.0, 'Corriente Cliente1'),
+	(3, 2, 2, '4', 1500.0, 'Corriente Cliente2'),
+	(2, 3, 1, '5', 300.0, 'Ahorro USD Cliente1'),
+	(3, 3, 1, '6', 600.0, 'Ahorro USD Cliente2'),
+	(2, 4, 3, '7', 0.0, 'Corriente EUR Cliente1'),
+	(3, 4, 3, '8', 0.0, 'Corriente EUR Cliente2'),
+	(2, 5, 2, '9', 10000.0, 'Inversión Cliente1'),
+	(3, 5, 2, '10', 5000.0, 'Inversión Cliente2');
 
 create index idx_accounts_user on accounts(user_id);
 create index idx_accounts_cbu on accounts(cbu);
