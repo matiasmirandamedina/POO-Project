@@ -30,53 +30,84 @@ namespace mini_home_banking.Vistas
 
         private void Login_Click(object sender, EventArgs e)
         {
-            string email = this.email.Text;
-            string password = pass.Text;
-            MySqlDataReader cons = null;
-            
-            string login = "SELECT * FROM users WHERE email = @email AND password_hash = MD5(@password_hash);";
-
-            if (mConexion.getConexion() != null)
+            try
             {
-                MySqlCommand log = new MySqlCommand(login, mConexion.getConexion());
-                log.Parameters.AddWithValue("@email", email);
-                log.Parameters.AddWithValue("@password_hash", password);
+                string email = this.email.Text;
+                string password = pass.Text;
+                bool at = false;
 
-                cons = log.ExecuteReader();
-
-                if (cons.Read())
+                if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
                 {
-                    MessageBox.Show("Login exitoso");
+                    throw new Own_Exception("Ingrese los valores correspondientes");
+                }
 
-                    Usuario user = new Usuario(Convert.ToInt32(cons["id"]),
-                    Convert.ToInt32(cons["role_id"]),
-                    cons["username"].ToString(),
-                    cons["full_name"].ToString(),
-                    cons["email"].ToString(),
-                    cons["password_hash"].ToString());
-
-                    if (Convert.ToInt32(cons["role_id"]) == 1)
+                for (int i = 0; i < email.Length; i++)
+                {
+                    if (email[i] == '@')
                     {
-                        Admin f1 = new Admin(user);
-                        f1.Show();
+                        at = true;
+                    }
+                }
+
+                if (at == false) throw new Own_Exception("Falta el @ en gmail");
+
+
+                MySqlDataReader cons = null;
+
+                string login = "SELECT * FROM users WHERE email = @email AND password_hash = MD5(@password_hash);";
+
+                if (mConexion.getConexion() != null)
+                {
+                    MySqlCommand log = new MySqlCommand(login, mConexion.getConexion());
+                    log.Parameters.AddWithValue("@email", email);
+                    log.Parameters.AddWithValue("@password_hash", password);
+
+                    cons = log.ExecuteReader();
+
+                    if (cons.Read())
+                    {
+                        MessageBox.Show("Login exitoso");
+
+                        User user = new User(Convert.ToInt32(cons["id"]),
+                        Convert.ToInt32(cons["role_id"]),
+                        cons["username"].ToString(),
+                        cons["full_name"].ToString(),
+                        cons["email"].ToString(),
+                        cons["password_hash"].ToString());
+
+                        if (Convert.ToInt32(cons["role_id"]) == 1)
+                        {
+                            Admin f1 = new Admin(user);
+                            f1.Show();
+                        }
+                        else
+                        {
+                            Home f1 = new Home(user);
+                            f1.Show();
+                        }
                     }
                     else
                     {
-                        Home f1 = new Home(user);
-                        f1.Show();
+                        MessageBox.Show("Login fallido: Datos incorrectos");
                     }
+
+                    cons.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Login fallido");
+                    MessageBox.Show("¡Error al conectar!");
                 }
-
-                cons.Close();
             }
-            else
+            catch (Own_Exception ex)
             {
-                MessageBox.Show("¡Error al conectar!");
+                MessageBox.Show(" Error: " + ex.Message);
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(" Ocurrió un error: " + ex.Message);
+            }
+
+
         }
 
         private void email_TextChanged(object sender, EventArgs e)
@@ -85,6 +116,11 @@ namespace mini_home_banking.Vistas
         }
 
         private void pass_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
         {
 
         }

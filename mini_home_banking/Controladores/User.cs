@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace mini_home_banking.Controladores
 {
-    public class Usuario
+    public class User
     {
         private int Id { get; set; }
         private int RoleId { get; set; }
@@ -16,7 +16,8 @@ namespace mini_home_banking.Controladores
         private string PasswordHash { get; set; }
 
 
-        public Usuario(int id, int roleId, string username, string fullName, string email, string passwordHash)
+
+        public User(int id, int roleId, string username, string fullName, string email, string passwordHash)
         {
             Id = id;
             RoleId = roleId;

@@ -17,107 +17,139 @@ namespace mini_home_banking.Vistas
     public partial class Transferencia : Form
     {
         private Conexion mConexion;
-        private List<Cuenta> cuentas;
+        private List<Account> accounts;
 
-        public Transferencia(List<Cuenta> cuentas)
+        public Transferencia(List<Account> accounts)
         {
             InitializeComponent();
-            this.cuentas = cuentas;
+            this.accounts = accounts;
             mConexion = new Conexion();
         }
 
         private void Transferencia_Load(object sender, EventArgs e)
         {
-            listBox1.DataSource = cuentas;
+            listBox1.DataSource = accounts;
         }
 
         private void transferir_Click(object sender, EventArgs e)
         {
-            string cuentaOrigen = this.cuentaOrigen.Text;
-            string cuentaDestino = this.cuentaDestino.Text;
-            string monto = this.monto.Text;
-
-            if (string.IsNullOrWhiteSpace(monto) || string.IsNullOrWhiteSpace(cuentaDestino) || string.IsNullOrWhiteSpace(cuentaOrigen))
+            try
             {
-                MessageBox.Show("Por favor complete todos los campos");
-                return;
-            }
+                string account_origin = this.cuentaOrigen.Text;
+                string account_destination = this.cuentaDestino.Text;
+                string amountText = this.monto.Text;
 
-            decimal montoDecimal;
-            if (!decimal.TryParse(monto, out montoDecimal))
-            {
-                MessageBox.Show("Monto inválido");
-                return;
-            }
-
-            string transferir = "INSERT INTO transactions (account_id, destination_account_id, type, amount, currency_id, description, created_by, created_at, reference) VALUES (@cuentaOrigen, @cuentaDestino, 'DEBITO', @montoDecimal, 2, 'Pago de servicios', 2, NOW(), 'REF004');";
-            string descontar = "UPDATE accounts SET current_balance = current_balance - @montoDecimal WHERE id = @cuentaOrigen;";
-            string sumar = "UPDATE accounts SET current_balance = current_balance + @montoDecimal WHERE id = @cuentaDestino;";
-
-            int idOrigen = 0;
-            int idDestino = 0;
-
-            string queryId = "SELECT id FROM accounts WHERE cbu = @cbu OR alias = @alias";
-
-
-            using (MySqlCommand cmd = new MySqlCommand(queryId, mConexion.getConexion()))
-            {
-                cmd.Parameters.AddWithValue("@cbu", cuentaOrigen);
-                cmd.Parameters.AddWithValue("@alias", cuentaOrigen);
-                using (MySqlDataReader resultOrigen = cmd.ExecuteReader())
+                if (string.IsNullOrWhiteSpace(amountText) || string.IsNullOrWhiteSpace(account_destination) || string.IsNullOrWhiteSpace(account_origin))
                 {
-                    if (resultOrigen.Read())
-                        idOrigen = resultOrigen.GetInt32("id");
-                    else
+                    throw new Own_Exception("Por favor complete todos los campos");
+                }
+
+                decimal amount;
+                if (!decimal.TryParse(amountText, out amount))
+                {
+                    throw new Own_Exception("Por favor ingrese un monto válido (solo números).");
+                }
+                amount = Convert.ToDecimal(amountText);
+
+                foreach (Account account in accounts)
+                {
+                    if (account.Get_Cbu() == account_origin || account.Get_Alias() == account_origin)
                     {
-                        MessageBox.Show("Cuenta de origen no encontrada");
-                        return;
+                        Account accountVer = account;
+                        if (accountVer.Get_Saldo() < amount) throw new Own_Exception($"El monto seleccionado supera el actual. Ingrese un monto igual o menor a {accountVer.Get_Saldo()}");
                     }
                 }
-            }
 
-            using (MySqlCommand cmd = new MySqlCommand(queryId, mConexion.getConexion()))
-            {
-                cmd.Parameters.AddWithValue("@cbu", cuentaDestino);
-                cmd.Parameters.AddWithValue("@alias", cuentaDestino);
-                using (MySqlDataReader resultDestino = cmd.ExecuteReader())
+                if (amount < 0 || amount == 0) throw new Own_Exception($"El monto seleccionado no puede ser igual o menor a cero");
+
+                string transaction = "INSERT INTO transactions (account_id, destination_account_id, type, amount, currency_id, description, created_by, created_at, reference) VALUES (@cuentaOrigen, @cuentaDestino, 'DEBITO', @montoDecimal, 2, 'Pago de servicios', 2, NOW(), 'REF004');";
+                string discount = "UPDATE accounts SET current_balance = current_balance - @montoDecimal WHERE id = @cuentaOrigen;";
+                string add = "UPDATE accounts SET current_balance = current_balance + @montoDecimal WHERE id = @cuentaDestino;";
+
+                int id_origin = 0;
+                int id_destination = 0;
+
+                string queryId = "SELECT id FROM accounts WHERE cbu = @cbu OR alias = @alias";
+
+
+                using (MySqlCommand cmd = new MySqlCommand(queryId, mConexion.getConexion()))
                 {
-                    if (resultDestino.Read())
-                        idDestino = resultDestino.GetInt32("id");
-                    else
+                    cmd.Parameters.AddWithValue("@cbu", account_origin);
+                    cmd.Parameters.AddWithValue("@alias", account_origin);
+                    using (MySqlDataReader result_origin = cmd.ExecuteReader())
                     {
-                        MessageBox.Show("Cuenta de destino no encontrada");
-                        return;
+                        if (result_origin.Read())
+                            id_origin = result_origin.GetInt32("id");
+                        else
+                        {
+                            MessageBox.Show("Cuenta de origen no encontrada");
+                            return;
+                        }
                     }
                 }
-            }
 
-            if (mConexion.getConexion() != null)
+                using (MySqlCommand cmd = new MySqlCommand(queryId, mConexion.getConexion()))
+                {
+                    cmd.Parameters.AddWithValue("@cbu", account_destination);
+                    cmd.Parameters.AddWithValue("@alias", account_destination);
+                    using (MySqlDataReader result_destination = cmd.ExecuteReader())
+                    {
+                        if (result_destination.Read())
+                            id_destination = result_destination.GetInt32("id");
+                        else
+                        {
+                            MessageBox.Show("Cuenta de destino no encontrada");
+                            return;
+                        }
+                    }
+                }
+
+                if (mConexion.getConexion() != null)
+                {
+                    using (MySqlCommand log = new MySqlCommand(transaction, mConexion.getConexion()))
+                    {
+                        log.Parameters.AddWithValue("@cuentaOrigen", id_origin);
+                        log.Parameters.AddWithValue("@cuentaDestino", id_destination);
+                        log.Parameters.AddWithValue("@montoDecimal", amount);
+                        log.ExecuteNonQuery();
+                    }
+
+                    using (MySqlCommand cmd_discount = new MySqlCommand(discount, mConexion.getConexion()))
+                    {
+                        cmd_discount.Parameters.AddWithValue("@montoDecimal", amount);
+                        cmd_discount.Parameters.AddWithValue("@cuentaOrigen", id_origin);
+                        cmd_discount.ExecuteNonQuery();
+                    }
+
+                    using (MySqlCommand cmd_add = new MySqlCommand(add, mConexion.getConexion()))
+                    {
+                        cmd_add.Parameters.AddWithValue("@montoDecimal", amount);
+                        cmd_add.Parameters.AddWithValue("@cuentaDestino", id_destination);
+                        cmd_add.ExecuteNonQuery();
+                    }
+
+                    MessageBox.Show($"Se ha transferido ${amount} de la cuenta {account_origin} a la cuenta {account_destination}");
+                }
+            }
+            catch (Own_Exception ex)
             {
-                using (MySqlCommand log = new MySqlCommand(transferir, mConexion.getConexion()))
-                {
-                    log.Parameters.AddWithValue("@cuentaOrigen", idOrigen);
-                    log.Parameters.AddWithValue("@cuentaDestino", idDestino);
-                    log.Parameters.AddWithValue("@montoDecimal", montoDecimal);
-                    log.ExecuteNonQuery();
-                }
-
-                using (MySqlCommand cmdDescontar = new MySqlCommand(descontar, mConexion.getConexion()))
-                {
-                    cmdDescontar.Parameters.AddWithValue("@montoDecimal", montoDecimal);
-                    cmdDescontar.Parameters.AddWithValue("@cuentaOrigen", idOrigen);
-                    cmdDescontar.ExecuteNonQuery();
-                }
-
-                using (MySqlCommand cmdSumar = new MySqlCommand(sumar, mConexion.getConexion()))
-                {
-                    cmdSumar.Parameters.AddWithValue("@montoDecimal", montoDecimal);
-                    cmdSumar.Parameters.AddWithValue("@cuentaDestino", idDestino);
-                    cmdSumar.ExecuteNonQuery();
-                }
-
-                MessageBox.Show($"Se ha transferido ${monto} de la cuenta {cuentaOrigen} a la cuenta {cuentaDestino}");
+                MessageBox.Show(" Error: " + ex.Message);
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(" Ocurrió un error: " + ex.Message);
+            }
+
+        }
+
+        private void cuentaOrigen_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
