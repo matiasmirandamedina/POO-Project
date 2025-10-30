@@ -43,42 +43,42 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Harrington", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Font = new Font("Harrington", 15F, FontStyle.Bold | FontStyle.Italic);
             label1.ForeColor = SystemColors.ControlLightLight;
-            label1.Location = new Point(172, 119);
+            label1.Location = new Point(186, 119);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(70, 25);
+            label1.Size = new Size(65, 24);
             label1.TabIndex = 1;
             label1.Text = "Login";
             // 
             // pass
             // 
-            pass.Location = new Point(255, 192);
+            pass.Location = new Point(250, 172);
             pass.Margin = new Padding(4, 3, 4, 3);
             pass.Name = "pass";
-            pass.Size = new Size(100, 23);
+            pass.Size = new Size(134, 23);
             pass.TabIndex = 4;
             pass.TextChanged += pass_TextChanged;
             // 
             // email
             // 
-            email.Location = new Point(71, 192);
+            email.Location = new Point(67, 172);
             email.Margin = new Padding(4, 3, 4, 3);
             email.Name = "email";
-            email.Size = new Size(100, 23);
+            email.Size = new Size(134, 23);
             email.TabIndex = 5;
             email.TextChanged += email_TextChanged;
             // 
             // Login
             // 
             Login.BackColor = Color.DarkSlateGray;
-            Login.Font = new Font("Harrington", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Login.Font = new Font("Harrington", 15.25F, FontStyle.Bold);
             Login.ForeColor = SystemColors.ControlLightLight;
-            Login.Location = new Point(137, 221);
+            Login.Location = new Point(144, 201);
             Login.Margin = new Padding(4, 3, 4, 3);
             Login.Name = "Login";
-            Login.Size = new Size(134, 39);
+            Login.Size = new Size(170, 65);
             Login.TabIndex = 6;
             Login.Text = "Iniciar Sesion";
             Login.UseVisualStyleBackColor = false;
@@ -89,7 +89,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Harrington", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label4.ForeColor = SystemColors.ControlLightLight;
-            label4.Location = new Point(12, 39);
+            label4.Location = new Point(36, 44);
             label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
             label4.Size = new Size(259, 32);
@@ -99,7 +99,7 @@
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(265, 18);
+            pictureBox1.Location = new Point(297, 14);
             pictureBox1.Margin = new Padding(4, 3, 4, 3);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(108, 89);
@@ -110,34 +110,34 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Harrington", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.Font = new Font("Harrington", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.ForeColor = SystemColors.ControlLightLight;
-            label2.Location = new Point(71, 164);
+            label2.Location = new Point(67, 150);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(70, 25);
+            label2.Size = new Size(52, 19);
             label2.TabIndex = 9;
-            label2.Text = "Gmail";
+            label2.Text = "Gmail:";
             label2.Click += label2_Click;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Harrington", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.Font = new Font("Harrington", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label3.ForeColor = SystemColors.ControlLightLight;
-            label3.Location = new Point(255, 164);
+            label3.Location = new Point(250, 150);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(127, 25);
+            label3.Size = new Size(93, 19);
             label3.TabIndex = 10;
-            label3.Text = "Contraseña";
+            label3.Text = "Contraseña:";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkCyan;
-            ClientSize = new Size(447, 294);
+            ClientSize = new Size(444, 286);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(pictureBox1);
@@ -146,7 +146,9 @@
             Controls.Add(email);
             Controls.Add(pass);
             Controls.Add(label1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Margin = new Padding(4, 3, 4, 3);
+            MaximizeBox = false;
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Login";

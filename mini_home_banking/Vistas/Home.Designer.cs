@@ -46,42 +46,42 @@
             listBoxCuentas.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             listBoxCuentas.FormattingEnabled = true;
             listBoxCuentas.ItemHeight = 15;
-            listBoxCuentas.Location = new Point(12, 152);
+            listBoxCuentas.Location = new Point(14, 120);
             listBoxCuentas.Name = "listBoxCuentas";
-            listBoxCuentas.Size = new Size(327, 64);
+            listBoxCuentas.Size = new Size(327, 94);
             listBoxCuentas.TabIndex = 0;
             listBoxCuentas.SelectedIndexChanged += listBoxCuentas_SelectedIndexChanged;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Harrington", 14.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            label1.Font = new Font("Harrington", 15F, FontStyle.Bold | FontStyle.Italic);
             label1.ForeColor = SystemColors.ControlLightLight;
-            label1.Location = new Point(5, 114);
+            label1.Location = new Point(14, 71);
             label1.Name = "label1";
-            label1.Size = new Size(84, 22);
+            label1.Size = new Size(88, 24);
             label1.TabIndex = 2;
             label1.Text = "Cuentas";
             // 
             // Tarjetas
             // 
             Tarjetas.AutoSize = true;
-            Tarjetas.Font = new Font("Harrington", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Tarjetas.Font = new Font("Harrington", 15F, FontStyle.Bold | FontStyle.Italic);
             Tarjetas.ForeColor = SystemColors.ControlLightLight;
-            Tarjetas.Location = new Point(345, 114);
+            Tarjetas.Location = new Point(347, 71);
             Tarjetas.Name = "Tarjetas";
-            Tarjetas.Size = new Size(85, 22);
+            Tarjetas.Size = new Size(90, 24);
             Tarjetas.TabIndex = 3;
             Tarjetas.Text = "Tarjetas";
             // 
             // button1
             // 
             button1.BackColor = Color.DarkSlateGray;
-            button1.Font = new Font("Harrington", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button1.Font = new Font("Harrington", 15F, FontStyle.Bold);
             button1.ForeColor = SystemColors.ControlLightLight;
-            button1.Location = new Point(195, 238);
+            button1.Location = new Point(228, 220);
             button1.Name = "button1";
-            button1.Size = new Size(235, 78);
+            button1.Size = new Size(235, 65);
             button1.TabIndex = 4;
             button1.Text = "Hacer transferencia";
             button1.UseVisualStyleBackColor = false;
@@ -92,9 +92,9 @@
             listBoxTarjetas.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             listBoxTarjetas.FormattingEnabled = true;
             listBoxTarjetas.ItemHeight = 15;
-            listBoxTarjetas.Location = new Point(345, 152);
+            listBoxTarjetas.Location = new Point(347, 120);
             listBoxTarjetas.Name = "listBoxTarjetas";
-            listBoxTarjetas.Size = new Size(333, 64);
+            listBoxTarjetas.Size = new Size(333, 94);
             listBoxTarjetas.TabIndex = 5;
             listBoxTarjetas.SelectedIndexChanged += listBoxTarjetas_SelectedIndexChanged;
             // 
@@ -103,7 +103,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Harrington", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.ForeColor = SystemColors.ControlLightLight;
-            label2.Location = new Point(12, 9);
+            label2.Location = new Point(302, 23);
             label2.Name = "label2";
             label2.Size = new Size(85, 32);
             label2.TabIndex = 6;
@@ -113,7 +113,7 @@
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(436, 102);
+            pictureBox1.Location = new Point(443, 59);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(55, 50);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -123,7 +123,7 @@
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(95, 96);
+            pictureBox2.Location = new Point(108, 59);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(55, 50);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
@@ -135,7 +135,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkCyan;
-            ClientSize = new Size(699, 343);
+            ClientSize = new Size(699, 311);
             Controls.Add(pictureBox2);
             Controls.Add(pictureBox1);
             Controls.Add(label2);
@@ -144,6 +144,8 @@
             Controls.Add(Tarjetas);
             Controls.Add(label1);
             Controls.Add(listBoxCuentas);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "Home";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Home";

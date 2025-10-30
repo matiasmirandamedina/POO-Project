@@ -217,7 +217,7 @@ namespace mini_home_banking.Vistas
 
             try
             {
-                
+
                 if (string.IsNullOrWhiteSpace(number_card) || string.IsNullOrWhiteSpace(debitsText))
                     throw new Own_Exception("Porfavor complete todos los campos");
 
@@ -231,12 +231,12 @@ namespace mini_home_banking.Vistas
                 }
                 debits = Convert.ToDecimal(debitsText);
 
-                if(debits < 0 || debits == 0) throw new Own_Exception("El debito a generar no puede ser menor o igual cero");
+                if (debits < 0 || debits == 0) throw new Own_Exception("El debito a generar no puede ser menor o igual cero");
 
                 if (mConexion.getConexion() == null)
                     throw new Own_Exception("¡Error al conectar con la base de datos!");
 
-                
+
 
                 string queryId = "SELECT id, user_id FROM cards WHERE card_number_hash = @card_number_hash ";
 
@@ -252,7 +252,7 @@ namespace mini_home_banking.Vistas
                         {
                             card_id = result_card.GetInt32("id");
                             user_id = result_card.GetInt32("user_id");
-                        } 
+                        }
                         else
                         {
                             MessageBox.Show("Tarjeta no encontrada");
@@ -298,6 +298,26 @@ namespace mini_home_banking.Vistas
         }
 
         private void label17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Number_card_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox12_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox13_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
         {
 
         }

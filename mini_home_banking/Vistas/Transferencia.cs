@@ -60,7 +60,7 @@ namespace mini_home_banking.Vistas
                     }
                 }
 
-                if(amount < 0 || amount == 0) throw new Own_Exception($"El monto seleccionado no puede ser igual o menor a cero");
+                if (amount < 0 || amount == 0) throw new Own_Exception($"El monto seleccionado no puede ser igual o menor a cero");
 
                 string transaction = "INSERT INTO transactions (account_id, destination_account_id, type, amount, currency_id, description, created_by, created_at, reference) VALUES (@cuentaOrigen, @cuentaDestino, 'DEBITO', @montoDecimal, 2, 'Pago de servicios', 2, NOW(), 'REF004');";
                 string discount = "UPDATE accounts SET current_balance = current_balance - @montoDecimal WHERE id = @cuentaOrigen;";
@@ -139,7 +139,17 @@ namespace mini_home_banking.Vistas
             {
                 MessageBox.Show(" Ocurrió un error: " + ex.Message);
             }
-            
+
+        }
+
+        private void cuentaOrigen_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
