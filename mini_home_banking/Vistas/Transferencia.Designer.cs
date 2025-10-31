@@ -59,6 +59,7 @@
             cuentaOrigen.Size = new Size(319, 23);
             cuentaOrigen.TabIndex = 1;
             cuentaOrigen.TextChanged += cuentaOrigen_TextChanged;
+            cuentaOrigen.KeyUp += cuentaOrigen_KeyUp;
             // 
             // label2
             // 
@@ -76,7 +77,9 @@
             monto.Location = new Point(12, 194);
             monto.Name = "monto";
             monto.Size = new Size(319, 23);
-            monto.TabIndex = 4;
+            monto.TabIndex = 3;
+            monto.TextChanged += monto_TextChanged;
+            monto.KeyUp += monto_KeyUp;
             // 
             // label3
             // 
@@ -94,7 +97,8 @@
             cuentaDestino.Location = new Point(370, 40);
             cuentaDestino.Name = "cuentaDestino";
             cuentaDestino.Size = new Size(296, 23);
-            cuentaDestino.TabIndex = 6;
+            cuentaDestino.TabIndex = 2;
+            cuentaDestino.KeyUp += cuentaDestino_KeyUp;
             // 
             // transferir
             // 
@@ -104,7 +108,7 @@
             transferir.Location = new Point(370, 152);
             transferir.Name = "transferir";
             transferir.Size = new Size(296, 65);
-            transferir.TabIndex = 7;
+            transferir.TabIndex = 4;
             transferir.Text = "Transferir";
             transferir.UseVisualStyleBackColor = false;
             transferir.Click += transferir_Click;
@@ -116,7 +120,7 @@
             listBox1.Location = new Point(12, 69);
             listBox1.Name = "listBox1";
             listBox1.Size = new Size(319, 79);
-            listBox1.TabIndex = 8;
+            listBox1.TabIndex = 0;
             listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             // 
             // pictureBox1

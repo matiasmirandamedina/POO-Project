@@ -151,5 +151,34 @@ namespace mini_home_banking.Vistas
         {
 
         }
+
+        private void monto_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cuentaOrigen_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                transferir.Focus();
+            }
+        }
+
+        private void cuentaDestino_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                transferir.Focus();
+            }
+        }
+
+        private void monto_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                transferir.Focus();
+            }
+        }
     }
 }

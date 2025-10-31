@@ -124,5 +124,26 @@ namespace mini_home_banking.Vistas
         {
 
         }
+
+        private void Login_KeyUp(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void email_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                Login.Focus();
+            }
+        }
+
+        private void pass_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                Login.Focus();
+            }
+        }
     }
 }

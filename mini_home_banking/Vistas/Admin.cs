@@ -352,15 +352,15 @@ namespace mini_home_banking.Vistas
                 int month = Convert.ToInt32(MonthText);
 
                 bool verification = false;
-                if(card_id == 0 || card_id < 0) verification = true;
-                if (month == 0 || month < 0 ) verification = true;
+                if (card_id == 0 || card_id < 0) verification = true;
+                if (month == 0 || month < 0) verification = true;
 
                 if (verification)
                 {
                     throw new Own_Exception("Ninguno de los campos puede ser menor o igual a cero");
                 }
 
-                if(month > 12) throw new Own_Exception("El mes no puede ser mayor a 12");
+                if (month > 12) throw new Own_Exception("El mes no puede ser mayor a 12");
 
                 if (mConexion.getConexion() == null)
                     throw new Own_Exception("¡Error al conectar con la base de datos!");
@@ -394,7 +394,7 @@ namespace mini_home_banking.Vistas
                     cmd.Parameters.AddWithValue("@month", month);
                     cmd.Parameters.AddWithValue("@card_id", card_id);
 
-                    using(var reader = cmd.ExecuteReader())
+                    using (var reader = cmd.ExecuteReader())
                     {
                         if (reader.Read())
                         {
@@ -426,6 +426,131 @@ namespace mini_home_banking.Vistas
             catch (Exception ex)
             {
                 MessageBox.Show("Error al insertar usuario: " + ex.Message);
+            }
+        }
+
+        private void rol_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                Insert_User.Focus();
+            }
+        }
+
+        private void textBox1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                Insert_User.Focus();
+            }
+        }
+
+        private void textBox2_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                Insert_User.Focus();
+            }
+        }
+
+        private void textBox5_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                Insert_User.Focus();
+            }
+        }
+
+        private void textBox6_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                Insert_User.Focus();
+            }
+        }
+
+        private void textBox4_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                Insert_Account.Focus();
+            }
+        }
+
+        private void textBox7_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                Insert_Account.Focus();
+            }
+        }
+
+        private void textBox8_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                Insert_Account.Focus();
+            }
+        }
+
+        private void textBox9_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                Insert_Account.Focus();
+            }
+        }
+
+        private void textBox12_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                Insert_Account.Focus();
+            }
+        }
+
+        private void textBox13_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                Insert_Account.Focus();
+            }
+        }
+
+        private void Number_card_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                Generate_Debits.Focus();
+            }
+        }
+
+        private void Debitos_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                Generate_Debits.Focus();
+            }
+        }
+
+        private void Id_card_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                Resumen.Focus();
+            }
+        }
+
+        private void Month_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Month_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                Resumen.Focus();
             }
         }
     }

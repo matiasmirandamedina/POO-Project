@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button3 = new Button();
+            Insert_Account = new Button();
             label2 = new Label();
             label3 = new Label();
-            button4 = new Button();
+            Insert_User = new Button();
             rol = new TextBox();
             textBox4 = new TextBox();
             label1 = new Label();
@@ -58,7 +58,7 @@
             label16 = new Label();
             textBox12 = new TextBox();
             Number_card = new TextBox();
-            button1 = new Button();
+            Generate_Debits = new Button();
             label17 = new Label();
             Debitos = new TextBox();
             label18 = new Label();
@@ -69,18 +69,18 @@
             Resumen = new Button();
             SuspendLayout();
             // 
-            // button3
+            // Insert_Account
             // 
-            button3.BackColor = Color.DarkSlateGray;
-            button3.Font = new Font("Harrington", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button3.ForeColor = SystemColors.ControlLightLight;
-            button3.Location = new Point(234, 352);
-            button3.Name = "button3";
-            button3.Size = new Size(225, 65);
-            button3.TabIndex = 0;
-            button3.Text = "Insertar Cuenta";
-            button3.UseVisualStyleBackColor = false;
-            button3.Click += button3_Click;
+            Insert_Account.BackColor = Color.DarkSlateGray;
+            Insert_Account.Font = new Font("Harrington", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Insert_Account.ForeColor = SystemColors.ControlLightLight;
+            Insert_Account.Location = new Point(234, 352);
+            Insert_Account.Name = "Insert_Account";
+            Insert_Account.Size = new Size(225, 65);
+            Insert_Account.TabIndex = 13;
+            Insert_Account.Text = "Insertar Cuenta";
+            Insert_Account.UseVisualStyleBackColor = false;
+            Insert_Account.Click += button3_Click;
             // 
             // label2
             // 
@@ -105,34 +105,36 @@
             label3.TabIndex = 2;
             label3.Text = "Insertar cuenta";
             // 
-            // button4
+            // Insert_User
             // 
-            button4.BackColor = Color.DarkSlateGray;
-            button4.Font = new Font("Harrington", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button4.ForeColor = SystemColors.ControlLightLight;
-            button4.Location = new Point(12, 304);
-            button4.Name = "button4";
-            button4.Size = new Size(185, 65);
-            button4.TabIndex = 3;
-            button4.Text = "Insertar Usuario";
-            button4.UseVisualStyleBackColor = false;
-            button4.Click += button4_Click;
+            Insert_User.BackColor = Color.DarkSlateGray;
+            Insert_User.Font = new Font("Harrington", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Insert_User.ForeColor = SystemColors.ControlLightLight;
+            Insert_User.Location = new Point(12, 304);
+            Insert_User.Name = "Insert_User";
+            Insert_User.Size = new Size(185, 65);
+            Insert_User.TabIndex = 6;
+            Insert_User.Text = "Insertar Usuario";
+            Insert_User.UseVisualStyleBackColor = false;
+            Insert_User.Click += button4_Click;
             // 
             // rol
             // 
             rol.Location = new Point(12, 83);
             rol.Name = "rol";
             rol.Size = new Size(185, 23);
-            rol.TabIndex = 4;
+            rol.TabIndex = 1;
             rol.TextChanged += textBox3_TextChanged;
+            rol.KeyUp += rol_KeyUp;
             // 
             // textBox4
             // 
             textBox4.Location = new Point(234, 83);
             textBox4.Name = "textBox4";
             textBox4.Size = new Size(225, 23);
-            textBox4.TabIndex = 5;
+            textBox4.TabIndex = 7;
             textBox4.TextChanged += textBox4_TextChanged;
+            textBox4.KeyUp += textBox4_KeyUp;
             // 
             // label1
             // 
@@ -163,8 +165,9 @@
             textBox1.Location = new Point(12, 131);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(185, 23);
-            textBox1.TabIndex = 8;
+            textBox1.TabIndex = 2;
             textBox1.TextChanged += textBox1_TextChanged;
+            textBox1.KeyUp += textBox1_KeyUp;
             // 
             // label5
             // 
@@ -183,8 +186,9 @@
             textBox2.Location = new Point(12, 179);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(185, 23);
-            textBox2.TabIndex = 10;
+            textBox2.TabIndex = 3;
             textBox2.TextChanged += textBox2_TextChanged;
+            textBox2.KeyUp += textBox2_KeyUp;
             // 
             // label6
             // 
@@ -203,8 +207,9 @@
             textBox5.Location = new Point(12, 227);
             textBox5.Name = "textBox5";
             textBox5.Size = new Size(185, 23);
-            textBox5.TabIndex = 12;
+            textBox5.TabIndex = 4;
             textBox5.TextChanged += textBox5_TextChanged;
+            textBox5.KeyUp += textBox5_KeyUp;
             // 
             // label7
             // 
@@ -222,8 +227,9 @@
             textBox6.Location = new Point(12, 275);
             textBox6.Name = "textBox6";
             textBox6.Size = new Size(185, 23);
-            textBox6.TabIndex = 14;
+            textBox6.TabIndex = 5;
             textBox6.TextChanged += textBox6_TextChanged;
+            textBox6.KeyUp += textBox6_KeyUp;
             // 
             // label8
             // 
@@ -253,8 +259,9 @@
             textBox7.Location = new Point(234, 131);
             textBox7.Name = "textBox7";
             textBox7.Size = new Size(225, 23);
-            textBox7.TabIndex = 17;
+            textBox7.TabIndex = 8;
             textBox7.TextChanged += textBox7_TextChanged;
+            textBox7.KeyUp += textBox7_KeyUp;
             // 
             // label10
             // 
@@ -272,8 +279,9 @@
             textBox8.Location = new Point(234, 179);
             textBox8.Name = "textBox8";
             textBox8.Size = new Size(225, 23);
-            textBox8.TabIndex = 19;
+            textBox8.TabIndex = 9;
             textBox8.TextChanged += textBox8_TextChanged;
+            textBox8.KeyUp += textBox8_KeyUp;
             // 
             // label11
             // 
@@ -291,8 +299,9 @@
             textBox9.Location = new Point(234, 227);
             textBox9.Name = "textBox9";
             textBox9.Size = new Size(225, 23);
-            textBox9.TabIndex = 21;
+            textBox9.TabIndex = 10;
             textBox9.TextChanged += textBox9_TextChanged;
+            textBox9.KeyUp += textBox9_KeyUp;
             // 
             // label14
             // 
@@ -321,8 +330,9 @@
             textBox13.Location = new Point(234, 323);
             textBox13.Name = "textBox13";
             textBox13.Size = new Size(225, 23);
-            textBox13.TabIndex = 29;
+            textBox13.TabIndex = 12;
             textBox13.TextChanged += textBox13_TextChanged;
+            textBox13.KeyUp += textBox13_KeyUp;
             // 
             // label12
             // 
@@ -362,29 +372,31 @@
             textBox12.Location = new Point(234, 275);
             textBox12.Name = "textBox12";
             textBox12.Size = new Size(225, 23);
-            textBox12.TabIndex = 27;
+            textBox12.TabIndex = 11;
             textBox12.TextChanged += textBox12_TextChanged;
+            textBox12.KeyUp += textBox12_KeyUp;
             // 
             // Number_card
             // 
             Number_card.Location = new Point(492, 83);
             Number_card.Name = "Number_card";
             Number_card.Size = new Size(296, 23);
-            Number_card.TabIndex = 33;
+            Number_card.TabIndex = 14;
             Number_card.TextChanged += Number_card_TextChanged;
+            Number_card.KeyUp += Number_card_KeyUp;
             // 
-            // button1
+            // Generate_Debits
             // 
-            button1.BackColor = Color.DarkSlateGray;
-            button1.Font = new Font("Harrington", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button1.ForeColor = SystemColors.ControlLightLight;
-            button1.Location = new Point(492, 162);
-            button1.Name = "button1";
-            button1.Size = new Size(296, 65);
-            button1.TabIndex = 34;
-            button1.Text = "Generar debitos";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
+            Generate_Debits.BackColor = Color.DarkSlateGray;
+            Generate_Debits.Font = new Font("Harrington", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Generate_Debits.ForeColor = SystemColors.ControlLightLight;
+            Generate_Debits.Location = new Point(492, 162);
+            Generate_Debits.Name = "Generate_Debits";
+            Generate_Debits.Size = new Size(296, 65);
+            Generate_Debits.TabIndex = 16;
+            Generate_Debits.Text = "Generar debitos";
+            Generate_Debits.UseVisualStyleBackColor = false;
+            Generate_Debits.Click += button1_Click;
             // 
             // label17
             // 
@@ -403,7 +415,8 @@
             Debitos.Location = new Point(492, 131);
             Debitos.Name = "Debitos";
             Debitos.Size = new Size(296, 23);
-            Debitos.TabIndex = 36;
+            Debitos.TabIndex = 15;
+            Debitos.KeyUp += Debitos_KeyUp;
             // 
             // label18
             // 
@@ -432,7 +445,8 @@
             Id_card.Location = new Point(492, 300);
             Id_card.Name = "Id_card";
             Id_card.Size = new Size(296, 23);
-            Id_card.TabIndex = 39;
+            Id_card.TabIndex = 17;
+            Id_card.KeyUp += Id_card_KeyUp;
             // 
             // label20
             // 
@@ -450,7 +464,9 @@
             Month.Location = new Point(492, 352);
             Month.Name = "Month";
             Month.Size = new Size(296, 23);
-            Month.TabIndex = 41;
+            Month.TabIndex = 18;
+            Month.TextChanged += Month_TextChanged;
+            Month.KeyUp += Month_KeyUp;
             // 
             // Resumen
             // 
@@ -460,7 +476,7 @@
             Resumen.Location = new Point(492, 381);
             Resumen.Name = "Resumen";
             Resumen.Size = new Size(296, 65);
-            Resumen.TabIndex = 42;
+            Resumen.TabIndex = 19;
             Resumen.Text = "Ver resumen";
             Resumen.UseVisualStyleBackColor = false;
             Resumen.Click += Resumen_Click;
@@ -479,7 +495,7 @@
             Controls.Add(label18);
             Controls.Add(Debitos);
             Controls.Add(label17);
-            Controls.Add(button1);
+            Controls.Add(Generate_Debits);
             Controls.Add(Number_card);
             Controls.Add(label16);
             Controls.Add(label13);
@@ -506,10 +522,10 @@
             Controls.Add(label1);
             Controls.Add(textBox4);
             Controls.Add(rol);
-            Controls.Add(button4);
+            Controls.Add(Insert_User);
             Controls.Add(label3);
             Controls.Add(label2);
-            Controls.Add(button3);
+            Controls.Add(Insert_Account);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "Admin";
@@ -525,10 +541,10 @@
         private Label label1;
         private TextBox textBox2;
         private Button Resumen;
-        private Button button3;
+        private Button Insert_Account;
         private Label label2;
         private Label label3;
-        private Button button4;
+        private Button Insert_User;
         private TextBox rol;
         private TextBox textBox4;
         private Label label4;
@@ -552,7 +568,7 @@
         private Label label16;
         private TextBox textBox12;
         private TextBox Number_card;
-        private Button button1;
+        private Button Generate_Debits;
         private Label label17;
         private TextBox Debitos;
         private Label label18;

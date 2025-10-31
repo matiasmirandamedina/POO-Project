@@ -58,8 +58,9 @@
             pass.Margin = new Padding(4, 3, 4, 3);
             pass.Name = "pass";
             pass.Size = new Size(134, 23);
-            pass.TabIndex = 4;
+            pass.TabIndex = 6;
             pass.TextChanged += pass_TextChanged;
+            pass.KeyUp += pass_KeyUp;
             // 
             // email
             // 
@@ -69,6 +70,7 @@
             email.Size = new Size(134, 23);
             email.TabIndex = 5;
             email.TextChanged += email_TextChanged;
+            email.KeyUp += email_KeyUp;
             // 
             // Login
             // 
@@ -79,10 +81,11 @@
             Login.Margin = new Padding(4, 3, 4, 3);
             Login.Name = "Login";
             Login.Size = new Size(170, 65);
-            Login.TabIndex = 6;
+            Login.TabIndex = 7;
             Login.Text = "Iniciar Sesion";
             Login.UseVisualStyleBackColor = false;
             Login.Click += Login_Click;
+            Login.KeyUp += Login_KeyUp;
             // 
             // label4
             // 
