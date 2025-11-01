@@ -50,7 +50,6 @@
             listBoxCuentas.Name = "listBoxCuentas";
             listBoxCuentas.Size = new Size(327, 94);
             listBoxCuentas.TabIndex = 0;
-            listBoxCuentas.SelectedIndexChanged += listBoxCuentas_SelectedIndexChanged;
             // 
             // label1
             // 
@@ -82,7 +81,7 @@
             button1.Location = new Point(228, 220);
             button1.Name = "button1";
             button1.Size = new Size(235, 65);
-            button1.TabIndex = 4;
+            button1.TabIndex = 1;
             button1.Text = "Hacer transferencia";
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
@@ -96,7 +95,6 @@
             listBoxTarjetas.Name = "listBoxTarjetas";
             listBoxTarjetas.Size = new Size(333, 94);
             listBoxTarjetas.TabIndex = 5;
-            listBoxTarjetas.SelectedIndexChanged += listBoxTarjetas_SelectedIndexChanged;
             // 
             // label2
             // 

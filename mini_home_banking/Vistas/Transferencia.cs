@@ -1,16 +1,6 @@
-﻿using Microsoft.VisualBasic.Logging;
-using mini_home_banking.Controladores;
+﻿using mini_home_banking.Controladores;
 using mini_home_banking.Modelos;
 using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace mini_home_banking.Vistas
 {
@@ -39,6 +29,9 @@ namespace mini_home_banking.Vistas
                 string account_destination = this.cuentaDestino.Text;
                 string amountText = this.monto.Text;
 
+                decimal saldo = 0;
+                Account cuentaOrigenObj = null;
+
                 if (string.IsNullOrWhiteSpace(amountText) || string.IsNullOrWhiteSpace(account_destination) || string.IsNullOrWhiteSpace(account_origin))
                 {
                     throw new Own_Exception("Por favor complete todos los campos");
@@ -55,8 +48,10 @@ namespace mini_home_banking.Vistas
                 {
                     if (account.Get_Cbu() == account_origin || account.Get_Alias() == account_origin)
                     {
-                        Account accountVer = account;
-                        if (accountVer.Get_Saldo() < amount) throw new Own_Exception($"El monto seleccionado supera el actual. Ingrese un monto igual o menor a {accountVer.Get_Saldo()}");
+                        saldo = account.Get_Saldo();
+                        cuentaOrigenObj = account;
+
+                        if (saldo < amount) throw new Own_Exception($"El monto seleccionado supera el actual. Ingrese un monto igual o menor a {saldo}");
                     }
                 }
 
@@ -128,6 +123,11 @@ namespace mini_home_banking.Vistas
                         cmd_add.ExecuteNonQuery();
                     }
 
+                    if (cuentaOrigenObj != null)
+                    {
+                        cuentaOrigenObj.Set_Saldo(saldo - amount);
+                    }
+
                     MessageBox.Show($"Se ha transferido ${amount} de la cuenta {account_origin} a la cuenta {account_destination}");
                 }
             }
@@ -142,26 +142,11 @@ namespace mini_home_banking.Vistas
 
         }
 
-        private void cuentaOrigen_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void monto_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void cuentaOrigen_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Enter)
             {
-                transferir.Focus();
+                cuentaDestino.Focus();
             }
         }
 
@@ -169,7 +154,7 @@ namespace mini_home_banking.Vistas
         {
             if (e.KeyData == Keys.Enter)
             {
-                transferir.Focus();
+                monto.Focus();
             }
         }
 

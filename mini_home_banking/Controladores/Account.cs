@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace mini_home_banking.Controladores
+﻿namespace mini_home_banking.Controladores
 {
     public class Account
     {
@@ -41,6 +35,11 @@ namespace mini_home_banking.Controladores
 
         public decimal Get_Saldo()
         {
+            return Saldo;
+        }
+        public decimal Set_Saldo(decimal Saldo)
+        {
+            this.Saldo = Saldo;
             return Saldo;
         }
     }

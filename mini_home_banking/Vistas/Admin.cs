@@ -1,17 +1,6 @@
-﻿using Google.Protobuf.WellKnownTypes;
-using Microsoft.VisualBasic.Logging;
-using mini_home_banking.Controladores;
+﻿using mini_home_banking.Controladores;
 using mini_home_banking.Modelos;
 using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace mini_home_banking.Vistas
 {
@@ -22,11 +11,6 @@ namespace mini_home_banking.Vistas
         {
             InitializeComponent();
             mConexion = new Conexion();
-        }
-
-        private void Admin_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -149,71 +133,6 @@ namespace mini_home_banking.Vistas
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void label8_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void textBox9_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void textBox5_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void textBox6_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void textBox7_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void textBox8_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void textBox10_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void label13_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             string number_card = Number_card.Text;
@@ -301,36 +220,6 @@ namespace mini_home_banking.Vistas
             }
         }
 
-        private void label17_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Number_card_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox12_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox13_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label12_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void Resumen_Click(object sender, EventArgs e)
         {
             string id_cardText = Id_card.Text;
@@ -402,7 +291,7 @@ namespace mini_home_banking.Vistas
                             Convert.ToInt32(reader["id"]),
                             Convert.ToInt32(reader["card_id"]),
                             Convert.ToDecimal(reader["amount"]),
-                            reader["type"].ToString(),
+                            reader["type"]!.ToString(),
                             reader["description"].ToString(),
                             Convert.ToInt32(reader["created_by"]),
                             Convert.ToDateTime(reader["created_at"])
@@ -414,10 +303,7 @@ namespace mini_home_banking.Vistas
                             throw new Own_Exception("Movimiento de tarjeta no encontrada");
                         }
                     }
-
-
                 }
-
             }
             catch (Own_Exception ex)
             {
@@ -433,7 +319,7 @@ namespace mini_home_banking.Vistas
         {
             if (e.KeyData == Keys.Enter)
             {
-                Insert_User.Focus();
+                textBox1.Focus();
             }
         }
 
@@ -441,7 +327,7 @@ namespace mini_home_banking.Vistas
         {
             if (e.KeyData == Keys.Enter)
             {
-                Insert_User.Focus();
+                textBox2.Focus();
             }
         }
 
@@ -449,7 +335,7 @@ namespace mini_home_banking.Vistas
         {
             if (e.KeyData == Keys.Enter)
             {
-                Insert_User.Focus();
+                textBox5.Focus();
             }
         }
 
@@ -457,7 +343,7 @@ namespace mini_home_banking.Vistas
         {
             if (e.KeyData == Keys.Enter)
             {
-                Insert_User.Focus();
+                textBox6.Focus();
             }
         }
 
@@ -473,7 +359,7 @@ namespace mini_home_banking.Vistas
         {
             if (e.KeyData == Keys.Enter)
             {
-                Insert_Account.Focus();
+                textBox7.Focus();
             }
         }
 
@@ -481,7 +367,7 @@ namespace mini_home_banking.Vistas
         {
             if (e.KeyData == Keys.Enter)
             {
-                Insert_Account.Focus();
+                textBox8.Focus();
             }
         }
 
@@ -489,7 +375,7 @@ namespace mini_home_banking.Vistas
         {
             if (e.KeyData == Keys.Enter)
             {
-                Insert_Account.Focus();
+                textBox9.Focus();
             }
         }
 
@@ -497,7 +383,7 @@ namespace mini_home_banking.Vistas
         {
             if (e.KeyData == Keys.Enter)
             {
-                Insert_Account.Focus();
+                textBox12.Focus();
             }
         }
 
@@ -505,7 +391,7 @@ namespace mini_home_banking.Vistas
         {
             if (e.KeyData == Keys.Enter)
             {
-                Insert_Account.Focus();
+                textBox13.Focus();
             }
         }
 
@@ -521,7 +407,7 @@ namespace mini_home_banking.Vistas
         {
             if (e.KeyData == Keys.Enter)
             {
-                Generate_Debits.Focus();
+                Debitos.Focus();
             }
         }
 
@@ -537,13 +423,8 @@ namespace mini_home_banking.Vistas
         {
             if (e.KeyData == Keys.Enter)
             {
-                Resumen.Focus();
+                Month.Focus();
             }
-        }
-
-        private void Month_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void Month_KeyUp(object sender, KeyEventArgs e)

@@ -1,18 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Microsoft.VisualBasic.Logging;
-using mini_home_banking.Controladores;
+﻿using mini_home_banking.Controladores;
 using mini_home_banking.Modelos;
 using MySql.Data.MySqlClient;
-using MySqlX.XDevAPI.Common;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace mini_home_banking.Vistas
 {
@@ -48,7 +36,6 @@ namespace mini_home_banking.Vistas
                 {
                     Account account = new Account(Convert.ToInt32(reader["id"]), reader["alias"].ToString(), reader["description"].ToString(), Convert.ToDecimal(reader["current_balance"]), reader["cbu"].ToString());
                     accounts.Add(account);
-
                 }
                 reader.Close();
 
@@ -90,16 +77,6 @@ namespace mini_home_banking.Vistas
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
-
-        }
-
-        private void listBoxCuentas_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listBoxTarjetas_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
         }
 

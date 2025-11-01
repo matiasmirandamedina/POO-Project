@@ -58,7 +58,6 @@
             cuentaOrigen.Name = "cuentaOrigen";
             cuentaOrigen.Size = new Size(319, 23);
             cuentaOrigen.TabIndex = 1;
-            cuentaOrigen.TextChanged += cuentaOrigen_TextChanged;
             cuentaOrigen.KeyUp += cuentaOrigen_KeyUp;
             // 
             // label2
@@ -78,7 +77,6 @@
             monto.Name = "monto";
             monto.Size = new Size(319, 23);
             monto.TabIndex = 3;
-            monto.TextChanged += monto_TextChanged;
             monto.KeyUp += monto_KeyUp;
             // 
             // label3
@@ -121,7 +119,6 @@
             listBox1.Name = "listBox1";
             listBox1.Size = new Size(319, 79);
             listBox1.TabIndex = 0;
-            listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             // 
             // pictureBox1
             // 

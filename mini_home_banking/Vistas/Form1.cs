@@ -1,15 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics.Contracts;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-using mini_home_banking.Modelos;
+﻿using mini_home_banking.Modelos;
 using mini_home_banking.Controladores;
 using MySql.Data.MySqlClient;
 
@@ -22,10 +11,6 @@ namespace mini_home_banking.Vistas
         {
             InitializeComponent();
             mConexion = new Conexion();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
         }
 
         private void Login_Click(object sender, EventArgs e)
@@ -110,31 +95,11 @@ namespace mini_home_banking.Vistas
 
         }
 
-        private void email_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pass_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Login_KeyUp(object sender, KeyEventArgs e)
-        {
-
-        }
-
         private void email_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Enter)
             {
-                Login.Focus();
+                pass.Focus();
             }
         }
 

@@ -2,15 +2,9 @@
 {
     partial class Admin
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing" />
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,10 +16,6 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             Insert_Account = new Button();
@@ -92,7 +82,6 @@
             label2.Size = new Size(167, 24);
             label2.TabIndex = 1;
             label2.Text = "Insertar usuario";
-            label2.Click += label2_Click;
             // 
             // label3
             // 
@@ -124,7 +113,6 @@
             rol.Name = "rol";
             rol.Size = new Size(185, 23);
             rol.TabIndex = 1;
-            rol.TextChanged += textBox3_TextChanged;
             rol.KeyUp += rol_KeyUp;
             // 
             // textBox4
@@ -133,7 +121,6 @@
             textBox4.Name = "textBox4";
             textBox4.Size = new Size(225, 23);
             textBox4.TabIndex = 7;
-            textBox4.TextChanged += textBox4_TextChanged;
             textBox4.KeyUp += textBox4_KeyUp;
             // 
             // label1
@@ -146,7 +133,6 @@
             label1.Size = new Size(53, 19);
             label1.TabIndex = 6;
             label1.Text = "rol_id:";
-            label1.Click += label1_Click;
             // 
             // label4
             // 
@@ -158,7 +144,6 @@
             label4.Size = new Size(81, 19);
             label4.TabIndex = 7;
             label4.Text = "username:";
-            label4.Click += label4_Click;
             // 
             // textBox1
             // 
@@ -166,7 +151,6 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(185, 23);
             textBox1.TabIndex = 2;
-            textBox1.TextChanged += textBox1_TextChanged;
             textBox1.KeyUp += textBox1_KeyUp;
             // 
             // label5
@@ -179,7 +163,6 @@
             label5.Size = new Size(72, 19);
             label5.TabIndex = 9;
             label5.Text = "fullname:";
-            label5.Click += label5_Click;
             // 
             // textBox2
             // 
@@ -187,7 +170,6 @@
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(185, 23);
             textBox2.TabIndex = 3;
-            textBox2.TextChanged += textBox2_TextChanged;
             textBox2.KeyUp += textBox2_KeyUp;
             // 
             // label6
@@ -200,7 +182,6 @@
             label6.Size = new Size(49, 19);
             label6.TabIndex = 11;
             label6.Text = "email:";
-            label6.Click += label6_Click;
             // 
             // textBox5
             // 
@@ -208,7 +189,6 @@
             textBox5.Name = "textBox5";
             textBox5.Size = new Size(185, 23);
             textBox5.TabIndex = 4;
-            textBox5.TextChanged += textBox5_TextChanged;
             textBox5.KeyUp += textBox5_KeyUp;
             // 
             // label7
@@ -228,7 +208,6 @@
             textBox6.Name = "textBox6";
             textBox6.Size = new Size(185, 23);
             textBox6.TabIndex = 5;
-            textBox6.TextChanged += textBox6_TextChanged;
             textBox6.KeyUp += textBox6_KeyUp;
             // 
             // label8
@@ -241,7 +220,6 @@
             label8.Size = new Size(65, 19);
             label8.TabIndex = 15;
             label8.Text = "user_id:";
-            label8.Click += label8_Click;
             // 
             // label9
             // 
@@ -260,7 +238,6 @@
             textBox7.Name = "textBox7";
             textBox7.Size = new Size(225, 23);
             textBox7.TabIndex = 8;
-            textBox7.TextChanged += textBox7_TextChanged;
             textBox7.KeyUp += textBox7_KeyUp;
             // 
             // label10
@@ -280,7 +257,6 @@
             textBox8.Name = "textBox8";
             textBox8.Size = new Size(225, 23);
             textBox8.TabIndex = 9;
-            textBox8.TextChanged += textBox8_TextChanged;
             textBox8.KeyUp += textBox8_KeyUp;
             // 
             // label11
@@ -300,7 +276,6 @@
             textBox9.Name = "textBox9";
             textBox9.Size = new Size(225, 23);
             textBox9.TabIndex = 10;
-            textBox9.TextChanged += textBox9_TextChanged;
             textBox9.KeyUp += textBox9_KeyUp;
             // 
             // label14
@@ -331,7 +306,6 @@
             textBox13.Name = "textBox13";
             textBox13.Size = new Size(225, 23);
             textBox13.TabIndex = 12;
-            textBox13.TextChanged += textBox13_TextChanged;
             textBox13.KeyUp += textBox13_KeyUp;
             // 
             // label12
@@ -344,7 +318,6 @@
             label12.Size = new Size(296, 24);
             label12.TabIndex = 30;
             label12.Text = "Generar débitos a una tarjeta";
-            label12.Click += label12_Click;
             // 
             // label13
             // 
@@ -373,7 +346,6 @@
             textBox12.Name = "textBox12";
             textBox12.Size = new Size(225, 23);
             textBox12.TabIndex = 11;
-            textBox12.TextChanged += textBox12_TextChanged;
             textBox12.KeyUp += textBox12_KeyUp;
             // 
             // Number_card
@@ -382,7 +354,6 @@
             Number_card.Name = "Number_card";
             Number_card.Size = new Size(296, 23);
             Number_card.TabIndex = 14;
-            Number_card.TextChanged += Number_card_TextChanged;
             Number_card.KeyUp += Number_card_KeyUp;
             // 
             // Generate_Debits
@@ -408,7 +379,6 @@
             label17.Size = new Size(67, 19);
             label17.TabIndex = 35;
             label17.Text = "Débitos:";
-            label17.Click += label17_Click;
             // 
             // Debitos
             // 
@@ -465,7 +435,6 @@
             Month.Name = "Month";
             Month.Size = new Size(296, 23);
             Month.TabIndex = 18;
-            Month.TextChanged += Month_TextChanged;
             Month.KeyUp += Month_KeyUp;
             // 
             // Resumen
@@ -531,7 +500,6 @@
             Name = "Admin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Ventana de administrador";
-            Load += Admin_Load;
             ResumeLayout(false);
             PerformLayout();
         }
