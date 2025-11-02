@@ -22,8 +22,6 @@
             label2 = new Label();
             label3 = new Label();
             Insert_User = new Button();
-            rol = new TextBox();
-            textBox4 = new TextBox();
             label1 = new Label();
             label4 = new Label();
             textBox1 = new TextBox();
@@ -35,9 +33,7 @@
             textBox6 = new TextBox();
             label8 = new Label();
             label9 = new Label();
-            textBox7 = new TextBox();
             label10 = new Label();
-            textBox8 = new TextBox();
             label11 = new Label();
             textBox9 = new TextBox();
             label14 = new Label();
@@ -57,6 +53,10 @@
             label20 = new Label();
             Month = new TextBox();
             Resumen = new Button();
+            comboBox1 = new ComboBox();
+            comboBox2 = new ComboBox();
+            comboBox3 = new ComboBox();
+            comboBox4 = new ComboBox();
             SuspendLayout();
             // 
             // Insert_Account
@@ -106,22 +106,6 @@
             Insert_User.Text = "Insertar Usuario";
             Insert_User.UseVisualStyleBackColor = false;
             Insert_User.Click += button4_Click;
-            // 
-            // rol
-            // 
-            rol.Location = new Point(12, 83);
-            rol.Name = "rol";
-            rol.Size = new Size(185, 23);
-            rol.TabIndex = 1;
-            rol.KeyUp += rol_KeyUp;
-            // 
-            // textBox4
-            // 
-            textBox4.Location = new Point(234, 83);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(225, 23);
-            textBox4.TabIndex = 7;
-            textBox4.KeyUp += textBox4_KeyUp;
             // 
             // label1
             // 
@@ -232,14 +216,6 @@
             label9.TabIndex = 16;
             label9.Text = "account_type_id:";
             // 
-            // textBox7
-            // 
-            textBox7.Location = new Point(234, 131);
-            textBox7.Name = "textBox7";
-            textBox7.Size = new Size(225, 23);
-            textBox7.TabIndex = 8;
-            textBox7.KeyUp += textBox7_KeyUp;
-            // 
             // label10
             // 
             label10.AutoSize = true;
@@ -250,14 +226,6 @@
             label10.Size = new Size(97, 19);
             label10.TabIndex = 18;
             label10.Text = "currency_id:";
-            // 
-            // textBox8
-            // 
-            textBox8.Location = new Point(234, 179);
-            textBox8.Name = "textBox8";
-            textBox8.Size = new Size(225, 23);
-            textBox8.TabIndex = 9;
-            textBox8.KeyUp += textBox8_KeyUp;
             // 
             // label11
             // 
@@ -450,12 +418,57 @@
             Resumen.UseVisualStyleBackColor = false;
             Resumen.Click += Resumen_Click;
             // 
+            // comboBox1
+            // 
+            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(12, 83);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(185, 23);
+            comboBox1.TabIndex = 1;
+            comboBox1.KeyUp += comboBox1_KeyUp;
+            // 
+            // comboBox2
+            // 
+            comboBox2.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox2.FormattingEnabled = true;
+            comboBox2.Location = new Point(234, 83);
+            comboBox2.Name = "comboBox2";
+            comboBox2.Size = new Size(225, 23);
+            comboBox2.TabIndex = 7;
+            comboBox2.KeyUp += comboBox2_KeyUp;
+            // 
+            // comboBox3
+            // 
+            comboBox3.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox3.FormattingEnabled = true;
+            comboBox3.ItemHeight = 15;
+            comboBox3.Location = new Point(234, 131);
+            comboBox3.Name = "comboBox3";
+            comboBox3.Size = new Size(225, 23);
+            comboBox3.TabIndex = 8;
+            comboBox3.KeyUp += comboBox3_KeyUp;
+            // 
+            // comboBox4
+            // 
+            comboBox4.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox4.FormattingEnabled = true;
+            comboBox4.Location = new Point(234, 179);
+            comboBox4.Name = "comboBox4";
+            comboBox4.Size = new Size(225, 23);
+            comboBox4.TabIndex = 9;
+            comboBox4.KeyUp += comboBox4_KeyUp;
+            // 
             // Admin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkCyan;
             ClientSize = new Size(800, 491);
+            Controls.Add(comboBox4);
+            Controls.Add(comboBox3);
+            Controls.Add(comboBox2);
+            Controls.Add(comboBox1);
             Controls.Add(Resumen);
             Controls.Add(Month);
             Controls.Add(label20);
@@ -475,9 +488,7 @@
             Controls.Add(label14);
             Controls.Add(textBox9);
             Controls.Add(label11);
-            Controls.Add(textBox8);
             Controls.Add(label10);
-            Controls.Add(textBox7);
             Controls.Add(label9);
             Controls.Add(label8);
             Controls.Add(textBox6);
@@ -489,8 +500,6 @@
             Controls.Add(textBox1);
             Controls.Add(label4);
             Controls.Add(label1);
-            Controls.Add(textBox4);
-            Controls.Add(rol);
             Controls.Add(Insert_User);
             Controls.Add(label3);
             Controls.Add(label2);
@@ -500,6 +509,7 @@
             Name = "Admin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Ventana de administrador";
+            Load += Admin_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -513,8 +523,6 @@
         private Label label2;
         private Label label3;
         private Button Insert_User;
-        private TextBox rol;
-        private TextBox textBox4;
         private Label label4;
         private Label label5;
         private Label label6;
@@ -523,9 +531,7 @@
         private TextBox textBox6;
         private Label label8;
         private Label label9;
-        private TextBox textBox7;
         private Label label10;
-        private TextBox textBox8;
         private Label label11;
         private TextBox textBox9;
         private Label label14;
@@ -544,5 +550,9 @@
         private TextBox Id_card;
         private Label label20;
         private TextBox Month;
+        private ComboBox comboBox1;
+        private ComboBox comboBox2;
+        private ComboBox comboBox3;
+        private ComboBox comboBox4;
     }
 }

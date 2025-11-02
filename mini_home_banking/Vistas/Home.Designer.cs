@@ -45,6 +45,7 @@
             // 
             listBoxCuentas.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             listBoxCuentas.FormattingEnabled = true;
+            listBoxCuentas.HorizontalScrollbar = true;
             listBoxCuentas.ItemHeight = 15;
             listBoxCuentas.Location = new Point(14, 120);
             listBoxCuentas.Name = "listBoxCuentas";
@@ -90,6 +91,7 @@
             // 
             listBoxTarjetas.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             listBoxTarjetas.FormattingEnabled = true;
+            listBoxTarjetas.HorizontalScrollbar = true;
             listBoxTarjetas.ItemHeight = 15;
             listBoxTarjetas.Location = new Point(347, 120);
             listBoxTarjetas.Name = "listBoxTarjetas";
@@ -106,7 +108,6 @@
             label2.Size = new Size(85, 32);
             label2.TabIndex = 6;
             label2.Text = "Home";
-            label2.Click += label2_Click;
             // 
             // pictureBox1
             // 

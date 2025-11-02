@@ -21,8 +21,7 @@ namespace mini_home_banking.Vistas
             MySqlDataReader reader = null;
             List<Account> accounts = new List<Account>();
 
-            string query = "SELECT a.id,at.description, a.alias, a.current_balance, a.cbu FROM accounts a JOIN account_types at ON" +
-                " a.account_type_id = at.id WHERE user_id = @user_id";
+            string query = "SELECT a.id, at.description, a.alias, a.current_balance, a.cbu FROM accounts a JOIN account_types at ON a.account_type_id = at.id WHERE user_id = @user_id";
 
             if (mConexion.getConexion() != null)
             {
@@ -47,6 +46,7 @@ namespace mini_home_banking.Vistas
             try
             {
                 listBoxCuentas.DataSource = Obtener_Cuentas();
+                listBoxCuentas.DisplayMember = "mostrarInfo";
 
                 MySqlDataReader reader = null;
                 string query = "SELECT card_type, expiration, available_limit FROM cards WHERE user_id = @user_id";
@@ -84,11 +84,6 @@ namespace mini_home_banking.Vistas
         {
             Transferencia transferencia = new Transferencia(Obtener_Cuentas());
             transferencia.Show();
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

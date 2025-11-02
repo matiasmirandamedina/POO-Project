@@ -13,26 +13,143 @@ namespace mini_home_banking.Vistas
             mConexion = new Conexion();
         }
 
+        public List<Role> Obtener_Roles()
+        {
+            List<Role> roles = new List<Role>();
+
+            string obtainRolesQuery = "SELECT id, name FROM roles;";
+
+            if (mConexion.getConexion() != null)
+            {
+                using (MySqlCommand cmd = new MySqlCommand(obtainRolesQuery, mConexion.getConexion()))
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Role role = new Role(Convert.ToInt32(reader["id"]), reader["name"].ToString());
+                            roles.Add(role);
+                        }
+                    }
+                }
+            }
+            return roles;
+        }
+
+        public List<(int id, string username)> Obtener_Usuarios()
+        {
+            List<(int id, string username)> users = new List<(int, string)>();
+
+            string obtainUsersQuery = "SELECT id, username FROM users;";
+
+            if (mConexion.getConexion() != null)
+            {
+                using (MySqlCommand cmd = new MySqlCommand(obtainUsersQuery, mConexion.getConexion()))
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            users.Add((Convert.ToInt32(reader["id"]), reader["username"].ToString()));
+                        }
+                    }
+                }
+            }
+
+            return users;
+        }
+
+        public List<(int id, string description)> Obtener_TiposCuentas()
+        {
+            List<(int id, string description)> accountTypes = new List<(int, string)>();
+
+            string obtainAccountTypesQuery = "SELECT id, description FROM account_types;";
+
+            if (mConexion.getConexion() != null)
+            {
+                using (MySqlCommand cmd = new MySqlCommand(obtainAccountTypesQuery, mConexion.getConexion()))
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            accountTypes.Add((Convert.ToInt32(reader["id"]), reader["description"].ToString()));
+                        }
+                    }
+                }
+            }
+
+            return accountTypes;
+        }
+
+        public List<(int id, string name)> Obtener_Monedas()
+        {
+            List<(int id, string name)> currencies = new List<(int, string)>();
+
+            string obtainCurrenciesQuery = "SELECT id, name FROM currencies;";
+
+            if (mConexion.getConexion() != null)
+            {
+                using (MySqlCommand cmd = new MySqlCommand(obtainCurrenciesQuery, mConexion.getConexion()))
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            currencies.Add((Convert.ToInt32(reader["id"]), reader["name"].ToString()));
+                        }
+                    }
+                }
+            }
+
+            return currencies;
+        }
+
+        private void Admin_Load(object sender, EventArgs e)
+        {
+            comboBox1.DataSource = Obtener_Roles();
+            comboBox1.DisplayMember = "mostrarInfo";
+            comboBox1.ValueMember = "id";
+
+            var users = Obtener_Usuarios()
+                .OrderBy(u => u.id)
+                .Select(u => new { u.id, mostrarInfo = $"{u.id} - {u.username}" })
+                .ToList();
+
+            comboBox2.DataSource = users;
+            comboBox2.DisplayMember = "mostrarInfo";
+            comboBox2.ValueMember = "id";
+
+            var accountTypes = Obtener_TiposCuentas()
+                .OrderBy(aT => aT.id)
+                .Select(aT => new { aT.id, mostrarInfo = $"{aT.id} - {aT.description}" })
+                .ToList();
+
+            comboBox3.DataSource = accountTypes;
+            comboBox3.DisplayMember = "mostrarInfo";
+            comboBox3.ValueMember = "id";
+
+            var currencies = Obtener_Monedas()
+                .OrderBy(c => c.id)
+                .Select(c => new { c.id, mostrarInfo = $"{c.id} - {c.name}" })
+                .ToList();
+
+            comboBox4.DataSource = currencies;
+            comboBox4.DisplayMember = "mostrarInfo";
+            comboBox4.ValueMember = "id";
+        }
+
         private void button3_Click(object sender, EventArgs e)
         {
-            string user_id = textBox4.Text;
-            string account_type_id = textBox7.Text;
-            string currency_id = textBox8.Text;
+            int user_id = (int)comboBox2.SelectedValue;
+            int account_type_id = (int)comboBox3.SelectedValue;
+            int currency_id = (int)comboBox4.SelectedValue;
             string CBU = textBox9.Text;
             string current_balance = textBox12.Text;
             string alias = textBox13.Text;
 
             try
             {
-                if (!int.TryParse(user_id, out _))
-                    throw new Own_Exception("El ID de usuario debe ser un número válido.");
-
-                if (!int.TryParse(account_type_id, out _))
-                    throw new Own_Exception("El ID del tipo de cuenta debe ser un número válido.");
-
-                if (!int.TryParse(currency_id, out _))
-                    throw new Own_Exception("El ID de moneda debe ser un número válido.");
-
                 if (!CBU.All(char.IsDigit))
                     throw new Own_Exception("El CBU debe tener solo numeros");
 
@@ -77,7 +194,7 @@ namespace mini_home_banking.Vistas
 
         private void button4_Click(object sender, EventArgs e)
         {
-            string role = rol.Text;
+            int role = (int)comboBox1.SelectedValue;
             string username = textBox1.Text;
             string fullname = textBox2.Text;
             string email = textBox5.Text;
@@ -85,9 +202,6 @@ namespace mini_home_banking.Vistas
 
             try
             {
-                if (!int.TryParse(role, out _))
-                    throw new Own_Exception("El rol debe ingresarse con el ID numérico (no el nombre).");
-
                 if (string.IsNullOrWhiteSpace(username))
                     throw new Own_Exception("El nombre de usuario no puede estar vacío.");
 
@@ -103,8 +217,19 @@ namespace mini_home_banking.Vistas
                 if (mConexion.getConexion() == null)
                     throw new Own_Exception("¡Error al conectar con la base de datos!");
 
+                string checkQuery = "SELECT COUNT(*) FROM users WHERE username = @username OR email = @email";
+                using (MySqlCommand checkCmd = new MySqlCommand(checkQuery, mConexion.getConexion()))
+                {
+                    checkCmd.Parameters.AddWithValue("@username", username);
+                    checkCmd.Parameters.AddWithValue("@email", email);
+                    int exists = Convert.ToInt32(checkCmd.ExecuteScalar());
+
+                    if (exists > 0)
+                        throw new Own_Exception("El nombre de usuario o el correo ya están registrados.");
+                }
+
                 string query = "INSERT INTO users (role_id, username, full_name, email, password_hash, created_at) " +
-                               "VALUES (@role_id, @username, @full_name, @email, @password_hash, @created_at)";
+                               "VALUES (@role_id, @username, @full_name, @email, MD5(@password_hash), @created_at)";
 
                 using (MySqlCommand cmd = new MySqlCommand(query, mConexion.getConexion()))
                 {
@@ -315,12 +440,13 @@ namespace mini_home_banking.Vistas
             }
         }
 
-        private void rol_KeyUp(object sender, KeyEventArgs e)
+        private void comboBox1_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Enter)
             {
                 textBox1.Focus();
             }
+
         }
 
         private void textBox1_KeyUp(object sender, KeyEventArgs e)
@@ -355,23 +481,23 @@ namespace mini_home_banking.Vistas
             }
         }
 
-        private void textBox4_KeyUp(object sender, KeyEventArgs e)
+        private void comboBox2_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Enter)
             {
-                textBox7.Focus();
+                comboBox3.Focus();
             }
         }
 
-        private void textBox7_KeyUp(object sender, KeyEventArgs e)
+        private void comboBox3_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Enter)
             {
-                textBox8.Focus();
+                comboBox4.Focus();
             }
         }
 
-        private void textBox8_KeyUp(object sender, KeyEventArgs e)
+        private void comboBox4_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Enter)
             {

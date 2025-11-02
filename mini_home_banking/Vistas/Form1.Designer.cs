@@ -117,7 +117,7 @@
             label2.Name = "label2";
             label2.Size = new Size(52, 19);
             label2.TabIndex = 9;
-            label2.Text = "Gmail:";
+            label2.Text = "Email:";
             // 
             // label3
             // 
