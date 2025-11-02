@@ -321,12 +321,12 @@ namespace mini_home_banking.Vistas
 
                 string card_movements = @"
                 INSERT INTO `card_movements`
-                (`card_id`, `amount`, `type`, `description`, `created_by`, `created_at`)
-                VALUES (@card_id, @amount, 'CARGA','Prestamo', 'Prestamo instantaneo', @user_id, NOW())";
+                (`card_number`, `amount`, `type`, `description`, `created_by`, `created_at`)
+                VALUES (@card_number, @amount, 'CARGA','Prestamo', 'Prestamo instantaneo', @user_id, NOW())";
 
                 using (MySqlCommand cmd = new MySqlCommand(card_movements, mConexion.getConexion()))
                 {
-                    cmd.Parameters.AddWithValue("@card_id", card_id);
+                    cmd.Parameters.AddWithValue("@card_number", card_id);
                     cmd.Parameters.AddWithValue("@amount", debits);
                     cmd.Parameters.AddWithValue("@user_id", user_id);
 
@@ -347,26 +347,27 @@ namespace mini_home_banking.Vistas
 
         private void Resumen_Click(object sender, EventArgs e)
         {
-            string id_cardText = Id_card.Text;
+            string number_cardText = Card_number.Text;
             string MonthText = Month.Text;
 
             try
             {
 
-                if (string.IsNullOrWhiteSpace(id_cardText) || string.IsNullOrWhiteSpace(MonthText))
+                if (string.IsNullOrWhiteSpace(number_cardText) || string.IsNullOrWhiteSpace(MonthText))
                     throw new Own_Exception("Porfavor complete todos los campos");
 
-                if (!id_cardText.All(char.IsDigit))
-                    throw new Own_Exception("El id de la tarjeta debe ser un numero");
+                
+                if(!long.TryParse(number_cardText, out _)) 
+                    throw new Own_Exception("El numero de la tarjeta debe ser un numero");
 
-                if (!MonthText.All(char.IsDigit))
+                if (!int.TryParse(MonthText, out _))
                     throw new Own_Exception("El mes debe estar puesto en forma numerica");
 
-                int card_id = Convert.ToInt32(id_cardText);
+                long card_number = Convert.ToInt64(number_cardText);
                 int month = Convert.ToInt32(MonthText);
 
                 bool verification = false;
-                if (card_id == 0 || card_id < 0) verification = true;
+                if (card_number == 0 || card_number < 0) verification = true;
                 if (month == 0 || month < 0) verification = true;
 
                 if (verification)
@@ -381,16 +382,17 @@ namespace mini_home_banking.Vistas
 
 
 
-                string queryId = "SELECT * FROM cards WHERE id = @id ";
-
+                string queryId = "SELECT * FROM cards WHERE card_number_hash = @card_number ";
+                int card_id = 0;
 
                 using (MySqlCommand cmd = new MySqlCommand(queryId, mConexion.getConexion()))
                 {
-                    cmd.Parameters.AddWithValue("@id", card_id);
+                    cmd.Parameters.AddWithValue("@card_number", card_number);
                     using (MySqlDataReader result_card = cmd.ExecuteReader())
                     {
                         if (result_card.Read())
                         {
+                            card_id = Convert.ToInt32(result_card["id"]);
                             MessageBox.Show("Tarjeta encontrada");
                         }
                         else

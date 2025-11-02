@@ -49,7 +49,7 @@
             Debitos = new TextBox();
             label18 = new Label();
             label19 = new Label();
-            Id_card = new TextBox();
+            Card_number = new TextBox();
             label20 = new Label();
             Month = new TextBox();
             Resumen = new Button();
@@ -374,17 +374,17 @@
             label19.ForeColor = SystemColors.ControlLightLight;
             label19.Location = new Point(492, 278);
             label19.Name = "label19";
-            label19.Size = new Size(113, 19);
+            label19.Size = new Size(153, 19);
             label19.TabIndex = 38;
-            label19.Text = "ID de la tarjeta:";
+            label19.Text = "Numero de la tarjeta:";
             // 
-            // Id_card
+            // Card_number
             // 
-            Id_card.Location = new Point(492, 300);
-            Id_card.Name = "Id_card";
-            Id_card.Size = new Size(296, 23);
-            Id_card.TabIndex = 17;
-            Id_card.KeyUp += Id_card_KeyUp;
+            Card_number.Location = new Point(492, 300);
+            Card_number.Name = "Card_number";
+            Card_number.Size = new Size(296, 23);
+            Card_number.TabIndex = 17;
+            Card_number.KeyUp += Id_card_KeyUp;
             // 
             // label20
             // 
@@ -472,7 +472,7 @@
             Controls.Add(Resumen);
             Controls.Add(Month);
             Controls.Add(label20);
-            Controls.Add(Id_card);
+            Controls.Add(Card_number);
             Controls.Add(label19);
             Controls.Add(label18);
             Controls.Add(Debitos);
@@ -547,7 +547,7 @@
         private TextBox Debitos;
         private Label label18;
         private Label label19;
-        private TextBox Id_card;
+        private TextBox Card_number;
         private Label label20;
         private TextBox Month;
         private ComboBox comboBox1;
