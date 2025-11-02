@@ -29,43 +29,25 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Transferencia));
-            label1 = new Label();
-            cuentaOrigen = new TextBox();
             label2 = new Label();
             monto = new TextBox();
             label3 = new Label();
             cuentaDestino = new TextBox();
             transferir = new Button();
-            listBox1 = new ListBox();
             pictureBox1 = new PictureBox();
+            comboBox1 = new ComboBox();
+            comboBox2 = new ComboBox();
+            radioAlias = new RadioButton();
+            radioCbu = new RadioButton();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Harrington", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.ForeColor = SystemColors.ControlLightLight;
-            label1.Location = new Point(12, 18);
-            label1.Name = "label1";
-            label1.Size = new Size(319, 19);
-            label1.TabIndex = 0;
-            label1.Text = "Seleccionar cuenta por medio de alias o cbu:";
-            // 
-            // cuentaOrigen
-            // 
-            cuentaOrigen.Location = new Point(12, 40);
-            cuentaOrigen.Name = "cuentaOrigen";
-            cuentaOrigen.Size = new Size(319, 23);
-            cuentaOrigen.TabIndex = 1;
-            cuentaOrigen.KeyUp += cuentaOrigen_KeyUp;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Harrington", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.ForeColor = SystemColors.ControlLightLight;
-            label2.Location = new Point(12, 158);
+            label2.Location = new Point(12, 124);
             label2.Name = "label2";
             label2.Size = new Size(129, 17);
             label2.TabIndex = 3;
@@ -73,10 +55,10 @@
             // 
             // monto
             // 
-            monto.Location = new Point(12, 194);
+            monto.Location = new Point(12, 160);
             monto.Name = "monto";
             monto.Size = new Size(319, 23);
-            monto.TabIndex = 3;
+            monto.TabIndex = 6;
             monto.KeyUp += monto_KeyUp;
             // 
             // label3
@@ -95,7 +77,7 @@
             cuentaDestino.Location = new Point(370, 40);
             cuentaDestino.Name = "cuentaDestino";
             cuentaDestino.Size = new Size(296, 23);
-            cuentaDestino.TabIndex = 2;
+            cuentaDestino.TabIndex = 5;
             cuentaDestino.KeyUp += cuentaDestino_KeyUp;
             // 
             // transferir
@@ -103,48 +85,90 @@
             transferir.BackColor = Color.DarkSlateGray;
             transferir.Font = new Font("Harrington", 15F, FontStyle.Bold);
             transferir.ForeColor = SystemColors.ControlLightLight;
-            transferir.Location = new Point(370, 152);
+            transferir.Location = new Point(370, 118);
             transferir.Name = "transferir";
             transferir.Size = new Size(296, 65);
-            transferir.TabIndex = 4;
+            transferir.TabIndex = 7;
             transferir.Text = "Transferir";
             transferir.UseVisualStyleBackColor = false;
             transferir.Click += transferir_Click;
             // 
-            // listBox1
-            // 
-            listBox1.FormattingEnabled = true;
-            listBox1.ItemHeight = 15;
-            listBox1.Location = new Point(12, 69);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(319, 79);
-            listBox1.TabIndex = 0;
-            // 
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(147, 151);
+            pictureBox1.Location = new Point(147, 117);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(37, 37);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 9;
             pictureBox1.TabStop = false;
             // 
+            // comboBox1
+            // 
+            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(12, 40);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(319, 23);
+            comboBox1.TabIndex = 2;
+            comboBox1.KeyUp += comboBox1_KeyUp;
+            // 
+            // comboBox2
+            // 
+            comboBox2.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox2.Enabled = false;
+            comboBox2.FormattingEnabled = true;
+            comboBox2.Location = new Point(12, 88);
+            comboBox2.Name = "comboBox2";
+            comboBox2.Size = new Size(319, 23);
+            comboBox2.TabIndex = 4;
+            comboBox2.KeyUp += comboBox2_KeyUp;
+            // 
+            // radioAlias
+            // 
+            radioAlias.AutoSize = true;
+            radioAlias.Checked = true;
+            radioAlias.Font = new Font("Harrington", 12F);
+            radioAlias.ForeColor = SystemColors.ControlLightLight;
+            radioAlias.Location = new Point(12, 16);
+            radioAlias.Name = "radioAlias";
+            radioAlias.Size = new Size(294, 23);
+            radioAlias.TabIndex = 1;
+            radioAlias.TabStop = true;
+            radioAlias.Text = "Seleccionar cuenta por medio de alias:";
+            radioAlias.UseVisualStyleBackColor = true;
+            radioAlias.KeyUp += radioAlias_KeyUp;
+            // 
+            // radioCbu
+            // 
+            radioCbu.AutoSize = true;
+            radioCbu.Font = new Font("Harrington", 12F);
+            radioCbu.ForeColor = SystemColors.ControlLightLight;
+            radioCbu.Location = new Point(12, 64);
+            radioCbu.Name = "radioCbu";
+            radioCbu.Size = new Size(288, 23);
+            radioCbu.TabIndex = 3;
+            radioCbu.TabStop = true;
+            radioCbu.Text = "Seleccionar cuenta por medio de cbu:";
+            radioCbu.UseVisualStyleBackColor = true;
+            radioCbu.KeyUp += radioCbu_KeyUp;
+            // 
             // Transferencia
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkCyan;
-            ClientSize = new Size(692, 236);
+            ClientSize = new Size(692, 211);
+            Controls.Add(radioCbu);
+            Controls.Add(radioAlias);
+            Controls.Add(comboBox2);
+            Controls.Add(comboBox1);
             Controls.Add(pictureBox1);
-            Controls.Add(listBox1);
             Controls.Add(transferir);
             Controls.Add(cuentaDestino);
             Controls.Add(label3);
             Controls.Add(monto);
             Controls.Add(label2);
-            Controls.Add(cuentaOrigen);
-            Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "Transferencia";
@@ -157,15 +181,15 @@
         }
 
         #endregion
-
-        private Label label1;
-        private TextBox cuentaOrigen;
         private Label label2;
         private TextBox monto;
         private Label label3;
         private TextBox cuentaDestino;
         private Button transferir;
-        private ListBox listBox1;
         private PictureBox pictureBox1;
+        private ComboBox comboBox1;
+        private ComboBox comboBox2;
+        private RadioButton radioAlias;
+        private RadioButton radioCbu;
     }
 }

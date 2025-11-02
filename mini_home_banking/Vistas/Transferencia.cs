@@ -18,21 +18,37 @@ namespace mini_home_banking.Vistas
 
         private void Transferencia_Load(object sender, EventArgs e)
         {
-            listBox1.DataSource = accounts;
+            List<string> aliases = accounts.Select(a => a.Get_Alias()).ToList();
+            List<string> cbus = accounts.Select(a => a.Get_Cbu()).ToList();
+
+            comboBox1.DataSource = aliases;
+            comboBox2.DataSource = cbus;
+
+            radioAlias.CheckedChanged += (s, ev) =>
+            {
+                comboBox1.Enabled = radioAlias.Checked;
+                comboBox2.Enabled = !radioAlias.Checked;
+            };
+
+            radioCbu.CheckedChanged += (s, ev) =>
+            {
+                comboBox2.Enabled = radioCbu.Checked;
+                comboBox1.Enabled = !radioCbu.Checked;
+            };
         }
 
         private void transferir_Click(object sender, EventArgs e)
         {
             try
             {
-                string account_origin = this.cuentaOrigen.Text;
+                string account_origin = radioAlias.Checked ? comboBox1.Text : comboBox2.Text;
                 string account_destination = this.cuentaDestino.Text;
                 string amountText = this.monto.Text;
 
                 decimal saldo = 0;
                 Account cuentaOrigenObj = null;
 
-                if (string.IsNullOrWhiteSpace(amountText) || string.IsNullOrWhiteSpace(account_destination) || string.IsNullOrWhiteSpace(account_origin))
+                if (string.IsNullOrWhiteSpace(amountText) || string.IsNullOrWhiteSpace(account_destination))
                 {
                     throw new Own_Exception("Por favor complete todos los campos");
                 }
@@ -55,7 +71,7 @@ namespace mini_home_banking.Vistas
                     }
                 }
 
-                if (amount < 0 || amount == 0) throw new Own_Exception($"El monto seleccionado no puede ser igual o menor a cero");
+                if (amount <= 0) throw new Own_Exception($"El monto seleccionado no puede ser igual o menor a cero");
 
                 string transaction = "INSERT INTO transactions (account_id, destination_account_id, type, amount, currency_id, description, created_by, created_at, reference) VALUES (@cuentaOrigen, @cuentaDestino, 'DEBITO', @montoDecimal, 2, 'Pago de servicios', 2, NOW(), 'REF004');";
                 string discount = "UPDATE accounts SET current_balance = current_balance - @montoDecimal WHERE id = @cuentaOrigen;";
@@ -65,7 +81,6 @@ namespace mini_home_banking.Vistas
                 int id_destination = 0;
 
                 string queryId = "SELECT id FROM accounts WHERE cbu = @cbu OR alias = @alias";
-
 
                 using (MySqlCommand cmd = new MySqlCommand(queryId, mConexion.getConexion()))
                 {
@@ -97,6 +112,11 @@ namespace mini_home_banking.Vistas
                             return;
                         }
                     }
+                }
+
+                if (id_origin == id_destination)
+                {
+                    throw new Own_Exception("No puedes transferirte a ti mismo.");
                 }
 
                 if (mConexion.getConexion() != null)
@@ -142,7 +162,31 @@ namespace mini_home_banking.Vistas
 
         }
 
-        private void cuentaOrigen_KeyUp(object sender, KeyEventArgs e)
+        private void radioAlias_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                comboBox1.Focus();
+            }
+        }
+
+        private void comboBox1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                cuentaDestino.Focus();
+            }
+        }
+
+        private void radioCbu_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                comboBox2.Focus();
+            }
+        }
+
+        private void comboBox2_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Enter)
             {
