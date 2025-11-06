@@ -1,6 +1,10 @@
 ﻿using mini_home_banking.Controladores;
 using mini_home_banking.Modelos;
 using MySql.Data.MySqlClient;
+using System;
+using System.Net.Http;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace mini_home_banking.Vistas
 {
@@ -15,8 +19,50 @@ namespace mini_home_banking.Vistas
             this.accounts = accounts;
             mConexion = new Conexion();
         }
+        private async Task<currency> ObtenerDolarOficial()
+        {
+            string url = "https://dolarapi.com/v1/dolares/oficial";
 
-        private void Transferencia_Load(object sender, EventArgs e)
+            using (HttpClient client = new HttpClient())
+            {
+                HttpResponseMessage response = await client.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+
+                string json = await response.Content.ReadAsStringAsync();
+
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+
+                return JsonSerializer.Deserialize<currency>(json, options);
+            }
+        }
+
+        private async Task<currency> ObtenerEuroOficial()
+        {
+            string url = "https://dolarapi.com/v1/cotizaciones/eur";
+
+            using (HttpClient client = new HttpClient())
+            {
+                HttpResponseMessage response = await client.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+
+                string json = await response.Content.ReadAsStringAsync();
+
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+
+                return JsonSerializer.Deserialize<currency>(json, options);
+            }
+        }
+
+        // dolar a euro: dividir el valor del dolar por el del euro
+        // euro a dolar: dividir el valor del euro por el del dolar
+
+        private async void Transferencia_Load(object sender, EventArgs e)
         {
             List<string> aliases = accounts.Select(a => a.Get_Alias()).ToList();
             List<string> cbus = accounts.Select(a => a.Get_Cbu()).ToList();
@@ -28,13 +74,25 @@ namespace mini_home_banking.Vistas
             {
                 comboBox1.Enabled = radioAlias.Checked;
                 comboBox2.Enabled = !radioAlias.Checked;
-            };
+            };      
 
             radioCbu.CheckedChanged += (s, ev) =>
             {
                 comboBox2.Enabled = radioCbu.Checked;
                 comboBox1.Enabled = !radioCbu.Checked;
             };
+
+            try
+            {
+                var dolar = await ObtenerDolarOficial();
+                var euro = await ObtenerEuroOficial();
+                MessageBox.Show($"Dólar oficial hoy:\nCompra: {dolar.compra.ToString("F2")}\nVenta: {dolar.venta.ToString("F2")}");
+                MessageBox.Show($"Euro oficial hoy:\nCompra: {euro.compra.ToString("F2")}\nVenta: {euro.venta.ToString("F2")}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener la cotización del dólar/euro: " + ex.Message);
+            }
         }
 
         private void transferir_Click(object sender, EventArgs e)
@@ -67,13 +125,17 @@ namespace mini_home_banking.Vistas
                         saldo = account.Get_Saldo();
                         cuentaOrigenObj = account;
 
-                        if (saldo < amount) throw new Own_Exception($"El monto seleccionado supera el actual. Ingrese un monto igual o menor a {saldo}");
+                        if (cuentaOrigenObj.Tipo == "Cuenta Ahorro")
+                            if (saldo < amount) throw new Own_Exception($"El monto seleccionado supera el actual. Ingrese un monto igual o menor a {saldo}");
+
+                        if (cuentaOrigenObj.Tipo == "Cuenta Corriente")
+                            if ((saldo - amount) < -25000) throw new Own_Exception($"Llego al saldo negativo permitido. Para continuar, ingrese dinero.");
                     }
                 }
 
                 if (amount <= 0) throw new Own_Exception($"El monto seleccionado no puede ser igual o menor a cero");
 
-                string transaction = "INSERT INTO transactions (account_id, destination_account_id, type, amount, currency_id, description, created_by, created_at, reference) VALUES (@cuentaOrigen, @cuentaDestino, 'DEBITO', @montoDecimal, 2, 'Pago de servicios', 2, NOW(), 'REF004');";
+                string transaction = "INSERT INTO transactions (account_id, destination_account_id, type, amount, currency_id, description, created_by, created_at) VALUES (@cuentaOrigen, @cuentaDestino, 'DEBITO', @montoDecimal, 2, 'Pago de servicios', 2, NOW());";
                 string discount = "UPDATE accounts SET current_balance = current_balance - @montoDecimal WHERE id = @cuentaOrigen;";
                 string add = "UPDATE accounts SET current_balance = current_balance + @montoDecimal WHERE id = @cuentaDestino;";
 
