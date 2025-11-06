@@ -151,7 +151,7 @@ namespace mini_home_banking.Vistas
             try
             {
                 if (!CBU.All(char.IsDigit))
-                    throw new Own_Exception("El CBU debe tener solo numeros");
+                    throw new Own_Exception("El valor no es vaido en el CBU");
 
                 if (!decimal.TryParse(current_balance, out decimal saldo))
                     throw new Own_Exception("El saldo debe ser un número válido.");
@@ -260,17 +260,20 @@ namespace mini_home_banking.Vistas
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string number_card = Number_card.Text;
+            string number_cardText = Number_card.Text;
             string debitsText = Debitos.Text;
 
             try
             {
 
-                if (string.IsNullOrWhiteSpace(number_card) || string.IsNullOrWhiteSpace(debitsText))
+                if (string.IsNullOrWhiteSpace(number_cardText) || string.IsNullOrWhiteSpace(debitsText))
                     throw new Own_Exception("Porfavor complete todos los campos");
 
-                if (!number_card.All(char.IsDigit))
-                    throw new Own_Exception("El numero de tarjeta debe contener solo numeros");
+                if (!long.TryParse(number_cardText, out _))
+                    throw new Own_Exception("El numero de la tarjeta debe ser un numero");
+
+                long number_card = Convert.ToInt64(number_cardText);
+
 
                 decimal debits;
                 if (!decimal.TryParse(debitsText, out debits))
@@ -278,6 +281,15 @@ namespace mini_home_banking.Vistas
                     throw new Own_Exception("Por favor ingrese los debitos de manera valida (solo números).");
                 }
                 debits = Convert.ToDecimal(debitsText);
+
+                bool verification = false;
+                if (number_card == 0 || number_card < 0) verification = true;
+                if (debits == 0 || debits < 0) verification = true;
+
+                if (verification)
+                {
+                    throw new Own_Exception("Ninguno de los campos puede ser menor o igual a cero");
+                }
 
                 if (debits < 0 || debits == 0) throw new Own_Exception("El debito a generar no puede ser menor o igual cero");
 
