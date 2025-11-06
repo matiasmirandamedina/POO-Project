@@ -45,12 +45,12 @@
             // 
             listBoxCuentas.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             listBoxCuentas.FormattingEnabled = true;
+            listBoxCuentas.HorizontalScrollbar = true;
             listBoxCuentas.ItemHeight = 15;
             listBoxCuentas.Location = new Point(14, 120);
             listBoxCuentas.Name = "listBoxCuentas";
             listBoxCuentas.Size = new Size(327, 94);
             listBoxCuentas.TabIndex = 0;
-            listBoxCuentas.SelectedIndexChanged += listBoxCuentas_SelectedIndexChanged;
             // 
             // label1
             // 
@@ -82,7 +82,7 @@
             button1.Location = new Point(228, 220);
             button1.Name = "button1";
             button1.Size = new Size(235, 65);
-            button1.TabIndex = 4;
+            button1.TabIndex = 1;
             button1.Text = "Hacer transferencia";
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
@@ -91,12 +91,12 @@
             // 
             listBoxTarjetas.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             listBoxTarjetas.FormattingEnabled = true;
+            listBoxTarjetas.HorizontalScrollbar = true;
             listBoxTarjetas.ItemHeight = 15;
             listBoxTarjetas.Location = new Point(347, 120);
             listBoxTarjetas.Name = "listBoxTarjetas";
             listBoxTarjetas.Size = new Size(333, 94);
             listBoxTarjetas.TabIndex = 5;
-            listBoxTarjetas.SelectedIndexChanged += listBoxTarjetas_SelectedIndexChanged;
             // 
             // label2
             // 
@@ -108,7 +108,6 @@
             label2.Size = new Size(85, 32);
             label2.TabIndex = 6;
             label2.Text = "Home";
-            label2.Click += label2_Click;
             // 
             // pictureBox1
             // 

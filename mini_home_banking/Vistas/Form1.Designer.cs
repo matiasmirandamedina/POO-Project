@@ -58,8 +58,8 @@
             pass.Margin = new Padding(4, 3, 4, 3);
             pass.Name = "pass";
             pass.Size = new Size(134, 23);
-            pass.TabIndex = 4;
-            pass.TextChanged += pass_TextChanged;
+            pass.TabIndex = 2;
+            pass.KeyUp += pass_KeyUp;
             // 
             // email
             // 
@@ -67,8 +67,8 @@
             email.Margin = new Padding(4, 3, 4, 3);
             email.Name = "email";
             email.Size = new Size(134, 23);
-            email.TabIndex = 5;
-            email.TextChanged += email_TextChanged;
+            email.TabIndex = 1;
+            email.KeyUp += email_KeyUp;
             // 
             // Login
             // 
@@ -79,7 +79,7 @@
             Login.Margin = new Padding(4, 3, 4, 3);
             Login.Name = "Login";
             Login.Size = new Size(170, 65);
-            Login.TabIndex = 6;
+            Login.TabIndex = 3;
             Login.Text = "Iniciar Sesion";
             Login.UseVisualStyleBackColor = false;
             Login.Click += Login_Click;
@@ -117,8 +117,7 @@
             label2.Name = "label2";
             label2.Size = new Size(52, 19);
             label2.TabIndex = 9;
-            label2.Text = "Gmail:";
-            label2.Click += label2_Click;
+            label2.Text = "Email:";
             // 
             // label3
             // 
@@ -152,7 +151,6 @@
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Login";
-            Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();

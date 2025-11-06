@@ -1,18 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Microsoft.VisualBasic.Logging;
-using mini_home_banking.Controladores;
+﻿using mini_home_banking.Controladores;
 using mini_home_banking.Modelos;
 using MySql.Data.MySqlClient;
-using MySqlX.XDevAPI.Common;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace mini_home_banking.Vistas
 {
@@ -33,8 +21,7 @@ namespace mini_home_banking.Vistas
             MySqlDataReader reader = null;
             List<Account> accounts = new List<Account>();
 
-            string query = "SELECT a.id,at.description, a.alias, a.current_balance, a.cbu FROM accounts a JOIN account_types at ON" +
-                " a.account_type_id = at.id WHERE user_id = @user_id";
+            string query = "SELECT a.id, at.description, a.alias, a.current_balance, a.cbu FROM accounts a JOIN account_types at ON a.account_type_id = at.id WHERE user_id = @user_id";
 
             if (mConexion.getConexion() != null)
             {
@@ -48,7 +35,6 @@ namespace mini_home_banking.Vistas
                 {
                     Account account = new Account(Convert.ToInt32(reader["id"]), reader["alias"].ToString(), reader["description"].ToString(), Convert.ToDecimal(reader["current_balance"]), reader["cbu"].ToString());
                     accounts.Add(account);
-
                 }
                 reader.Close();
 
@@ -60,6 +46,7 @@ namespace mini_home_banking.Vistas
             try
             {
                 listBoxCuentas.DataSource = Obtener_Cuentas();
+                listBoxCuentas.DisplayMember = "mostrarInfo";
 
                 MySqlDataReader reader = null;
                 string query = "SELECT card_type, expiration, available_limit FROM cards WHERE user_id = @user_id";
@@ -93,25 +80,10 @@ namespace mini_home_banking.Vistas
 
         }
 
-        private void listBoxCuentas_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listBoxTarjetas_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             Transferencia transferencia = new Transferencia(Obtener_Cuentas());
             transferencia.Show();
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

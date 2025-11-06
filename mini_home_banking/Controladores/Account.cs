@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace mini_home_banking.Controladores
+﻿namespace mini_home_banking.Controladores
 {
     public class Account
     {
-        private int Id { get; set; }
-        private string Alias { get; set; }
-        private string Tipo { get; set; }
-        private decimal Saldo { get; set; }
-        private string Cbu { get; set; }
+        public int Id { get; set; }
+        public string Alias { get; set; }
+        public string Tipo { get; set; }
+        public decimal Saldo { get; set; }
+        public string Cbu { get; set; }
 
-        public Account(int Id,string Alias, string Tipo, decimal Saldo, string cbu)
+        public Account(int Id, string Alias, string Tipo, decimal Saldo, string cbu)
         {
             this.Id = Id;
             this.Alias = Alias;
@@ -23,11 +17,7 @@ namespace mini_home_banking.Controladores
             Cbu = cbu;
         }
 
-        public override string ToString()
-        {
-            // Esto define lo que se muestra en la ListBox
-            return $"{Alias} - {Tipo} - ${Saldo} - {Cbu}";
-        }
+        public string mostrarInfo => $"{Id} - {Alias} - {Tipo} - Saldo: ${Saldo} - {Cbu}";
 
         public string Get_Alias()
         {
@@ -41,6 +31,11 @@ namespace mini_home_banking.Controladores
 
         public decimal Get_Saldo()
         {
+            return Saldo;
+        }
+        public decimal Set_Saldo(decimal Saldo)
+        {
+            this.Saldo = Saldo;
             return Saldo;
         }
     }

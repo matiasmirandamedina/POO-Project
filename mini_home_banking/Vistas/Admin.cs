@@ -1,17 +1,6 @@
-﻿using Google.Protobuf.WellKnownTypes;
-using Microsoft.VisualBasic.Logging;
-using mini_home_banking.Controladores;
+﻿using mini_home_banking.Controladores;
 using mini_home_banking.Modelos;
 using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace mini_home_banking.Vistas
 {
@@ -24,33 +13,145 @@ namespace mini_home_banking.Vistas
             mConexion = new Conexion();
         }
 
+        public List<Role> Obtener_Roles()
+        {
+            List<Role> roles = new List<Role>();
+
+            string obtainRolesQuery = "SELECT id, name FROM roles;";
+
+            if (mConexion.getConexion() != null)
+            {
+                using (MySqlCommand cmd = new MySqlCommand(obtainRolesQuery, mConexion.getConexion()))
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Role role = new Role(Convert.ToInt32(reader["id"]), reader["name"].ToString());
+                            roles.Add(role);
+                        }
+                    }
+                }
+            }
+            return roles;
+        }
+
+        public List<(int id, string username)> Obtener_Usuarios()
+        {
+            List<(int id, string username)> users = new List<(int, string)>();
+
+            string obtainUsersQuery = "SELECT id, username FROM users;";
+
+            if (mConexion.getConexion() != null)
+            {
+                using (MySqlCommand cmd = new MySqlCommand(obtainUsersQuery, mConexion.getConexion()))
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            users.Add((Convert.ToInt32(reader["id"]), reader["username"].ToString()));
+                        }
+                    }
+                }
+            }
+
+            return users;
+        }
+
+        public List<(int id, string description)> Obtener_TiposCuentas()
+        {
+            List<(int id, string description)> accountTypes = new List<(int, string)>();
+
+            string obtainAccountTypesQuery = "SELECT id, description FROM account_types;";
+
+            if (mConexion.getConexion() != null)
+            {
+                using (MySqlCommand cmd = new MySqlCommand(obtainAccountTypesQuery, mConexion.getConexion()))
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            accountTypes.Add((Convert.ToInt32(reader["id"]), reader["description"].ToString()));
+                        }
+                    }
+                }
+            }
+
+            return accountTypes;
+        }
+
+        public List<(int id, string name)> Obtener_Monedas()
+        {
+            List<(int id, string name)> currencies = new List<(int, string)>();
+
+            string obtainCurrenciesQuery = "SELECT id, name FROM currencies;";
+
+            if (mConexion.getConexion() != null)
+            {
+                using (MySqlCommand cmd = new MySqlCommand(obtainCurrenciesQuery, mConexion.getConexion()))
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            currencies.Add((Convert.ToInt32(reader["id"]), reader["name"].ToString()));
+                        }
+                    }
+                }
+            }
+
+            return currencies;
+        }
+
         private void Admin_Load(object sender, EventArgs e)
         {
+            comboBox1.DataSource = Obtener_Roles();
+            comboBox1.DisplayMember = "mostrarInfo";
+            comboBox1.ValueMember = "id";
 
+            var users = Obtener_Usuarios()
+                .OrderBy(u => u.id)
+                .Select(u => new { u.id, mostrarInfo = $"{u.id} - {u.username}" })
+                .ToList();
+
+            comboBox2.DataSource = users;
+            comboBox2.DisplayMember = "mostrarInfo";
+            comboBox2.ValueMember = "id";
+
+            var accountTypes = Obtener_TiposCuentas()
+                .OrderBy(aT => aT.id)
+                .Select(aT => new { aT.id, mostrarInfo = $"{aT.id} - {aT.description}" })
+                .ToList();
+
+            comboBox3.DataSource = accountTypes;
+            comboBox3.DisplayMember = "mostrarInfo";
+            comboBox3.ValueMember = "id";
+
+            var currencies = Obtener_Monedas()
+                .OrderBy(c => c.id)
+                .Select(c => new { c.id, mostrarInfo = $"{c.id} - {c.name}" })
+                .ToList();
+
+            comboBox4.DataSource = currencies;
+            comboBox4.DisplayMember = "mostrarInfo";
+            comboBox4.ValueMember = "id";
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string user_id = textBox4.Text;
-            string account_type_id = textBox7.Text;
-            string currency_id = textBox8.Text;
+            int user_id = (int)comboBox2.SelectedValue;
+            int account_type_id = (int)comboBox3.SelectedValue;
+            int currency_id = (int)comboBox4.SelectedValue;
             string CBU = textBox9.Text;
             string current_balance = textBox12.Text;
             string alias = textBox13.Text;
 
             try
             {
-                if (!int.TryParse(user_id, out _))
-                    throw new Own_Exception("El ID de usuario debe ser un número válido.");
-
-                if (!int.TryParse(account_type_id, out _))
-                    throw new Own_Exception("El ID del tipo de cuenta debe ser un número válido.");
-
-                if (!int.TryParse(currency_id, out _))
-                    throw new Own_Exception("El ID de moneda debe ser un número válido.");
-
                 if (!CBU.All(char.IsDigit))
-                    throw new Own_Exception("El CBU debe tener solo numeros");
+                    throw new Own_Exception("El valor no es vaido en el CBU");
 
                 if (!decimal.TryParse(current_balance, out decimal saldo))
                     throw new Own_Exception("El saldo debe ser un número válido.");
@@ -93,7 +194,7 @@ namespace mini_home_banking.Vistas
 
         private void button4_Click(object sender, EventArgs e)
         {
-            string role = rol.Text;
+            int role = (int)comboBox1.SelectedValue;
             string username = textBox1.Text;
             string fullname = textBox2.Text;
             string email = textBox5.Text;
@@ -101,9 +202,6 @@ namespace mini_home_banking.Vistas
 
             try
             {
-                if (!int.TryParse(role, out _))
-                    throw new Own_Exception("El rol debe ingresarse con el ID numérico (no el nombre).");
-
                 if (string.IsNullOrWhiteSpace(username))
                     throw new Own_Exception("El nombre de usuario no puede estar vacío.");
 
@@ -119,8 +217,19 @@ namespace mini_home_banking.Vistas
                 if (mConexion.getConexion() == null)
                     throw new Own_Exception("¡Error al conectar con la base de datos!");
 
+                string checkQuery = "SELECT COUNT(*) FROM users WHERE username = @username OR email = @email";
+                using (MySqlCommand checkCmd = new MySqlCommand(checkQuery, mConexion.getConexion()))
+                {
+                    checkCmd.Parameters.AddWithValue("@username", username);
+                    checkCmd.Parameters.AddWithValue("@email", email);
+                    int exists = Convert.ToInt32(checkCmd.ExecuteScalar());
+
+                    if (exists > 0)
+                        throw new Own_Exception("El nombre de usuario o el correo ya están registrados.");
+                }
+
                 string query = "INSERT INTO users (role_id, username, full_name, email, password_hash, created_at) " +
-                               "VALUES (@role_id, @username, @full_name, @email, @password_hash, @created_at)";
+                               "VALUES (@role_id, @username, @full_name, @email, MD5(@password_hash), @created_at)";
 
                 using (MySqlCommand cmd = new MySqlCommand(query, mConexion.getConexion()))
                 {
@@ -149,84 +258,22 @@ namespace mini_home_banking.Vistas
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void label8_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void textBox9_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void textBox5_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void textBox6_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void textBox7_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void textBox8_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void textBox10_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void label13_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
-            string number_card = Number_card.Text;
+            string number_cardText = Number_card.Text;
             string debitsText = Debitos.Text;
 
             try
             {
 
-                if (string.IsNullOrWhiteSpace(number_card) || string.IsNullOrWhiteSpace(debitsText))
+                if (string.IsNullOrWhiteSpace(number_cardText) || string.IsNullOrWhiteSpace(debitsText))
                     throw new Own_Exception("Porfavor complete todos los campos");
 
-                if (!number_card.All(char.IsDigit))
-                    throw new Own_Exception("El numero de tarjeta debe contener solo numeros");
+                if (!long.TryParse(number_cardText, out _))
+                    throw new Own_Exception("El numero de la tarjeta debe ser un numero");
+
+                long number_card = Convert.ToInt64(number_cardText);
+
 
                 decimal debits;
                 if (!decimal.TryParse(debitsText, out debits))
@@ -234,6 +281,15 @@ namespace mini_home_banking.Vistas
                     throw new Own_Exception("Por favor ingrese los debitos de manera valida (solo números).");
                 }
                 debits = Convert.ToDecimal(debitsText);
+
+                bool verification = false;
+                if (number_card == 0 || number_card < 0) verification = true;
+                if (debits == 0 || debits < 0) verification = true;
+
+                if (verification)
+                {
+                    throw new Own_Exception("Ninguno de los campos puede ser menor o igual a cero");
+                }
 
                 if (debits < 0 || debits == 0) throw new Own_Exception("El debito a generar no puede ser menor o igual cero");
 
@@ -277,12 +333,12 @@ namespace mini_home_banking.Vistas
 
                 string card_movements = @"
                 INSERT INTO `card_movements`
-                (`card_id`, `amount`, `type`, `description`, `created_by`, `created_at`)
-                VALUES (@card_id, @amount, 'CARGA','Prestamo', 'Prestamo instantaneo', @user_id, NOW())";
+                (`card_number`, `amount`, `type`, `description`, `created_by`, `created_at`)
+                VALUES (@card_number, @amount, 'CARGA','Prestamo', 'Prestamo instantaneo', @user_id, NOW())";
 
                 using (MySqlCommand cmd = new MySqlCommand(card_movements, mConexion.getConexion()))
                 {
-                    cmd.Parameters.AddWithValue("@card_id", card_id);
+                    cmd.Parameters.AddWithValue("@card_number", card_id);
                     cmd.Parameters.AddWithValue("@amount", debits);
                     cmd.Parameters.AddWithValue("@user_id", user_id);
 
@@ -301,82 +357,54 @@ namespace mini_home_banking.Vistas
             }
         }
 
-        private void label17_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Number_card_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox12_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox13_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label12_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void Resumen_Click(object sender, EventArgs e)
         {
-            string id_cardText = Id_card.Text;
+            string number_cardText = Card_number.Text;
             string MonthText = Month.Text;
 
             try
             {
 
-                if (string.IsNullOrWhiteSpace(id_cardText) || string.IsNullOrWhiteSpace(MonthText))
+                if (string.IsNullOrWhiteSpace(number_cardText) || string.IsNullOrWhiteSpace(MonthText))
                     throw new Own_Exception("Porfavor complete todos los campos");
 
-                if (!id_cardText.All(char.IsDigit))
-                    throw new Own_Exception("El id de la tarjeta debe ser un numero");
+                
+                if(!long.TryParse(number_cardText, out _)) 
+                    throw new Own_Exception("El numero de la tarjeta debe ser un numero");
 
-                if (!MonthText.All(char.IsDigit))
+                if (!int.TryParse(MonthText, out _))
                     throw new Own_Exception("El mes debe estar puesto en forma numerica");
 
-                int card_id = Convert.ToInt32(id_cardText);
+                long card_number = Convert.ToInt64(number_cardText);
                 int month = Convert.ToInt32(MonthText);
 
                 bool verification = false;
-                if(card_id == 0 || card_id < 0) verification = true;
-                if (month == 0 || month < 0 ) verification = true;
+                if (card_number == 0 || card_number < 0) verification = true;
+                if (month == 0 || month < 0) verification = true;
 
                 if (verification)
                 {
                     throw new Own_Exception("Ninguno de los campos puede ser menor o igual a cero");
                 }
 
-                if(month > 12) throw new Own_Exception("El mes no puede ser mayor a 12");
+                if (month > 12) throw new Own_Exception("El mes no puede ser mayor a 12");
 
                 if (mConexion.getConexion() == null)
                     throw new Own_Exception("¡Error al conectar con la base de datos!");
 
 
 
-                string queryId = "SELECT * FROM cards WHERE id = @id ";
-
+                string queryId = "SELECT * FROM cards WHERE card_number_hash = @card_number ";
+                int card_id = 0;
 
                 using (MySqlCommand cmd = new MySqlCommand(queryId, mConexion.getConexion()))
                 {
-                    cmd.Parameters.AddWithValue("@id", card_id);
+                    cmd.Parameters.AddWithValue("@card_number", card_number);
                     using (MySqlDataReader result_card = cmd.ExecuteReader())
                     {
                         if (result_card.Read())
                         {
+                            card_id = Convert.ToInt32(result_card["id"]);
                             MessageBox.Show("Tarjeta encontrada");
                         }
                         else
@@ -394,7 +422,7 @@ namespace mini_home_banking.Vistas
                     cmd.Parameters.AddWithValue("@month", month);
                     cmd.Parameters.AddWithValue("@card_id", card_id);
 
-                    using(var reader = cmd.ExecuteReader())
+                    using (var reader = cmd.ExecuteReader())
                     {
                         if (reader.Read())
                         {
@@ -402,7 +430,7 @@ namespace mini_home_banking.Vistas
                             Convert.ToInt32(reader["id"]),
                             Convert.ToInt32(reader["card_id"]),
                             Convert.ToDecimal(reader["amount"]),
-                            reader["type"].ToString(),
+                            reader["type"]!.ToString(),
                             reader["description"].ToString(),
                             Convert.ToInt32(reader["created_by"]),
                             Convert.ToDateTime(reader["created_at"])
@@ -414,10 +442,7 @@ namespace mini_home_banking.Vistas
                             throw new Own_Exception("Movimiento de tarjeta no encontrada");
                         }
                     }
-
-
                 }
-
             }
             catch (Own_Exception ex)
             {
@@ -426,6 +451,127 @@ namespace mini_home_banking.Vistas
             catch (Exception ex)
             {
                 MessageBox.Show("Error al insertar usuario: " + ex.Message);
+            }
+        }
+
+        private void comboBox1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                textBox1.Focus();
+            }
+
+        }
+
+        private void textBox1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                textBox2.Focus();
+            }
+        }
+
+        private void textBox2_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                textBox5.Focus();
+            }
+        }
+
+        private void textBox5_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                textBox6.Focus();
+            }
+        }
+
+        private void textBox6_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                Insert_User.Focus();
+            }
+        }
+
+        private void comboBox2_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                comboBox3.Focus();
+            }
+        }
+
+        private void comboBox3_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                comboBox4.Focus();
+            }
+        }
+
+        private void comboBox4_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                textBox9.Focus();
+            }
+        }
+
+        private void textBox9_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                textBox12.Focus();
+            }
+        }
+
+        private void textBox12_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                textBox13.Focus();
+            }
+        }
+
+        private void textBox13_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                Insert_Account.Focus();
+            }
+        }
+
+        private void Number_card_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                Debitos.Focus();
+            }
+        }
+
+        private void Debitos_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                Generate_Debits.Focus();
+            }
+        }
+
+        private void Id_card_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                Month.Focus();
+            }
+        }
+
+        private void Month_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                Resumen.Focus();
             }
         }
     }

@@ -1,21 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace mini_home_banking.Controladores
+﻿namespace mini_home_banking.Controladores
 {
     public class User
     {
-        private int Id { get; set; }
-        private int RoleId { get; set; }
-        private string Username { get; set; }
-        private string FullName { get; set; }
-        private string Email { get; set; }
-        private string PasswordHash { get; set; }
-
-
+        public int Id { get; set; }
+        public int RoleId { get; set; }
+        public string Username { get; set; }
+        public string FullName { get; set; }
+        public string Email { get; set; }
+        public string PasswordHash { get; set; }
 
         public User(int id, int roleId, string username, string fullName, string email, string passwordHash)
         {

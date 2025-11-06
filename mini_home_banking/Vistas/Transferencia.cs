@@ -1,16 +1,6 @@
-﻿using Microsoft.VisualBasic.Logging;
-using mini_home_banking.Controladores;
+﻿using mini_home_banking.Controladores;
 using mini_home_banking.Modelos;
 using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace mini_home_banking.Vistas
 {
@@ -28,18 +18,37 @@ namespace mini_home_banking.Vistas
 
         private void Transferencia_Load(object sender, EventArgs e)
         {
-            listBox1.DataSource = accounts;
+            List<string> aliases = accounts.Select(a => a.Get_Alias()).ToList();
+            List<string> cbus = accounts.Select(a => a.Get_Cbu()).ToList();
+
+            comboBox1.DataSource = aliases;
+            comboBox2.DataSource = cbus;
+
+            radioAlias.CheckedChanged += (s, ev) =>
+            {
+                comboBox1.Enabled = radioAlias.Checked;
+                comboBox2.Enabled = !radioAlias.Checked;
+            };
+
+            radioCbu.CheckedChanged += (s, ev) =>
+            {
+                comboBox2.Enabled = radioCbu.Checked;
+                comboBox1.Enabled = !radioCbu.Checked;
+            };
         }
 
         private void transferir_Click(object sender, EventArgs e)
         {
             try
             {
-                string account_origin = this.cuentaOrigen.Text;
+                string account_origin = radioAlias.Checked ? comboBox1.Text : comboBox2.Text;
                 string account_destination = this.cuentaDestino.Text;
                 string amountText = this.monto.Text;
 
-                if (string.IsNullOrWhiteSpace(amountText) || string.IsNullOrWhiteSpace(account_destination) || string.IsNullOrWhiteSpace(account_origin))
+                decimal saldo = 0;
+                Account cuentaOrigenObj = null;
+
+                if (string.IsNullOrWhiteSpace(amountText) || string.IsNullOrWhiteSpace(account_destination))
                 {
                     throw new Own_Exception("Por favor complete todos los campos");
                 }
@@ -55,12 +64,14 @@ namespace mini_home_banking.Vistas
                 {
                     if (account.Get_Cbu() == account_origin || account.Get_Alias() == account_origin)
                     {
-                        Account accountVer = account;
-                        if (accountVer.Get_Saldo() < amount) throw new Own_Exception($"El monto seleccionado supera el actual. Ingrese un monto igual o menor a {accountVer.Get_Saldo()}");
+                        saldo = account.Get_Saldo();
+                        cuentaOrigenObj = account;
+
+                        if (saldo < amount) throw new Own_Exception($"El monto seleccionado supera el actual. Ingrese un monto igual o menor a {saldo}");
                     }
                 }
 
-                if (amount < 0 || amount == 0) throw new Own_Exception($"El monto seleccionado no puede ser igual o menor a cero");
+                if (amount <= 0) throw new Own_Exception($"El monto seleccionado no puede ser igual o menor a cero");
 
                 string transaction = "INSERT INTO transactions (account_id, destination_account_id, type, amount, currency_id, description, created_by, created_at, reference) VALUES (@cuentaOrigen, @cuentaDestino, 'DEBITO', @montoDecimal, 2, 'Pago de servicios', 2, NOW(), 'REF004');";
                 string discount = "UPDATE accounts SET current_balance = current_balance - @montoDecimal WHERE id = @cuentaOrigen;";
@@ -70,7 +81,6 @@ namespace mini_home_banking.Vistas
                 int id_destination = 0;
 
                 string queryId = "SELECT id FROM accounts WHERE cbu = @cbu OR alias = @alias";
-
 
                 using (MySqlCommand cmd = new MySqlCommand(queryId, mConexion.getConexion()))
                 {
@@ -104,6 +114,11 @@ namespace mini_home_banking.Vistas
                     }
                 }
 
+                if (id_origin == id_destination)
+                {
+                    throw new Own_Exception("No puedes transferirte a ti mismo.");
+                }
+
                 if (mConexion.getConexion() != null)
                 {
                     using (MySqlCommand log = new MySqlCommand(transaction, mConexion.getConexion()))
@@ -128,6 +143,11 @@ namespace mini_home_banking.Vistas
                         cmd_add.ExecuteNonQuery();
                     }
 
+                    if (cuentaOrigenObj != null)
+                    {
+                        cuentaOrigenObj.Set_Saldo(saldo - amount);
+                    }
+
                     MessageBox.Show($"Se ha transferido ${amount} de la cuenta {account_origin} a la cuenta {account_destination}");
                 }
             }
@@ -142,14 +162,52 @@ namespace mini_home_banking.Vistas
 
         }
 
-        private void cuentaOrigen_TextChanged(object sender, EventArgs e)
+        private void radioAlias_KeyUp(object sender, KeyEventArgs e)
         {
-
+            if (e.KeyData == Keys.Enter)
+            {
+                comboBox1.Focus();
+            }
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox1_KeyUp(object sender, KeyEventArgs e)
         {
+            if (e.KeyData == Keys.Enter)
+            {
+                cuentaDestino.Focus();
+            }
+        }
 
+        private void radioCbu_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                comboBox2.Focus();
+            }
+        }
+
+        private void comboBox2_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                cuentaDestino.Focus();
+            }
+        }
+
+        private void cuentaDestino_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                monto.Focus();
+            }
+        }
+
+        private void monto_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                transferir.Focus();
+            }
         }
     }
 }
