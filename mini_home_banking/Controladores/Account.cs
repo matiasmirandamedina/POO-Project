@@ -7,14 +7,16 @@
         public string Tipo { get; set; }
         public decimal Saldo { get; set; }
         public string Cbu { get; set; }
+        public int monedaId { get; set; }
 
-        public Account(int Id, string Alias, string Tipo, decimal Saldo, string cbu)
+        public Account(int Id, string Alias, string Tipo, decimal Saldo, string cbu, int monedaId)
         {
             this.Id = Id;
             this.Alias = Alias;
             this.Tipo = Tipo;
             this.Saldo = Saldo;
             Cbu = cbu;
+            this.monedaId = monedaId;
         }
 
         public string mostrarInfo => $"{Id} - {Alias} - {Tipo} - Saldo: ${Saldo} - {Cbu}";
