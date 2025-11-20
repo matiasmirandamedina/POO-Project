@@ -12,11 +12,13 @@ namespace mini_home_banking.Vistas
     {
         private Conexion mConexion;
         private List<Account> accounts;
+        private User user;
 
-        public Transferencia(List<Account> accounts)
+        public Transferencia(List<Account> accounts, User user)
         {
             InitializeComponent();
             this.accounts = accounts;
+            this.user = user;
             mConexion = new Conexion();
         }
         private async Task<currency> ObtenerDolarOficial()
@@ -61,6 +63,9 @@ namespace mini_home_banking.Vistas
 
         private async void Transferencia_Load(object sender, EventArgs e)
         {
+            string name = user.GetUsername();
+            this.Text = $"Transferencia: {name}";
+
             List<string> aliases = accounts.Select(a => a.Get_Alias()).ToList();
             List<string> cbus = accounts.Select(a => a.Get_Cbu()).ToList();
 

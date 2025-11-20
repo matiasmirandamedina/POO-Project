@@ -48,6 +48,10 @@ namespace mini_home_banking.Vistas
                 listBoxCuentas.DataSource = Obtener_Cuentas();
                 listBoxCuentas.DisplayMember = "mostrarInfo";
 
+                string name = user.GetUsername();
+                this.Text = $"Home: {name}";
+
+
                 MySqlDataReader reader = null;
                 string query = "SELECT card_type, expiration, available_limit FROM cards WHERE user_id = @user_id";
 
@@ -82,7 +86,7 @@ namespace mini_home_banking.Vistas
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Transferencia transferencia = new Transferencia(Obtener_Cuentas());
+            Transferencia transferencia = new Transferencia(Obtener_Cuentas(), user);
             transferencia.Show();
         }
     }
