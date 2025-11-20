@@ -28,5 +28,10 @@
         {
             return Id;
         }
+
+        public string GetUsername()
+        {
+            return Username;
+        }
     }
 }
