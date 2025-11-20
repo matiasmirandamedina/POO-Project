@@ -137,6 +137,7 @@
             Name = "Admin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Ventana de administrador";
+            Load += Admin_Load;
             panelVar.ResumeLayout(false);
             panelVar.PerformLayout();
             ResumeLayout(false);

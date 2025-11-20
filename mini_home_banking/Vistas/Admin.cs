@@ -1,17 +1,25 @@
 ﻿using mini_home_banking.Controladores;
 using mini_home_banking.Modelos;
 using mini_home_banking.Vistas.UserControl;
-using MySql.Data.MySqlClient;
 
 namespace mini_home_banking.Vistas
 {
     public partial class Admin : Form
     {
         private Conexion mConexion;
+
+        private User user;
+
         public Admin(User user)
         {
             InitializeComponent();
             mConexion = new Conexion();
+            this.user = user;
+        }
+
+        private void Admin_Load(object sender, EventArgs e)
+        {
+            this.Text = $"Admin - {user.GetUsername()}";
         }
 
         private void CargarUserControl(System.Windows.Forms.UserControl uc)
