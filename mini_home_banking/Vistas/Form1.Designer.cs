@@ -37,6 +37,8 @@
             pictureBox1 = new PictureBox();
             label2 = new Label();
             label3 = new Label();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            btnVer = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -60,6 +62,7 @@
             pass.PasswordChar = '*';
             pass.Size = new Size(134, 23);
             pass.TabIndex = 2;
+            pass.TextChanged += pass_TextChanged;
             pass.KeyUp += pass_KeyUp;
             // 
             // email
@@ -131,6 +134,17 @@
             label3.Size = new Size(93, 19);
             label3.TabIndex = 10;
             label3.Text = "Contraseña:";
+            label3.Click += label3_Click;
+            // 
+            // btnVer
+            // 
+            btnVer.Location = new Point(393, 172);
+            btnVer.Name = "btnVer";
+            btnVer.Size = new Size(39, 23);
+            btnVer.TabIndex = 11;
+            btnVer.Text = "(👁️)";
+            btnVer.UseVisualStyleBackColor = true;
+            btnVer.Click += button1_Click;
             // 
             // Form1
             // 
@@ -138,6 +152,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkCyan;
             ClientSize = new Size(444, 286);
+            Controls.Add(btnVer);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(pictureBox1);
@@ -166,5 +181,7 @@
         private PictureBox pictureBox1;
         private Label label2;
         private Label label3;
+        private Button btnVer;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
