@@ -57,6 +57,7 @@
             pass.Location = new Point(250, 172);
             pass.Margin = new Padding(4, 3, 4, 3);
             pass.Name = "pass";
+            pass.PasswordChar = '*';
             pass.Size = new Size(134, 23);
             pass.TabIndex = 2;
             pass.KeyUp += pass_KeyUp;

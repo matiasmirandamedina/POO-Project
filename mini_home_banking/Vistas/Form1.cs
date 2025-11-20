@@ -91,8 +91,6 @@ namespace mini_home_banking.Vistas
             {
                 MessageBox.Show(" Ocurrió un error: " + ex.Message);
             }
-
-
         }
 
         private void email_KeyUp(object sender, KeyEventArgs e)

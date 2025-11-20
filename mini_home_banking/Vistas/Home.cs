@@ -21,7 +21,7 @@ namespace mini_home_banking.Vistas
             MySqlDataReader reader = null;
             List<Account> accounts = new List<Account>();
 
-            string query = "SELECT a.id, at.description, a.alias, a.current_balance, a.cbu FROM accounts a JOIN account_types at ON a.account_type_id = at.id WHERE user_id = @user_id";
+            string query = "SELECT a.id, at.description, a.currency_id, a.alias, a.current_balance, a.cbu FROM accounts a JOIN account_types at ON a.account_type_id = at.id WHERE user_id = @user_id";
 
             if (mConexion.getConexion() != null)
             {
@@ -33,7 +33,7 @@ namespace mini_home_banking.Vistas
 
                 while (reader.Read())
                 {
-                    Account account = new Account(Convert.ToInt32(reader["id"]), reader["alias"].ToString(), reader["description"].ToString(), Convert.ToDecimal(reader["current_balance"]), reader["cbu"].ToString());
+                    Account account = new Account(Convert.ToInt32(reader["id"]), reader["alias"].ToString(), reader["description"].ToString(), Convert.ToDecimal(reader["current_balance"]), reader["cbu"].ToString(), Convert.ToInt32(reader["currency_id"]));
                     accounts.Add(account);
                 }
                 reader.Close();
