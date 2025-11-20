@@ -108,5 +108,28 @@ namespace mini_home_banking.Vistas
                 Login.Focus();
             }
         }
+
+        private void pass_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (pass.PasswordChar == '*')
+            {
+                pass.PasswordChar = '\0'; // mostrar
+            }
+            else
+            {
+                pass.PasswordChar = '*'; // ocultar
+            }
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
