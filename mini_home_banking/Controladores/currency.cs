@@ -1,6 +1,6 @@
 ﻿namespace mini_home_banking.Controladores
 {
-    internal class currency
+    public class currency
     {
         public decimal compra { get; set; }
         public decimal venta { get; set; }

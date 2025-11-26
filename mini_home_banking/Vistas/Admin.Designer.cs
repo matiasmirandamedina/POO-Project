@@ -52,6 +52,7 @@
             panelVar.Name = "panelVar";
             panelVar.Size = new Size(200, 491);
             panelVar.TabIndex = 41;
+            panelVar.Paint += panelVar_Paint;
             // 
             // label21
             // 
@@ -122,6 +123,7 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(400, 491);
             panel1.TabIndex = 42;
+            panel1.Paint += panel1_Paint;
             // 
             // Admin
             // 

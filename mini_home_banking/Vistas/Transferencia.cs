@@ -76,7 +76,7 @@ namespace mini_home_banking.Vistas
             {
                 comboBox1.Enabled = radioAlias.Checked;
                 comboBox2.Enabled = !radioAlias.Checked;
-            };      
+            };
 
             radioCbu.CheckedChanged += (s, ev) =>
             {
@@ -136,7 +136,7 @@ namespace mini_home_banking.Vistas
 
                 if (cuentaOrigenObj == null)
                     throw new Own_Exception("Cuenta de origen no encontrada.");
-                
+
                 if (cuentaOrigenObj.Tipo == "Cuenta Ahorro")
                 {
                     if (saldo < amount)
@@ -349,6 +349,22 @@ namespace mini_home_banking.Vistas
             if (e.KeyData == Keys.Enter)
             {
                 transferir.Focus();
+            }
+        }
+
+        private async void Convert_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var dolar = await ObtenerDolarOficial();
+                var euro = await ObtenerEuroOficial();
+
+                Converter c = new Converter(dolar, euro);
+                c.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener cotizaciones: " + ex.Message);
             }
         }
     }

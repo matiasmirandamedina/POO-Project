@@ -39,6 +39,7 @@
             comboBox2 = new ComboBox();
             radioAlias = new RadioButton();
             radioCbu = new RadioButton();
+            Conv = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -85,7 +86,7 @@
             transferir.BackColor = Color.DarkSlateGray;
             transferir.Font = new Font("Harrington", 15F, FontStyle.Bold);
             transferir.ForeColor = SystemColors.ControlLightLight;
-            transferir.Location = new Point(370, 118);
+            transferir.Location = new Point(370, 76);
             transferir.Name = "transferir";
             transferir.Size = new Size(296, 65);
             transferir.TabIndex = 7;
@@ -153,12 +154,26 @@
             radioCbu.UseVisualStyleBackColor = true;
             radioCbu.KeyUp += radioCbu_KeyUp;
             // 
+            // Conv
+            // 
+            Conv.BackColor = Color.DarkSlateGray;
+            Conv.Font = new Font("Harrington", 15F, FontStyle.Bold);
+            Conv.ForeColor = SystemColors.ControlLightLight;
+            Conv.Location = new Point(370, 147);
+            Conv.Name = "Conv";
+            Conv.Size = new Size(296, 52);
+            Conv.TabIndex = 10;
+            Conv.Text = "Conversion de unidades";
+            Conv.UseVisualStyleBackColor = false;
+            Conv.Click += Convert_Click;
+            // 
             // Transferencia
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkCyan;
             ClientSize = new Size(692, 211);
+            Controls.Add(Conv);
             Controls.Add(radioCbu);
             Controls.Add(radioAlias);
             Controls.Add(comboBox2);
@@ -191,5 +206,6 @@
         private ComboBox comboBox2;
         private RadioButton radioAlias;
         private RadioButton radioCbu;
+        private Button Conv;
     }
 }
