@@ -152,5 +152,17 @@ namespace mini_home_banking.Vistas.UserControl
                 Insert_User.Focus();
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (textBox6.PasswordChar == '*')
+            {
+                textBox6.PasswordChar = '\0'; // mostrar
+            }
+            else
+            {
+                textBox6.PasswordChar = '*'; // ocultar
+            }
+        }
     }
 }

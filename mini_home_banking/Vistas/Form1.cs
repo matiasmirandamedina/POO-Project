@@ -107,7 +107,7 @@ namespace mini_home_banking.Vistas
             {
                 Login.Focus();
             }
-        }
+        } 
 
         private void pass_TextChanged(object sender, EventArgs e)
         {
@@ -118,11 +118,11 @@ namespace mini_home_banking.Vistas
         {
             if (pass.PasswordChar == '*')
             {
-                pass.PasswordChar = '\0'; // mostrar
+                pass.PasswordChar = '\0'; 
             }
             else
             {
-                pass.PasswordChar = '*'; // ocultar
+                pass.PasswordChar = '*';
             }
         }
 

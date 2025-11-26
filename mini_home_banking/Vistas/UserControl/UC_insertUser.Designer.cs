@@ -40,6 +40,7 @@
             label1 = new Label();
             Insert_User = new Button();
             label2 = new Label();
+            button1 = new Button();
             SuspendLayout();
             // 
             // comboBox1
@@ -50,13 +51,16 @@
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(185, 23);
             comboBox1.TabIndex = 26;
+            comboBox1.KeyUp += comboBox1_KeyUp;
             // 
             // textBox6
             // 
             textBox6.Location = new Point(107, 309);
             textBox6.Name = "textBox6";
+            textBox6.PasswordChar = '*';
             textBox6.Size = new Size(185, 23);
             textBox6.TabIndex = 31;
+            textBox6.KeyUp += textBox6_KeyUp;
             // 
             // label7
             // 
@@ -75,6 +79,7 @@
             textBox5.Name = "textBox5";
             textBox5.Size = new Size(185, 23);
             textBox5.TabIndex = 30;
+            textBox5.KeyUp += textBox5_KeyUp;
             // 
             // label6
             // 
@@ -93,6 +98,7 @@
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(185, 23);
             textBox2.TabIndex = 29;
+            textBox2.KeyUp += textBox2_KeyUp;
             // 
             // label5
             // 
@@ -111,6 +117,7 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(185, 23);
             textBox1.TabIndex = 28;
+            textBox1.KeyUp += textBox1_KeyUp;
             // 
             // label4
             // 
@@ -158,11 +165,22 @@
             label2.TabIndex = 27;
             label2.Text = "Insertar usuario";
             // 
+            // button1
+            // 
+            button1.Location = new Point(298, 309);
+            button1.Name = "button1";
+            button1.Size = new Size(39, 23);
+            button1.TabIndex = 38;
+            button1.Text = "(👁️)";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // UC_insertUser
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkCyan;
+            Controls.Add(button1);
             Controls.Add(comboBox1);
             Controls.Add(textBox6);
             Controls.Add(label7);
@@ -196,5 +214,6 @@
         private Label label1;
         private Button Insert_User;
         private Label label2;
+        private Button button1;
     }
 }
