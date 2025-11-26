@@ -1,6 +1,6 @@
 ﻿namespace mini_home_banking.Vistas
 {
-    partial class Form1
+    partial class Login
     {
         /// <summary>
         /// Required designer variable.
@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             label1 = new Label();
             pass = new TextBox();
             email = new TextBox();
-            Login = new Button();
+            login = new Button();
             label4 = new Label();
             pictureBox1 = new PictureBox();
             label2 = new Label();
@@ -76,17 +76,17 @@
             // 
             // Login
             // 
-            Login.BackColor = Color.DarkSlateGray;
-            Login.Font = new Font("Harrington", 15.25F, FontStyle.Bold);
-            Login.ForeColor = SystemColors.ControlLightLight;
-            Login.Location = new Point(144, 201);
-            Login.Margin = new Padding(4, 3, 4, 3);
-            Login.Name = "Login";
-            Login.Size = new Size(170, 65);
-            Login.TabIndex = 3;
-            Login.Text = "Iniciar Sesion";
-            Login.UseVisualStyleBackColor = false;
-            Login.Click += Login_Click;
+            login.BackColor = Color.DarkSlateGray;
+            login.Font = new Font("Harrington", 15.25F, FontStyle.Bold);
+            login.ForeColor = SystemColors.ControlLightLight;
+            login.Location = new Point(144, 201);
+            login.Margin = new Padding(4, 3, 4, 3);
+            login.Name = "Login";
+            login.Size = new Size(170, 65);
+            login.TabIndex = 3;
+            login.Text = "Iniciar Sesion";
+            login.UseVisualStyleBackColor = false;
+            login.Click += login_Click;
             // 
             // label4
             // 
@@ -157,7 +157,7 @@
             Controls.Add(label2);
             Controls.Add(pictureBox1);
             Controls.Add(label4);
-            Controls.Add(Login);
+            Controls.Add(login);
             Controls.Add(email);
             Controls.Add(pass);
             Controls.Add(label1);
@@ -176,7 +176,7 @@
         private Label label1;
         private TextBox pass;
         private TextBox email;
-        private Button Login;
+        private Button login;
         private Label label4;
         private PictureBox pictureBox1;
         private Label label2;

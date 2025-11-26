@@ -2,50 +2,31 @@
 using mini_home_banking.Modelos;
 using MySql.Data.MySqlClient;
 
-namespace mini_home_banking.Vistas
+namespace mini_home_banking.Vistas.UserControl
 {
-    public partial class Home : Form
+    public partial class UC_home : System.Windows.Forms.UserControl
     {
         private User user;
+        private List<Account> accounts;
         private Conexion mConexion;
-        public Home(User user)
+
+        public UC_home(List<Account> accounts, User user)
         {
             InitializeComponent();
+            this.accounts = accounts;
             this.user = user;
             mConexion = new Conexion();
         }
-
-        public List<Account> Obtener_Cuentas()
+        public void SetConexion(Conexion conexion)
         {
-
-            MySqlDataReader reader = null;
-            List<Account> accounts = new List<Account>();
-
-            string query = "SELECT a.id, at.description, a.currency_id, a.alias, a.current_balance, a.cbu FROM accounts a JOIN account_types at ON a.account_type_id = at.id WHERE user_id = @user_id";
-
-            if (mConexion.getConexion() != null)
-            {
-                MySqlCommand cmd = new MySqlCommand(query, mConexion.getConexion());
-                cmd.Parameters.AddWithValue("@user_id", user.Getid());
-
-                reader = cmd.ExecuteReader();
-
-
-                while (reader.Read())
-                {
-                    Account account = new Account(Convert.ToInt32(reader["id"]), reader["alias"].ToString(), reader["description"].ToString(), Convert.ToDecimal(reader["current_balance"]), reader["cbu"].ToString(), Convert.ToInt32(reader["currency_id"]));
-                    accounts.Add(account);
-                }
-                reader.Close();
-
-            }
-            return accounts;
+            mConexion = conexion;
         }
-        private void Home_Load(object sender, EventArgs e)
+
+        private void UC_home_Load(object sender, EventArgs e)
         {
             try
             {
-                listBoxCuentas.DataSource = Obtener_Cuentas();
+                listBoxCuentas.DataSource = accounts;
                 listBoxCuentas.DisplayMember = "mostrarInfo";
 
                 string name = user.GetUsername();
@@ -81,13 +62,6 @@ namespace mini_home_banking.Vistas
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Transferencia transferencia = new Transferencia(Obtener_Cuentas(), user);
-            transferencia.Show();
         }
     }
 }

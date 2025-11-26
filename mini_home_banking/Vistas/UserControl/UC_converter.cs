@@ -1,30 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using mini_home_banking.Controladores;
+﻿using mini_home_banking.Controladores;
 using mini_home_banking.Modelos;
 
-namespace mini_home_banking.Vistas
+namespace mini_home_banking.Vistas.UserControl
 {
-    public partial class Converter : Form
+    public partial class UC_converter : System.Windows.Forms.UserControl
     {
-
         private currency dolar;
         private currency euro;
-        public Converter(currency dolar, currency euro)
+        private Conexion mConexion;
+
+        public UC_converter(currency dolar, currency euro)
         {
             InitializeComponent();
             this.dolar = dolar;
             this.euro = euro;
+            mConexion = new Conexion();
+        }
+        public void SetConexion(Conexion conexion)
+        {
+            mConexion = conexion;
         }
 
-        private void Converter_Load(object sender, EventArgs e)
+        private void UC_converter_Load(object sender, EventArgs e)
         {
             currencieA.DataSource = new List<string> { "Peso", "Dolar", "Euro" };
 
@@ -55,7 +52,8 @@ namespace mini_home_banking.Vistas
 
         private void Convertion_Click(object sender, EventArgs e)
         {
-            try {
+            try
+            {
                 string amountText = this.amount.Text;
                 string currencyA = currencieA.Text;
                 string currencyC = currencieC.Text;
