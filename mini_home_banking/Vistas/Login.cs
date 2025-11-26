@@ -1,19 +1,20 @@
 ﻿using mini_home_banking.Modelos;
 using mini_home_banking.Controladores;
 using MySql.Data.MySqlClient;
+using mini_home_banking.Vistas.UserControl;
 
 namespace mini_home_banking.Vistas
 {
-    public partial class Form1 : Form
+    public partial class Login : Form
     {
         private Conexion mConexion;
-        public Form1()
+        public Login()
         {
             InitializeComponent();
             mConexion = new Conexion();
         }
 
-        private void Login_Click(object sender, EventArgs e)
+        private void login_Click(object sender, EventArgs e)
         {
             try
             {
@@ -67,7 +68,7 @@ namespace mini_home_banking.Vistas
                         }
                         else
                         {
-                            Home f1 = new Home(user);
+                            Client f1 = new Client(user);
                             f1.Show();
                         }
                     }
@@ -105,7 +106,7 @@ namespace mini_home_banking.Vistas
         {
             if (e.KeyData == Keys.Enter)
             {
-                Login.Focus();
+                login.Focus();
             }
         } 
 

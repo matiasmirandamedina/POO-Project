@@ -56,15 +56,5 @@ namespace mini_home_banking.Vistas
             uc.SetConexion(mConexion);
             CargarUserControl(uc);
         }
-
-        private void panelVar_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }

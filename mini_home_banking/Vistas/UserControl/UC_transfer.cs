@@ -1,67 +1,33 @@
 ﻿using mini_home_banking.Controladores;
 using mini_home_banking.Modelos;
 using MySql.Data.MySqlClient;
-using System;
-using System.Net.Http;
-using System.Text.Json;
-using System.Threading.Tasks;
 
-namespace mini_home_banking.Vistas
+namespace mini_home_banking.Vistas.UserControl
 {
-    public partial class Transferencia : Form
+    public partial class UC_transfer : System.Windows.Forms.UserControl
     {
         private Conexion mConexion;
         private List<Account> accounts;
         private User user;
 
-        public Transferencia(List<Account> accounts, User user)
+        private Task<currency> dolarOficial;
+        private Task<currency> euroOficial;
+
+        public UC_transfer(List<Account> accounts, User user, Task<currency> dolarOficial, Task<currency> euroOficial)
         {
             InitializeComponent();
             this.accounts = accounts;
             this.user = user;
+            this.dolarOficial = dolarOficial;
+            this.euroOficial = euroOficial;
             mConexion = new Conexion();
         }
-        private async Task<currency> ObtenerDolarOficial()
+        public void SetConexion(Conexion conexion)
         {
-            string url = "https://dolarapi.com/v1/dolares/oficial";
-
-            using (HttpClient client = new HttpClient())
-            {
-                HttpResponseMessage response = await client.GetAsync(url);
-                response.EnsureSuccessStatusCode();
-
-                string json = await response.Content.ReadAsStringAsync();
-
-                var options = new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                };
-
-                return JsonSerializer.Deserialize<currency>(json, options);
-            }
+            mConexion = conexion;
         }
 
-        private async Task<currency> ObtenerEuroOficial()
-        {
-            string url = "https://dolarapi.com/v1/cotizaciones/eur";
-
-            using (HttpClient client = new HttpClient())
-            {
-                HttpResponseMessage response = await client.GetAsync(url);
-                response.EnsureSuccessStatusCode();
-
-                string json = await response.Content.ReadAsStringAsync();
-
-                var options = new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                };
-
-                return JsonSerializer.Deserialize<currency>(json, options);
-            }
-        }
-
-        private async void Transferencia_Load(object sender, EventArgs e)
+        private async void UC_transfer_Load(object sender, EventArgs e)
         {
             string name = user.GetUsername();
             this.Text = $"Transferencia: {name}";
@@ -86,8 +52,8 @@ namespace mini_home_banking.Vistas
 
             try
             {
-                var dolar = await ObtenerDolarOficial();
-                var euro = await ObtenerEuroOficial();
+                var dolar = await dolarOficial;
+                var euro = await euroOficial;
                 MessageBox.Show($"Cotizaciones de hoy:\n\n" +
                                 $"Dólar oficial:\nCompra: {dolar.compra:F2} | Venta: {dolar.venta:F2}\n\n" +
                                 $"Euro oficial:\nCompra: {euro.compra:F2} | Venta: {euro.venta:F2}");
@@ -262,8 +228,8 @@ namespace mini_home_banking.Vistas
 
         private async Task<decimal> DolarAEuro(decimal monto)
         {
-            var dolar = await ObtenerDolarOficial();
-            var euro = await ObtenerEuroOficial();
+            var dolar = await dolarOficial;
+            var euro = await euroOficial;
 
             decimal valorDolar = dolar.compra;
             decimal valorEuro = euro.venta;
@@ -272,8 +238,8 @@ namespace mini_home_banking.Vistas
 
         private async Task<decimal> EuroADolar(decimal monto)
         {
-            var euro = await ObtenerEuroOficial();
-            var dolar = await ObtenerDolarOficial();
+            var euro = await euroOficial;
+            var dolar = await dolarOficial;
 
             decimal valorEuro = euro.compra;
             decimal valorDolar = dolar.venta;
@@ -282,25 +248,25 @@ namespace mini_home_banking.Vistas
 
         private async Task<decimal> PesoADolar(decimal monto)
         {
-            var dolar = await ObtenerDolarOficial();
+            var dolar = await dolarOficial;
             return monto / dolar.venta;
         }
 
         private async Task<decimal> DolarAPeso(decimal monto)
         {
-            var dolar = await ObtenerDolarOficial();
+            var dolar = await dolarOficial;
             return monto * dolar.compra;
         }
 
         private async Task<decimal> PesoAEuro(decimal monto)
         {
-            var euro = await ObtenerEuroOficial();
+            var euro = await euroOficial;
             return monto / euro.venta;
         }
 
         private async Task<decimal> EuroAPeso(decimal monto)
         {
-            var euro = await ObtenerEuroOficial();
+            var euro = await euroOficial;
             return monto * euro.compra;
         }
 
@@ -349,22 +315,6 @@ namespace mini_home_banking.Vistas
             if (e.KeyData == Keys.Enter)
             {
                 transferir.Focus();
-            }
-        }
-
-        private async void Convert_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var dolar = await ObtenerDolarOficial();
-                var euro = await ObtenerEuroOficial();
-
-                Converter c = new Converter(dolar, euro);
-                c.Show();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al obtener cotizaciones: " + ex.Message);
             }
         }
     }
